@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="head_bar">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 20px; padding-right: 20px;">
+    <a class="navbar-brand" th:href="@{/}">SM</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/metrics}">Metrics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/history}">History</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Configure
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" th:href="@{/configuration/metrics}">Metrics</a>
+            <a class="dropdown-item" th:href="@{/configuration/alertFilters}">Alert filters</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/logout}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <form th:if="${searchbarshow}" th:action="${action}" method="get">
+      <div class="input-group">
+        <input class="my-auto" style="scale:1.5;" type="checkbox" name="onlyalerted" th:checked="${onlyalerted}" value="true" id="flexCheckDefault" />
+        <input type="hidden" name="onlyalerted" value="false" />
+        <label class="my-auto px-2" for="flexCheckDefault">Only alerted</label>
+        <input type="text" class="form-control" name="filter" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2" th:value="${filter}" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+  </nav>
+</div>
+</body>
+</html>
