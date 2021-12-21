@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertFilters;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
@@ -23,6 +24,8 @@ public class DashboardRest {
     private Storage storage;
     @Autowired
     private MetricsQueue metricsQueue;
+    @Autowired
+    private AlertFilters alertFilters;
 
     @GetMapping("/currentProblems")
     @ResponseBody
@@ -31,6 +34,7 @@ public class DashboardRest {
         JSONArray response=new JSONArray();
         for (Alert alert:alertList){
             if (alert.getStopDate()!=null) continue;
+            if (alertFilters.matchFilters(alert)) continue;
             JSONObject jsonAlert=new JSONObject();
             jsonAlert.put("id", alert.getId());
             jsonAlert.put("startDate", alert.getStartDate());

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertFilters;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
@@ -21,6 +22,8 @@ public class HistoryRest {
     private Storage storage;
     @Autowired
     private MetricsQueue metricsQueue;
+    @Autowired
+    private AlertFilters alertFilters;
 
     @GetMapping("/allProblems")
     @ResponseBody
@@ -36,6 +39,7 @@ public class HistoryRest {
             jsonAlert.put("host", alert.getTrigger().getHost());
             jsonAlert.put("triggerName", alert.getTrigger().getName());
             jsonAlert.put("triggerDescription", alert.getTrigger().getDescription());
+            jsonAlert.put("isFiltered", alertFilters.matchFilters(alert));
             response.put(jsonAlert);
         }
         return ResponseEntity.ok().body(response.toString());
