@@ -99,7 +99,7 @@ public class CollectDMetricRest {
         }
         for (String mountPoint: mountPoints){
             storage.createIfNotExistTrigger(
-                    "collectd." + proj + "." + host+".df",
+                    "collectd." + proj + "." + host+".df."+mountPoint,
                     "ua.com.serverhelp.simplemonitoring.entities.trigger.DiskFreeU85pChecker",
                     storage.getOrCreateParameterGroup(dfMetric,"{\"ds_name\":\"value\",\"instance\":\""+mountPoint+"\",\"type_instance\":\"free\",\"ds_type\":\"gauge\",\"type\":\"df_complex\"}"),
                     storage.getOrCreateParameterGroup(dfMetric,"{\"ds_name\":\"value\",\"instance\":\""+mountPoint+"\",\"type_instance\":\"used\",\"ds_type\":\"gauge\",\"type\":\"df_complex\"}")
