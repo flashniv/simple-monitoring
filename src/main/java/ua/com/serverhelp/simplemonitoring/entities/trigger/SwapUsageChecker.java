@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.CheckTriggerException;
@@ -9,6 +10,7 @@ import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class SwapUsageChecker  implements Checker{
     /**
      * Check specific trigger condition
@@ -39,7 +41,7 @@ public class SwapUsageChecker  implements Checker{
             }
         }
         if(sizeBytes!=null && freeBytes!=null) {
-            MYLog.printDebug1("SwapUsageChecker freeBytes="+freeBytes+"  sizeBytes="+sizeBytes+"  freeBytes / sizeBytes="+freeBytes / sizeBytes+" res="+(freeBytes / sizeBytes>0.5));
+            log.debug("SwapUsageChecker freeBytes="+freeBytes+"  sizeBytes="+sizeBytes+"  freeBytes / sizeBytes="+freeBytes / sizeBytes+" res="+(freeBytes / sizeBytes>0.5));
             return freeBytes / sizeBytes>0.5;
         }
         throw new CheckTriggerException("SwapUsageChecker::checkState value is negative");

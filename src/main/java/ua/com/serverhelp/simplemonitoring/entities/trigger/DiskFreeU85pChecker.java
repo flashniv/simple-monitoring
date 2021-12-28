@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.CheckTriggerException;
@@ -9,6 +10,7 @@ import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class DiskFreeU85pChecker  implements Checker{
     /**
      * Check specific trigger condition
@@ -27,19 +29,19 @@ public class DiskFreeU85pChecker  implements Checker{
             if (checkerArgument.getPosition()==1) {
                 Optional<Event> eventList = storage.getFirstEventByParameterGroup(checkerArgument.getParameterGroup());
                 if (eventList.isEmpty())
-                    throw new MetricUnreachableException("DiskFreeU85pChecker::checkState list not have events");
+                    throw new MetricUnreachableException("DiskFreeU85pChecker::checkState list not have events "+checkerArgument.getParameterGroup().getMetric()+checkerArgument.getParameterGroup().getJson());
                 Event event = eventList.get();
                 freeBytes = event.getValue();
             } else {
                 Optional<Event> eventList = storage.getFirstEventByParameterGroup(checkerArgument.getParameterGroup());
                 if (eventList.isEmpty())
-                    throw new MetricUnreachableException("DiskFreeU85pChecker::checkState list not have events");
+                    throw new MetricUnreachableException("DiskFreeU85pChecker::checkState list not have events"+checkerArgument.getParameterGroup().getMetric()+checkerArgument.getParameterGroup().getJson());
                 Event event = eventList.get();
                 usedBytes = event.getValue();
             }
         }
         if(usedBytes!=null && freeBytes!=null) {
-            MYLog.printDebug1("DiskFreeU85pChecker freeBytes="+freeBytes+"  usedBytes="+usedBytes+"  freeBytes / (usedBytes+freeBytes)="+freeBytes / (usedBytes+freeBytes)+" res="+(freeBytes / (usedBytes+freeBytes)>0.15));
+            log.error("DiskFreeU85pChecker "+checkerArguments.get(0).getParameterGroup().getMetric()+checkerArguments.get(0).getParameterGroup().getJson()+" freeBytes="+freeBytes+"  usedBytes="+usedBytes+"  freeBytes / (usedBytes+freeBytes)="+freeBytes / (usedBytes+freeBytes)+" res="+(freeBytes / (usedBytes+freeBytes)>0.15));
             return freeBytes / (usedBytes+freeBytes)>0.15;
         }
         throw new CheckTriggerException("DiskFreeU85pChecker::checkState value is negative");

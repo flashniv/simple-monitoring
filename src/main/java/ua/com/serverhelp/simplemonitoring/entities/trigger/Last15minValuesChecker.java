@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.IParameterGroup;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
@@ -10,6 +11,7 @@ import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 import java.time.Instant;
 import java.util.List;
 
+@Slf4j
 public class Last15minValuesChecker  implements Checker{
     /**
      * Check specific trigger condition
@@ -25,7 +27,7 @@ public class Last15minValuesChecker  implements Checker{
         if(checkerArguments.size()!=1) throw new CheckTriggerException("Last15minValuesChecker::checkState parameter list not have correct count");
         IParameterGroup iParameterGroup=checkerArguments.get(0).getParameterGroup();
         List<Event> events=storage.getEventsByParameterGroup(iParameterGroup, Instant.now().minusSeconds(900),Instant.now());
-        MYLog.printDebug1("Last15minValuesChecker size="+events.size()+"  res="+!events.isEmpty());
+        log.debug(checkerArguments.get(0).getParameterGroup().getMetric()+checkerArguments.get(0).getParameterGroup().getJson()+" Last15minValuesChecker size="+events.size()+"  res="+!events.isEmpty());
         return !events.isEmpty();
     }
 

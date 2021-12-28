@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.IParameterGroup;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
@@ -10,6 +11,7 @@ import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class LoadAvgChecker implements Checker{
     /**
      * Check specific trigger condition
@@ -28,10 +30,10 @@ public class LoadAvgChecker implements Checker{
         if(eventList.isEmpty()) throw new MetricUnreachableException("LoadAvgChecker::checkState list not have events");
         Event event=eventList.get();
         if (event.getValue()>5.0){
-            MYLog.printDebug1("LoadAvgChecker val="+event.getValue()+"  res=false");
+            log.debug("LoadAvgChecker val="+event.getValue()+"  res=false");
             return false;
         }else if (event.getValue()>=0.0){
-            MYLog.printDebug1("LoadAvgChecker val="+event.getValue()+"  res=true");
+            log.debug("LoadAvgChecker val="+event.getValue()+"  res=true");
             return true;
         }
         throw new CheckTriggerException("LoadAvgChecker::checkState value is negative");
