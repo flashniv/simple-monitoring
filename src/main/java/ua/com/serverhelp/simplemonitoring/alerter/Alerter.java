@@ -1,23 +1,22 @@
 package ua.com.serverhelp.simplemonitoring.alerter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertChannel;
+import ua.com.serverhelp.simplemonitoring.storage.Storage;
+
+import java.util.List;
 
 @Component
 public class Alerter {
-    public void printAlert(Alert alert) {
-        if(alert.getStopDate()==null){
-            printMessage("<b>ERR "+alert.getTrigger().getName()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStartDate());
-        }else {
-            printMessage("<b>OK "+alert.getTrigger().getName()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStopDate());
-        }
-    }
-    public void printAlert(String alertMessage) {
-        printMessage("<b>ERR "+alertMessage+"</b>");
-    }
+    @Autowired
+    private Storage storage;
 
-    private void printMessage(String message){
-        MYLog.printAnywhere(message);
+    public void printAlert(Alert alert) {
+        List<AlertChannel> alertChannels=storage.getAllAlertChannels();
+        for (AlertChannel alertChannel:alertChannels){
+            alertChannel.printAlert(alert);
+        }
     }
 }

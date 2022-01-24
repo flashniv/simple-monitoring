@@ -5,6 +5,8 @@ import org.springframework.data.domain.Sort;
 import ua.com.serverhelp.simplemonitoring.entities.account.Role;
 import ua.com.serverhelp.simplemonitoring.entities.account.User;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertChannel;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertChannelFilter;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertFilter;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
@@ -49,6 +51,10 @@ public class DataBaseStorage implements Storage {
     private AlertRepository alertRepository;
     @Autowired
     private ParameterGroupCheckerArgumentRepository parameterGroupCheckerArgumentRepository;
+    @Autowired
+    private AlertChannelFilterRepository alertChannelFilterRepository;
+    @Autowired
+    private AlertChannelRepository alertChannelRepository;
 
     @Override
     public void commitHistory() {
@@ -277,6 +283,16 @@ public class DataBaseStorage implements Storage {
     @Override
     public List<Alert> getAllAlerts(Sort startDate) {
         return alertRepository.findAll(startDate);
+    }
+
+    @Override
+    public List<AlertChannelFilter> getAlertChannelFilters(AlertChannel alertChannel) {
+        return alertChannelFilterRepository.findAllByAlertChannel(alertChannel);
+    }
+
+    @Override
+    public List<AlertChannel> getAllAlertChannels() {
+        return alertChannelRepository.findAll();
     }
 
 }

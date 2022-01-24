@@ -4,6 +4,8 @@ import org.springframework.data.domain.Sort;
 import ua.com.serverhelp.simplemonitoring.entities.account.Role;
 import ua.com.serverhelp.simplemonitoring.entities.account.User;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertChannel;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertChannelFilter;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertFilter;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
@@ -58,4 +60,8 @@ public interface Storage {
     Optional<Event> getFirstEventByParameterGroup(IParameterGroup parameterGroup);
 
     List<Alert> getAllAlerts(Sort startDate);
+
+    List<AlertChannelFilter> getAlertChannelFilters(AlertChannel alertChannel);
+
+    List<AlertChannel> getAllAlertChannels();
 }

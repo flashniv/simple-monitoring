@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.serverhelp.simplemonitoring.alerter.Alerter;
+import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.entities.trigger.Trigger;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 
 import java.time.Duration;
@@ -58,13 +60,43 @@ public class HealthMetrics {
             metricsQueue.putData("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 1.0);
         }else{
             metricsQueue.putData("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 0.0);
-            alerter.printAlert("Check metrics not running");
+            Trigger trigger=new Trigger(){
+                @Override
+                public String getName() {
+                    return "Check metrics not running";
+                }
+
+                @Override
+                public String getDescription() {
+                    return "Check metrics not running";
+                }
+            };
+            trigger.setHost("internal.cron.runCheckMetrics");
+            Alert alert=new Alert();
+            alert.setStartDate(Instant.now());
+            alert.setTrigger(trigger);
+            alerter.printAlert(alert);
         }
         if(checkMetricsCommit()){
             metricsQueue.putData("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 1.0);
         }else{
             metricsQueue.putData("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 0.0);
-            alerter.printAlert("Metrics commit not running");
+            Trigger trigger=new Trigger(){
+                @Override
+                public String getName() {
+                    return "Metrics commit not running";
+                }
+
+                @Override
+                public String getDescription() {
+                    return "Metrics commit not running";
+                }
+            };
+            trigger.setHost("internal.cron.checkMetricsCommit");
+            Alert alert=new Alert();
+            alert.setStartDate(Instant.now());
+            alert.setTrigger(trigger);
+            alerter.printAlert(alert);
         }
     }
 }
