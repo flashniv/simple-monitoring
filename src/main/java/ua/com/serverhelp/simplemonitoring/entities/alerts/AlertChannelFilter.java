@@ -1,6 +1,7 @@
 package ua.com.serverhelp.simplemonitoring.entities.alerts;
 
 import lombok.Data;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
@@ -11,6 +12,9 @@ public class AlertChannelFilter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    @ManyToOne (optional=false)
+    @JoinColumn (name="alert_channel_id")
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private AlertChannel alertChannel;
     private String name;
     private String expression;

@@ -3,8 +3,8 @@ package ua.com.serverhelp.simplemonitoring.entities.alerts;
 import io.sentry.Sentry;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.alerter.AlertSender;
 import ua.com.serverhelp.simplemonitoring.alerter.SimpleTelegramBot;
 import ua.com.serverhelp.simplemonitoring.entities.account.User;
@@ -18,18 +18,18 @@ import java.util.List;
 @Data
 @Slf4j
 public class AlertChannel {
-    @Autowired
-    private Storage storage;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+    @ManyToOne (optional=false)
+    @JoinColumn (name="owner_id")
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private User owner;
     private String alerterClass;
     private String parameters;
 
-    public void printAlert(Alert alert){
+    public void printAlert(Storage storage,Alert alert){
         List<AlertChannelFilter> alertChannelFilters=storage.getAlertChannelFilters(this);
         boolean matched=false;
         for (AlertChannelFilter alertChannelFilter: alertChannelFilters){
