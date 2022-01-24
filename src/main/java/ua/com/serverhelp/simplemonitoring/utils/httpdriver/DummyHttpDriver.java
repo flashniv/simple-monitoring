@@ -3,10 +3,10 @@ package ua.com.serverhelp.simplemonitoring.utils.httpdriver;
 import java.util.HashMap;
 
 public class DummyHttpDriver implements HttpDriver {
-    private HttpResponse httpResponse;
+    private final HttpResponse httpResponse;
     private String url="";
     private String additionalURL="";
-    private HashMap params=new HashMap();
+    private final HashMap<String,Object> params=new HashMap<>();
 
     public DummyHttpDriver() {
         httpResponse=new SimpleHttpResponse(200,"OK");
@@ -28,7 +28,7 @@ public class DummyHttpDriver implements HttpDriver {
     }
 
     @Override
-    public HttpResponse sendPost(String additionUrl, Object parameters) {
+    public HttpResponse sendPost(String additionUrl, HashMap<String,Object> parameters) {
         return httpResponse;
     }
 
@@ -48,7 +48,7 @@ public class DummyHttpDriver implements HttpDriver {
     }
 
     @Override
-    public HttpResponse sendGet(String additionUrl, HashMap parameters) {
+    public HttpResponse sendGet(String additionUrl, HashMap<String,Object> parameters) {
         return httpResponse;
     }
 
@@ -56,7 +56,7 @@ public class DummyHttpDriver implements HttpDriver {
     public void addParameter(String name, Object value) {
         params.put(name,value);
     }
-    public HashMap getParams(){
+    public HashMap<String,Object> getParams(){
         return params;
     }
     public String getUrl(){

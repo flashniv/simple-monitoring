@@ -5,7 +5,6 @@ import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.IParameterGroup;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.CheckTriggerException;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 
 import java.time.Instant;

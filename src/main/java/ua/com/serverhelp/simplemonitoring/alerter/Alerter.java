@@ -1,19 +1,23 @@
 package ua.com.serverhelp.simplemonitoring.alerter;
 
+import org.springframework.stereotype.Component;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
+import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
-public interface Alerter {
-    default void printAlert(Alert alert) {
+@Component
+public class Alerter {
+    public void printAlert(Alert alert) {
         if(alert.getStopDate()==null){
             printMessage("<b>ERR "+alert.getTrigger().getName()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStartDate());
         }else {
             printMessage("<b>OK "+alert.getTrigger().getName()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStopDate());
         }
     }
-    default void printAlert(String alertMessage) {
+    public void printAlert(String alertMessage) {
         printMessage("<b>ERR "+alertMessage+"</b>");
     }
 
-    void printMessage(String message);
-    void printInfo(String message);
+    private void printMessage(String message){
+        MYLog.printAnywhere(message);
+    }
 }

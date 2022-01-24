@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.serverhelp.simplemonitoring.alerter.Alerter;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
-import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.time.Duration;
 import java.time.Instant;

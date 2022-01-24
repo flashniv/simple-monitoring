@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.utils.httpdriver;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public interface HttpDriver {
@@ -8,17 +9,17 @@ public interface HttpDriver {
 
     void setAdditionalURL(String url);
 
-    HttpResponse sendPost(String additionUrl);
+    HttpResponse sendPost(String additionUrl) throws IOException;
 
-    HttpResponse sendPost(String additionUrl, Object parameters);
+    HttpResponse sendPost(String additionUrl, HashMap<String,Object> parameters) throws IOException ;
 
-    HttpResponse sendPost();
+    HttpResponse sendPost() throws IOException ;
 
-    HttpResponse sendGet(String additionUrl);
+    HttpResponse sendGet(String additionUrl) throws IOException ;
 
-    HttpResponse sendGet();
+    HttpResponse sendGet() throws IOException ;
 
-    HttpResponse sendGet(String additionUrl, HashMap parameters);
+    HttpResponse sendGet(String additionUrl, HashMap<String,Object> parameters) throws IOException ;
 
     void addParameter(String name, Object value);
 }

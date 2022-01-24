@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.AlertFilter;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.util.List;
 

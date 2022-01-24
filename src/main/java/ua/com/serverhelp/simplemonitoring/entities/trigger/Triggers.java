@@ -7,7 +7,6 @@ import ua.com.serverhelp.simplemonitoring.alerter.Alerter;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.CheckTriggerException;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 
 import java.time.Instant;
