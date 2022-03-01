@@ -1,18 +1,14 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
-import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -32,12 +28,9 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
         for (String input : inputs) {
             if (isAllowedMetric(input)) {
                 try {
-                    processItem(input);
-//                    if (parameters.matches("method=\"[A-Z]+\",code=\"500\"")) {
-//                        //add triggers and calculate metrics
-//                        checkAdditionalConditions(parts[0], parseParameterGroup(parameters));
-//                    }
-
+                    processItem("exporter."+input);
+                    input = Pattern.compile("(.*)\\{.*").matcher(input).replaceFirst("$1");
+                    createTriggersByHost("exporter."+input);
                 } catch (NumberFormatException e) {
                     log.warn("NodeMetricRest::receiveData number format error " + input);
                     return ResponseEntity.badRequest().body("number format error " + input);
@@ -51,10 +44,12 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
         return ResponseEntity.ok().body("Success");
     }
 
-    private void checkAdditionalConditions(String pathPart, String parameterGroup) {
+    @Override
+    protected void createTriggers(String pathPart) {
         //create trigger for LA
         Metric metric=storage.getOrCreateMetric(pathPart);
-        storage.createIfNotExistTrigger(pathPart,"ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,parameterGroup));
+        storage.createIfNotExistTrigger(pathPart+".GET.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"GET\"}"));
+        storage.createIfNotExistTrigger(pathPart+".POST.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"POST\"}"));
     }
 
     @Override

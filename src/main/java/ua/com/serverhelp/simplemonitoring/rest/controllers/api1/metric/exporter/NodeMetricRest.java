@@ -6,15 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
-import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestController
@@ -47,12 +44,13 @@ public class NodeMetricRest extends AbstractMetricRest{
             }
         }
         //add triggers and calculate metrics
-        checkAdditionalConditions("exporter."+proj+"."+hostname+".node.");
+        createTriggersByHost("exporter."+proj+"."+hostname+".node.");
 
         return ResponseEntity.ok().body("Success");
     }
 
-    private void checkAdditionalConditions(String pathPart) {
+    @Override
+    protected void createTriggers(String pathPart) {
         //create sum metric for cpu
         List<String> cpuModes = List.of("idle","iowait","irq","nice","softirq","steal","system","user");
         for (String cpuMode : cpuModes) {

@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class AbstractMetricRest {
     @Autowired
     private MetricsQueue metricsQueue;
+    private static final ArrayList<String> triggers=new ArrayList<>();
 
     private String parseParameterGroup(String part) throws IllegalStateException,IndexOutOfBoundsException{
         JSONObject json=new JSONObject();
@@ -64,6 +66,8 @@ public abstract class AbstractMetricRest {
         return res.toString();
     }
 
+    protected abstract void createTriggers(String pathPart);
+
     protected String[] getAllowedMetrics(){
         return new String[]{};
     }
@@ -71,4 +75,10 @@ public abstract class AbstractMetricRest {
         return new String[]{};
     }
 
+    protected void createTriggersByHost(String host){
+        if(!triggers.contains(host)){
+            createTriggers(host);
+            triggers.add(host);
+        }
+    }
 }
