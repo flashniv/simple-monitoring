@@ -19,9 +19,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/apiv1/metric/exporter/node")
-public class NodeMetricRest {
-    @Autowired
-    private MetricsQueue metricsQueue;
+public class NodeMetricRest extends AbstractMetricRest{
     @Autowired
     private Storage storage;
 
@@ -37,7 +35,8 @@ public class NodeMetricRest {
         for (String input:inputs){
             if(isAllowedMetric(input)){
                 try {
-                    processItem(proj,hostname,input);
+                    input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
+                    processItem(input);
                 }catch (NumberFormatException e){
                     MYLog.printWarn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
@@ -51,29 +50,6 @@ public class NodeMetricRest {
         checkAdditionalConditions("exporter."+proj+"."+hostname+".node.");
 
         return ResponseEntity.ok().body("Success");
-    }
-
-    private void processItem(String proj,String hostname,String input) throws IllegalStateException,IndexOutOfBoundsException,NumberFormatException{
-        Double value;
-        String parameters="";
-        //node_cpu_seconds_total{cpu="0",mode="system"} 18.61
-        input=input.replace("\r", "");
-        input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
-        input=Pattern.compile("(.*[0-9]e) ([0-9]+)$").matcher(input).replaceFirst("$1+$2");
-        String[] parts;
-        Pattern p = Pattern.compile("(.*)\\{(.*)} (.*)");
-        Matcher m = p.matcher(input);
-        if(m.matches()){
-            parts=new String[3];
-            parts[0]=m.group(1);
-            parameters=m.group(2);
-            parts[2]=m.group(3);
-        }else{
-            parts=input.split(" ");
-        }
-        value=Double.valueOf(parts[parts.length-1]);
-
-        metricsQueue.putData(parts[0],parseParameterGroup(parameters),getOptionsByMetric(parts[0]), Instant.now(), value);
     }
 
     private void checkAdditionalConditions(String pathPart) {
@@ -105,21 +81,9 @@ public class NodeMetricRest {
         storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
     }
 
-    private String parseParameterGroup(String part) throws IllegalStateException,IndexOutOfBoundsException{
-        JSONObject json=new JSONObject();
-        String[] parameters=part.split(",");
-        for(String parameter:parameters){
-            Pattern pattern=Pattern.compile("(.*)=\"(.*)\"");
-            Matcher matcher=pattern.matcher(parameter);
-            if(matcher.matches()){
-                json.put(matcher.group(1), matcher.group(2));
-            }
-        }
-        return json.toString();
-    }
-
-    private boolean isAllowedMetric(String metric){
-        String[] allowedMetrics={
+    @Override
+    protected String[] getAllowedMetrics() {
+        return new String[]{
                 "node_load1",
                 "node_load5",
                 "node_load15",
@@ -134,25 +98,14 @@ public class NodeMetricRest {
                 "node_network_transmit_bytes_total",
                 "node_network_receive_bytes_total"
         };
-        for (String metricExp:allowedMetrics){
-            if(metric.contains(metricExp)){
-                return true;
-            }
-        }
-        return false;
     }
-    private String getOptionsByMetric(String metric) {
-        JSONObject res=new JSONObject();
-        String[] diffMetrics = {
+
+    @Override
+    protected String[] getDiffMetrics() {
+        return new String[]{
                 "cpu_seconds_total",
                 "network_transmit_bytes_total",
                 "network_receive_bytes_total"
         };
-        for (String metricExp:diffMetrics){
-            if(metric.contains(metricExp)){
-                res.put("diff", true);
-            }
-        }
-        return res.toString();
     }
 }
