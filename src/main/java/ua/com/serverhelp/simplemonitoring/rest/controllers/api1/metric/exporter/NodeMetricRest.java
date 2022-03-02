@@ -35,7 +35,7 @@ public class NodeMetricRest extends AbstractMetricRest{
 
         for (String input:inputs){
             if(isAllowedMetric(input)){
-                log.info("mid receiveData "+input+" "+ Instant.now());
+                log.info("mid receiveData "+hostname+" "+proj+" "+ Instant.now());
                 try {
                     input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
                     processItem(input);
