@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,11 @@ import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Slf4j
 @RestController
 @RequestMapping("/apiv1/metric/exporter/node")
 public class NodeMetricRest extends AbstractMetricRest{
@@ -26,11 +29,13 @@ public class NodeMetricRest extends AbstractMetricRest{
             @RequestHeader("X-Hostname") String hostname,
             @RequestBody String data
     ) {
+        log.info("start receiveData "+hostname+" "+proj+" "+ Instant.now());
         String inputData= URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs=inputData.split("\n");
 
         for (String input:inputs){
             if(isAllowedMetric(input)){
+                log.info("mid receiveData "+input+" "+ Instant.now());
                 try {
                     input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
                     processItem(input);
@@ -45,6 +50,8 @@ public class NodeMetricRest extends AbstractMetricRest{
         }
         //add triggers and calculate metrics
         createTriggersByHost("exporter."+proj+"."+hostname+".node.");
+
+        log.info("stop receiveData "+hostname+" "+proj+" "+ Instant.now());
 
         return ResponseEntity.ok().body("Success");
     }

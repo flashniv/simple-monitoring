@@ -30,7 +30,7 @@ public abstract class AbstractMetricRest {
     }
 
     protected void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
-        log.info("start processItem "+input+" "+Instant.now());
+        //log.info("start processItem "+input+" "+Instant.now());
         Double value;
         String parameters = "";
         input = input.replace("\r", "");
@@ -47,9 +47,9 @@ public abstract class AbstractMetricRest {
             parts = input.split(" ");
         }
         value = Double.valueOf(parts[parts.length - 1]);
-        log.info("mid processItem "+input+" "+Instant.now());
+        //log.info("mid processItem "+input+" "+Instant.now());
         metricsQueue.putData(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value);
-        log.info("stop processItem "+input+" "+Instant.now());
+        //log.info("stop processItem "+input+" "+Instant.now());
     }
 
     protected boolean isAllowedMetric(String metric){
