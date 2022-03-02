@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 public abstract class AbstractMetricRest {
     @Autowired
     private MetricsQueue metricsQueue;
@@ -28,6 +30,7 @@ public abstract class AbstractMetricRest {
     }
 
     protected void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
+        log.info("start processItem "+input+" "+Instant.now());
         Double value;
         String parameters = "";
         input = input.replace("\r", "");
@@ -44,8 +47,9 @@ public abstract class AbstractMetricRest {
             parts = input.split(" ");
         }
         value = Double.valueOf(parts[parts.length - 1]);
-
+        log.info("mid processItem "+input+" "+Instant.now());
         metricsQueue.putData(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value);
+        log.info("stop processItem "+input+" "+Instant.now());
     }
 
     protected boolean isAllowedMetric(String metric){

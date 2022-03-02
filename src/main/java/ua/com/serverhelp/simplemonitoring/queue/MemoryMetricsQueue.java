@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.queue;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,6 @@ import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.HealthMetrics;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
+@Slf4j
 @Component
 public class MemoryMetricsQueue implements MetricsQueue {
     @Autowired
@@ -36,7 +37,7 @@ public class MemoryMetricsQueue implements MetricsQueue {
             eventList=(List<Event>) events.clone();
             events.clear();
         }catch (InterruptedException e){
-            MYLog.printError("MemoryMetricsQueue::putData acquire semaphore exception",e);
+            log.error("acquire semaphore exception",e);
         } finally {
             eventsSemaphore.release();
         }
@@ -45,6 +46,7 @@ public class MemoryMetricsQueue implements MetricsQueue {
 
     @Override
     public void putData(String path,String json,String options, Instant timestamp, Double value) {
+        log.info("start putData "+path+" "+json+" "+Instant.now());
         try {
             Metric metric= storage.getOrCreateMetric(path);
             ParameterGroup parameterGroup= storage.getOrCreateParameterGroup(metric,json);
@@ -61,10 +63,11 @@ public class MemoryMetricsQueue implements MetricsQueue {
             eventsSemaphore.acquire();
             events.add(event);
         }catch (InterruptedException e){
-            MYLog.printError("MemoryMetricsQueue::putData acquire semaphore exception",e);
+            log.error("acquire semaphore exception",e);
         } finally {
             eventsSemaphore.release();
         }
+        log.info("end putData "+path+" "+json+" "+Instant.now());
     }
 
     private Double checkOptions(String path, String json, String options, Instant timestamp, Double value) {
