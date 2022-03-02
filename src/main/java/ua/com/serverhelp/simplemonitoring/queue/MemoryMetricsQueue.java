@@ -46,7 +46,7 @@ public class MemoryMetricsQueue implements MetricsQueue {
 
     @Override
     public void putData(String path,String json,String options, Instant timestamp, Double value) {
-        log.info("start putData "+path+" "+json+" "+Instant.now());
+        //log.info("start putData "+path+" "+json+" "+Instant.now());
         try {
             Metric metric= storage.getOrCreateMetric(path);
             ParameterGroup parameterGroup= storage.getOrCreateParameterGroup(metric,json);
@@ -67,7 +67,7 @@ public class MemoryMetricsQueue implements MetricsQueue {
         } finally {
             eventsSemaphore.release();
         }
-        log.info("end putData "+path+" "+json+" "+Instant.now());
+        //log.info("end putData "+path+" "+json+" "+Instant.now());
     }
 
     private Double checkOptions(String path, String json, String options, Instant timestamp, Double value) {
