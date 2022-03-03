@@ -11,10 +11,7 @@ import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Slf4j
 @RestController
@@ -35,7 +32,7 @@ public class NodeMetricRest extends AbstractMetricRest{
         for (String input:inputs){
             if(isAllowedMetric(input)){
                 try {
-                    processItem("exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
+                    getInputQueue().add("exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
                 }catch (NumberFormatException e){
                     log.warn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);

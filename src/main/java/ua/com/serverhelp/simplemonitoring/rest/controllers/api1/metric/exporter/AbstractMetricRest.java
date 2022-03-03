@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,8 @@ public abstract class AbstractMetricRest {
     @Autowired
     private MetricsQueue metricsQueue;
     private static final ArrayList<String> triggers=new ArrayList<>();
+    @Getter
+    private final ConcurrentLinkedQueue<String> inputQueue=new ConcurrentLinkedQueue<>();
     private final Pattern replaceE=Pattern.compile("(.*[0-9]e) ([0-9]+)$");
     private final Pattern parametersSplitToGroup=Pattern.compile("(.*)=\"(.*)\"");
     private final Pattern itemSplitToGroups=Pattern.compile("(.*)\\{(.*)} (.*)");
@@ -31,8 +35,13 @@ public abstract class AbstractMetricRest {
         return json.toString();
     }
 
-    protected void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
-        //Instant start=Instant.now();
+    public void processItems(){
+        while (!inputQueue.isEmpty()){
+            processItem(inputQueue.poll());
+        }
+    }
+
+    private void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
         Double value;
         String parameters = "";
         input = input.replace("\r", "");
@@ -48,9 +57,7 @@ public abstract class AbstractMetricRest {
             parts = input.split(" ");
         }
         value = Double.valueOf(parts[parts.length - 1]);
-        //log.info(Duration.between(start, Instant.now()).toNanos()+" mid processItem "+ input);
         metricsQueue.putData(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value);
-        //log.info(Duration.between(start, Instant.now()).toNanos()+" stop processItem "+input);
     }
 
     protected boolean isAllowedMetric(String metric){

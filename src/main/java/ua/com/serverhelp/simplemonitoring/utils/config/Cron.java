@@ -38,10 +38,10 @@ public class Cron {
 
     @Scheduled(initialDelay = 60000L,fixedRate = 90000L)
     public void commitHistory(){
-        log.info("Cron::clearHistory Start commit history");
+        log.info("Cron::commitHistory Start commit history");
         storage.commitHistory();
         healthMetrics.updateMetricCommit();
-        log.info("Cron::clearHistory Stop commit history");
+        log.info("Cron::commitHistory Stop commit history");
     }
 
     @Scheduled(initialDelay = 300000L,fixedRate = 300000L)

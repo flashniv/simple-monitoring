@@ -17,6 +17,9 @@ import ua.com.serverhelp.simplemonitoring.entities.trigger.CheckerArgument;
 import ua.com.serverhelp.simplemonitoring.entities.trigger.ParameterGroupCheckerArgument;
 import ua.com.serverhelp.simplemonitoring.entities.trigger.Trigger;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
+import ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter.BlackBoxMetricRest;
+import ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter.NginxAccessLogMetricRest;
+import ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter.NodeMetricRest;
 import ua.com.serverhelp.simplemonitoring.storage.db.*;
 import ua.com.serverhelp.simplemonitoring.utils.HealthMetrics;
 
@@ -55,9 +58,18 @@ public class DataBaseStorage implements Storage {
     private AlertChannelFilterRepository alertChannelFilterRepository;
     @Autowired
     private AlertChannelRepository alertChannelRepository;
+    @Autowired
+    private NginxAccessLogMetricRest nginxAccessLogMetricRest;
+    @Autowired
+    private BlackBoxMetricRest blackBoxMetricRest;
+    @Autowired
+    private NodeMetricRest nodeMetricRest;
 
     @Override
     public void commitHistory() {
+        nginxAccessLogMetricRest.processItems();
+        blackBoxMetricRest.processItems();
+        nodeMetricRest.processItems();
         eventRepository.saveAll(metricsQueue.getEvents());
     }
 

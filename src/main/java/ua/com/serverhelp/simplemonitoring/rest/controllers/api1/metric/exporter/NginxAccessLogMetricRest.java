@@ -31,7 +31,7 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
         for (String input : inputs) {
             if (isAllowedMetric(input)) {
                 try {
-                    processItem("exporter."+input);
+                    getInputQueue().add("exporter."+input);
                     input = Pattern.compile("(.*)\\{.*").matcher(input).replaceFirst("$1");
                     createTriggersByHost("exporter."+input);
                 } catch (NumberFormatException e) {

@@ -28,7 +28,7 @@ public class BlackBoxMetricRest extends AbstractMetricRest{
         for (String input : inputs) {
             if (isAllowedMetric(input)) {
                 try {
-                    processItem("exporter." + proj + ".blackbox." + siteId + "." + input);
+                    getInputQueue().add("exporter." + proj + ".blackbox." + siteId + "." + input);
                 } catch (NumberFormatException e) {
                     MYLog.printWarn("NodeMetricRest::receiveData number format error " + input);
                     return ResponseEntity.badRequest().body("number format error " + input);
