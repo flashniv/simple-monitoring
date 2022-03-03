@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 public class NodeMetricRest extends AbstractMetricRest{
     @Autowired
     private Storage storage;
-    private final Pattern pointReplace=Pattern.compile("([a-z]+)_(.*)");
 
     @PostMapping("/")
     public ResponseEntity<String> receiveData(
@@ -30,20 +29,13 @@ public class NodeMetricRest extends AbstractMetricRest{
             @RequestHeader("X-Hostname") String hostname,
             @RequestBody String data
     ) {
-        Instant start=Instant.now();
         String inputData= URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs=inputData.split("\n");
 
         for (String input:inputs){
             if(isAllowedMetric(input)){
-                //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid1 receiveData "+hostname+" "+proj);
                 try {
-                    Instant mid=Instant.now();
-                    input=pointReplace.matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
-                    //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid2 receiveData "+hostname+" "+proj+" "+input);
-                    mid=Instant.now();
-                    processItem(input);
-                    //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid3 receiveData "+hostname+" "+proj+" "+input);
+                    processItem("exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
                 }catch (NumberFormatException e){
                     log.warn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
@@ -51,13 +43,10 @@ public class NodeMetricRest extends AbstractMetricRest{
                     log.warn("NodeMetricRest::receiveData regexp match error "+input);
                     return ResponseEntity.badRequest().body("regexp match error "+input);
                 }
-                //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid4 receiveData "+hostname+" "+proj);
             }
         }
         //add triggers and calculate metrics
         createTriggersByHost("exporter."+proj+"."+hostname+".node.");
-
-        //log.info(Duration.between(start, Instant.now()).toNanos()+" stop receiveData "+hostname+" "+proj);
 
         return ResponseEntity.ok().body("Success");
     }

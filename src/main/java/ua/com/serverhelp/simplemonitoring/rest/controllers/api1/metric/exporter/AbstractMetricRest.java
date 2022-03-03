@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
