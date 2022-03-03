@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
-import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +22,7 @@ import java.util.regex.Pattern;
 public class NodeMetricRest extends AbstractMetricRest{
     @Autowired
     private Storage storage;
+    private final Pattern pointReplace=Pattern.compile("([a-z]+)_(.*)");
 
     @PostMapping("/")
     public ResponseEntity<String> receiveData(
@@ -39,7 +39,7 @@ public class NodeMetricRest extends AbstractMetricRest{
                 //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid1 receiveData "+hostname+" "+proj);
                 try {
                     Instant mid=Instant.now();
-                    input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
+                    input=pointReplace.matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
                     log.info(Duration.between(mid, Instant.now()).toNanos()+" mid2 receiveData "+hostname+" "+proj+" "+input);
                     mid=Instant.now();
                     processItem(input);

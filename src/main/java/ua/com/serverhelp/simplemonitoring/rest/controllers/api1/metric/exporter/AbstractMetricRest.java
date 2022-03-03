@@ -16,13 +16,15 @@ public abstract class AbstractMetricRest {
     @Autowired
     private MetricsQueue metricsQueue;
     private static final ArrayList<String> triggers=new ArrayList<>();
+    private final Pattern replaceE=Pattern.compile("(.*[0-9]e) ([0-9]+)$");
+    private final Pattern parametersSplitToGroup=Pattern.compile("(.*)=\"(.*)\"");
+    private final Pattern itemSplitToGroups=Pattern.compile("(.*)\\{(.*)} (.*)");
 
     private String parseParameterGroup(String part) throws IllegalStateException,IndexOutOfBoundsException{
         JSONObject json=new JSONObject();
         String[] parameters=part.split(",");
         for(String parameter:parameters){
-            Pattern pattern=Pattern.compile("(.*)=\"(.*)\"");
-            Matcher matcher=pattern.matcher(parameter);
+            Matcher matcher=parametersSplitToGroup.matcher(parameter);
             if(matcher.matches()){
                 json.put(matcher.group(1), matcher.group(2));
             }
@@ -35,10 +37,9 @@ public abstract class AbstractMetricRest {
         Double value;
         String parameters = "";
         input = input.replace("\r", "");
-        input = Pattern.compile("(.*[0-9]e) ([0-9]+)$").matcher(input).replaceFirst("$1+$2");
+        input = replaceE.matcher(input).replaceFirst("$1+$2");
         String[] parts;
-        Pattern p = Pattern.compile("(.*)\\{(.*)} (.*)");
-        Matcher m = p.matcher(input);
+        Matcher m = itemSplitToGroups.matcher(input);
         if (m.matches()) {
             parts = new String[3];
             parts[0] = m.group(1);
