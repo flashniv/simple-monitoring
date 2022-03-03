@@ -12,6 +12,8 @@ import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -28,13 +30,13 @@ public class NodeMetricRest extends AbstractMetricRest{
             @RequestHeader("X-Hostname") String hostname,
             @RequestBody String data
     ) {
-        //log.info("start receiveData "+hostname+" "+proj+" "+ Instant.now());
+        Instant start=Instant.now();
         String inputData= URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs=inputData.split("\n");
 
         for (String input:inputs){
             if(isAllowedMetric(input)){
-                //log.info("mid receiveData "+hostname+" "+proj+" "+ Instant.now());
+                log.info(Duration.between(start, Instant.now()).toNanos()+" mid receiveData "+hostname+" "+proj);
                 try {
                     input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
                     processItem(input);
@@ -50,7 +52,7 @@ public class NodeMetricRest extends AbstractMetricRest{
         //add triggers and calculate metrics
         createTriggersByHost("exporter."+proj+"."+hostname+".node.");
 
-        //log.info("stop receiveData "+hostname+" "+proj+" "+ Instant.now());
+        log.info(Duration.between(start, Instant.now()).toNanos()+" stop receiveData "+hostname+" "+proj);
 
         return ResponseEntity.ok().body("Success");
     }

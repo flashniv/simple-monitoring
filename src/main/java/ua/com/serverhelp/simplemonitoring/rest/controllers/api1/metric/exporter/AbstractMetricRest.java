@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -30,7 +31,7 @@ public abstract class AbstractMetricRest {
     }
 
     protected void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
-        log.info(Instant.now()+" start processItem "+input);
+        Instant start=Instant.now();
         Double value;
         String parameters = "";
         input = input.replace("\r", "");
@@ -47,9 +48,9 @@ public abstract class AbstractMetricRest {
             parts = input.split(" ");
         }
         value = Double.valueOf(parts[parts.length - 1]);
-        log.info(Instant.now()+" mid processItem "+input);
+        log.info(Duration.between(start, Instant.now()).toNanos()+" mid processItem "+ input);
         metricsQueue.putData(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value);
-        log.info(Instant.now()+" stop processItem "+input);
+        log.info(Duration.between(start, Instant.now()).toNanos()+" stop processItem "+input);
     }
 
     protected boolean isAllowedMetric(String metric){
