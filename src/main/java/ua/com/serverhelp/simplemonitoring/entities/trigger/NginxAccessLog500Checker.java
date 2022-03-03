@@ -10,7 +10,6 @@ import ua.com.serverhelp.simplemonitoring.utils.MetricUnreachableException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 public class NginxAccessLog500Checker  implements Checker{

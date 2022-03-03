@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Slf4j
 @Component
@@ -24,50 +24,40 @@ public class MemoryMetricsQueue implements MetricsQueue {
     private Storage storage;
     @Autowired
     private HealthMetrics healthMetrics;
-    private final ArrayList<Event> events=new ArrayList<>();
     private final HashMap<String,QueueParameter> prevValues=new HashMap<>();
-    private final Semaphore eventsSemaphore=new Semaphore(1);
+    private final ConcurrentLinkedQueue<QueueElement> linkedQueue=new ConcurrentLinkedQueue<>();
 
     @Override
     public List<Event> getEvents() {
-        List<Event> eventList=null;
-        try {
-            eventsSemaphore.acquire();
+        ArrayList<Event> events=new ArrayList<>();
+        while(!linkedQueue.isEmpty()){
+            QueueElement queueElement=linkedQueue.poll();
+            Metric metric= storage.getOrCreateMetric(queueElement.getPath());
+            ParameterGroup parameterGroup= storage.getOrCreateParameterGroup(metric, queueElement.getJson());
 
-            eventList=(List<Event>) events.clone();
-            events.clear();
-        }catch (InterruptedException e){
-            log.error("acquire semaphore exception",e);
-        } finally {
-            eventsSemaphore.release();
+            queueElement.setValue(checkOptions(queueElement.getPath(), queueElement.getJson(), queueElement.getOptions(), queueElement.getTimestamp(), queueElement.getValue()));
+
+            Event event=new Event();
+            event.setParameterGroup(parameterGroup);
+            event.setTimestamp(queueElement.getTimestamp());
+            event.setValue(queueElement.getValue());
+
+            healthMetrics.incEventCount();
+
+            events.add(event);
         }
-        return eventList;
+        return events;
     }
 
     @Override
     public void putData(String path,String json,String options, Instant timestamp, Double value) {
-        //log.info("start putData "+path+" "+json+" "+Instant.now());
-        try {
-            Metric metric= storage.getOrCreateMetric(path);
-            ParameterGroup parameterGroup= storage.getOrCreateParameterGroup(metric,json);
-
-            value=checkOptions(path,json,options,timestamp,value);
-
-            Event event=new Event();
-            event.setParameterGroup(parameterGroup);
-            event.setTimestamp(timestamp);
-            event.setValue(value);
-
-            healthMetrics.incEventCount();
-
-            eventsSemaphore.acquire();
-            events.add(event);
-        }catch (InterruptedException e){
-            log.error("acquire semaphore exception",e);
-        } finally {
-            eventsSemaphore.release();
-        }
-        //log.info("end putData "+path+" "+json+" "+Instant.now());
+        QueueElement queueElement=new QueueElement();
+        queueElement.setPath(path);
+        queueElement.setJson(json);
+        queueElement.setTimestamp(timestamp);
+        queueElement.setOptions(options);
+        queueElement.setValue(value);
+        linkedQueue.add(queueElement);
     }
 
     private Double checkOptions(String path, String json, String options, Instant timestamp, Double value) {
