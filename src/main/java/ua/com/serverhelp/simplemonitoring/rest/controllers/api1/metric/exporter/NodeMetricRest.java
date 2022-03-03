@@ -38,11 +38,12 @@ public class NodeMetricRest extends AbstractMetricRest{
             if(isAllowedMetric(input)){
                 //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid1 receiveData "+hostname+" "+proj);
                 try {
-                    input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
-                    //log.info(Duration.between(mid, Instant.now()).toNanos()+" mid2 receiveData "+hostname+" "+proj);
                     Instant mid=Instant.now();
+                    input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
+                    log.info(Duration.between(mid, Instant.now()).toNanos()+" mid2 receiveData "+hostname+" "+proj+" "+input);
+                    mid=Instant.now();
                     processItem(input);
-                    log.info(Duration.between(mid, Instant.now()).toNanos()+" mid3 receiveData "+hostname+" "+proj);
+                    log.info(Duration.between(mid, Instant.now()).toNanos()+" mid3 receiveData "+hostname+" "+proj+" "+input);
                 }catch (NumberFormatException e){
                     log.warn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
