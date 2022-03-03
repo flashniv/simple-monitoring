@@ -35,11 +35,14 @@ public class NodeMetricRest extends AbstractMetricRest{
         String[] inputs=inputData.split("\n");
 
         for (String input:inputs){
+            Instant mid=Instant.now();
             if(isAllowedMetric(input)){
-                log.info(Duration.between(start, Instant.now()).toNanos()+" mid receiveData "+hostname+" "+proj);
+                log.info(Duration.between(mid, Instant.now()).toNanos()+" mid1 receiveData "+hostname+" "+proj);
                 try {
                     input=Pattern.compile("([a-z]+)_(.*)").matcher(input).replaceFirst("exporter."+proj+"."+hostname+".$1.$2");
+                    log.info(Duration.between(mid, Instant.now()).toNanos()+" mid2 receiveData "+hostname+" "+proj);
                     processItem(input);
+                    log.info(Duration.between(mid, Instant.now()).toNanos()+" mid3 receiveData "+hostname+" "+proj);
                 }catch (NumberFormatException e){
                     MYLog.printWarn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
@@ -47,6 +50,7 @@ public class NodeMetricRest extends AbstractMetricRest{
                     MYLog.printWarn("NodeMetricRest::receiveData regexp match error "+input);
                     return ResponseEntity.badRequest().body("regexp match error "+input);
                 }
+                log.info(Duration.between(mid, Instant.now()).toNanos()+" mid4 receiveData "+hostname+" "+proj);
             }
         }
         //add triggers and calculate metrics
