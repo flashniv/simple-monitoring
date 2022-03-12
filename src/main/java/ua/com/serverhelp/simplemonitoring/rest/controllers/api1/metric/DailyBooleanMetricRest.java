@@ -26,7 +26,7 @@ public class DailyBooleanMetricRest {
             val=1;
         }
 
-        metricsQueue.putData(new QueueElement(path, "{}","{}", Instant.now(), val));
+        metricsQueue.putData(new QueueElement(path, "{}",Instant.now(), val));
         storage.createIfNotExistTrigger(path,"{}","ua.com.serverhelp.simplemonitoring.entities.trigger.BooleanChecker");
         storage.createIfNotExistTrigger(path,"{}","ua.com.serverhelp.simplemonitoring.entities.trigger.Last24hValuesChecker");
 

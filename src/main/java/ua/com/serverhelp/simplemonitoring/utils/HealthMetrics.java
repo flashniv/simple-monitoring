@@ -58,9 +58,9 @@ public class HealthMetrics {
 
     public void commitHealthMetric(){
         if(checkRunCheckMetrics()){
-            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 1.0));
+            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", Instant.now(), 1.0));
         }else{
-            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 0.0));
+            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", Instant.now(), 0.0));
             Trigger trigger=new Trigger(){
                 @Override
                 public String getName() {
@@ -79,9 +79,9 @@ public class HealthMetrics {
             alerter.printAlert(alert);
         }
         if(checkMetricsCommit()){
-            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 1.0));
+            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", Instant.now(), 1.0));
         }else{
-            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 0.0));
+            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", Instant.now(), 0.0));
             Trigger trigger=new Trigger(){
                 @Override
                 public String getName() {

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.DiffItemProcessor;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -43,7 +44,8 @@ public abstract class AbstractMetricRest {
     }
 
     private void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
-        Double value;
+        double value;
+        //Simple parse first part(path and parameter group)
         String parameters = "";
         input = input.replace("\r", "");
         input = replaceE.matcher(input).replaceFirst("$1+$2");
@@ -57,8 +59,16 @@ public abstract class AbstractMetricRest {
         } else {
             parts = input.split(" ");
         }
-        value = Double.valueOf(parts[parts.length - 1]);
-        metricsQueue.putData(new QueueElement(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value));
+        //Parse value of item
+        value = Double.parseDouble(parts[parts.length - 1]);
+        //create response container
+        QueueElement queueElement=new QueueElement(parts[0], parseParameterGroup(parameters), Instant.now(), value);
+        //add modificators to queue element
+        setItemProcessors(queueElement);
+        //run modificators
+        if(queueElement.runProcessors()){
+            metricsQueue.putData(queueElement);
+        }
     }
 
     protected boolean isAllowedMetric(String metric){
@@ -69,14 +79,13 @@ public abstract class AbstractMetricRest {
         }
         return false;
     }
-    private String getOptionsByMetric(String metric) {
-        JSONObject res=new JSONObject();
+
+    private void setItemProcessors(QueueElement queueElement) {
         for (String metricExp:getDiffMetrics()){
-            if(metric.contains(metricExp)){
-                res.put("diff", true);
+            if(queueElement.getPath().contains(metricExp)){
+                queueElement.addItemProcessor(new DiffItemProcessor());
             }
         }
-        return res.toString();
     }
 
     protected abstract void createTriggers(String pathPart);

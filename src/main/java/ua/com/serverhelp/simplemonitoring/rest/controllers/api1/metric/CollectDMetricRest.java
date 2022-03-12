@@ -9,6 +9,7 @@ import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.DiffItemProcessor;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.time.Instant;
@@ -80,7 +81,11 @@ public class CollectDMetricRest {
                 parameters.put("ds_name", dsnames.getString(j));
                 parameters.put("ds_type", dstypes.getString(j));
                 Double dobValue= values.getDouble(j);
-                metricsQueue.putData(new QueueElement(path,parameters.toString(),getOptionsByMetric(plugin),timestamp,dobValue));
+                QueueElement queueElement=new QueueElement(path,parameters.toString(),timestamp,dobValue);
+                setItemProcessors(queueElement);
+                if(queueElement.runProcessors()){
+                    metricsQueue.putData(queueElement);
+                }
             }
         }
 
@@ -92,9 +97,8 @@ public class CollectDMetricRest {
         Metric dfMetric= storage.getOrCreateMetric("collectd." + proj + "." + host+".df");
         List<ParameterGroup> dfParameterGroupList=storage.getParameterGroups(dfMetric);
         List<String> mountPoints=new ArrayList<>();
-        for (int i=0;i< dfParameterGroupList.size();i++) {
-            ParameterGroup parameterGroup= dfParameterGroupList.get(i);
-            if(!mountPoints.contains(parameterGroup.getParameters().get("instance"))){
+        for (ParameterGroup parameterGroup : dfParameterGroupList) {
+            if (!mountPoints.contains(parameterGroup.getParameters().get("instance"))) {
                 mountPoints.add(parameterGroup.getParameters().get("instance"));
             }
         }
@@ -118,14 +122,18 @@ public class CollectDMetricRest {
         return ResponseEntity.ok().body("Success");
     }
 
-    private String getOptionsByMetric(String plugin){
-        JSONObject res=new JSONObject();
-        switch (plugin){
-            case "disk":
-            case "interface":
-            case "nginx":
-                res.put("diff", true);
+    private void setItemProcessors(QueueElement queueElement){
+        for (String diffMetric:getDiffMetrics()){
+            if(queueElement.getPath().contains(diffMetric)){
+                queueElement.addItemProcessor(new DiffItemProcessor());
+            }
         }
-        return res.toString();
+    }
+    private String[] getDiffMetrics(){
+        return new String[]{
+            "disk",
+            "interface",
+            "nginx"
+        };
     }
 }
