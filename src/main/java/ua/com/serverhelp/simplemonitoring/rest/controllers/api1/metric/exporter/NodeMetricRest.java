@@ -1,7 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +11,7 @@ import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -50,6 +50,7 @@ public class NodeMetricRest extends AbstractMetricRest{
 
     @Override
     protected void createTriggers(String pathPart) {
+        /*
         //create sum metric for cpu
         List<String> cpuModes = List.of("idle","iowait","irq","nice","softirq","steal","system","user");
         for (String cpuMode : cpuModes) {
@@ -57,7 +58,7 @@ public class NodeMetricRest extends AbstractMetricRest{
             jsonObject.put("cpu", "%");
             jsonObject.put("mode", cpuMode);
             storage.createIfNotExistCalculateParameterGroup(pathPart+"cpu_seconds_total", jsonObject.toString(), "sum");
-        }
+        }*/
         //create trigger for LA
         Metric load15=storage.getOrCreateMetric(pathPart+"load15");
         storage.createIfNotExistTrigger(pathPart+"load15","ua.com.serverhelp.simplemonitoring.entities.trigger.LoadAvgChecker",storage.getOrCreateParameterGroup(load15,"{}"));
@@ -104,5 +105,10 @@ public class NodeMetricRest extends AbstractMetricRest{
                 "network_transmit_bytes_total",
                 "network_receive_bytes_total"
         };
+    }
+
+    @Override
+    protected Map<String, String> getAvgMetrics() {
+        return Map.of("cpu_seconds_total","cpu");
     }
 }

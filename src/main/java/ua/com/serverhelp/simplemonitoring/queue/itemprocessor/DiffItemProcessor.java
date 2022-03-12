@@ -21,8 +21,6 @@ public class DiffItemProcessor implements ItemProcessor{
 
         queueElement.setValue(res);
 
-        log.info("Metric "+queueElement.getPath()+queueElement.getJson()+" value:"+res);
-
         return true;
     }
 }

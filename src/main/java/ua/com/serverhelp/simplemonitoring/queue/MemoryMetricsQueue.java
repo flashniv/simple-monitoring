@@ -1,7 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.queue;
 
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
@@ -10,10 +9,7 @@ import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.HealthMetrics;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

@@ -2,7 +2,6 @@ package ua.com.serverhelp.simplemonitoring.queue;
 
 import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 
-import java.time.Instant;
 import java.util.List;
 
 /*{

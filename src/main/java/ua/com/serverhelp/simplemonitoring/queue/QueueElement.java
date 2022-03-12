@@ -29,7 +29,7 @@ public class QueueElement{
     /**
      * Run modificator processors
      *
-     * @return true if need to add element to db
+     * @return true if you need to add element to db
      */
     public boolean runProcessors(){
         boolean ret=true;

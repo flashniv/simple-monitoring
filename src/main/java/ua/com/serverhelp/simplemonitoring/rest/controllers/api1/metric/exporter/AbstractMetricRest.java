@@ -6,10 +6,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
 import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.AvgItemProcessor;
 import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.DiffItemProcessor;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,9 +83,18 @@ public abstract class AbstractMetricRest {
     }
 
     private void setItemProcessors(QueueElement queueElement) {
+        //Diff metrics
         for (String metricExp:getDiffMetrics()){
             if(queueElement.getPath().contains(metricExp)){
                 queueElement.addItemProcessor(new DiffItemProcessor());
+            }
+        }
+        //Avg metrics
+        for (Map.Entry<String,String> avgMetric:getAvgMetrics().entrySet()){
+            if(queueElement.getPath().contains(avgMetric.getKey())){
+                JSONObject parameters=new JSONObject(queueElement.getJson());
+                parameters.remove(avgMetric.getValue());
+                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getValue()));
             }
         }
     }
@@ -95,6 +106,9 @@ public abstract class AbstractMetricRest {
     }
     protected String[] getDiffMetrics(){
         return new String[]{};
+    }
+    protected Map<String,String> getAvgMetrics(){
+        return Map.of();
     }
 
     protected void createTriggersByHost(String host){
