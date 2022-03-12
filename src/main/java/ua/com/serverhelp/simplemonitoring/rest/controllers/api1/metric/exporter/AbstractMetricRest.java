@@ -94,7 +94,7 @@ public abstract class AbstractMetricRest {
             if(queueElement.getPath().contains(avgMetric.getKey())){
                 JSONObject parameters=new JSONObject(queueElement.getJson());
                 parameters.remove(avgMetric.getValue());
-                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getValue()));
+                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString()));
             }
         }
     }
