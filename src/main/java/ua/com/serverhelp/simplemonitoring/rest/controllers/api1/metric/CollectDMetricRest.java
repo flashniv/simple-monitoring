@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.time.Instant;
@@ -79,7 +80,7 @@ public class CollectDMetricRest {
                 parameters.put("ds_name", dsnames.getString(j));
                 parameters.put("ds_type", dstypes.getString(j));
                 Double dobValue= values.getDouble(j);
-                metricsQueue.putData(path,parameters.toString(),getOptionsByMetric(plugin),timestamp,dobValue);
+                metricsQueue.putData(new QueueElement(path,parameters.toString(),getOptionsByMetric(plugin),timestamp,dobValue));
             }
         }
 

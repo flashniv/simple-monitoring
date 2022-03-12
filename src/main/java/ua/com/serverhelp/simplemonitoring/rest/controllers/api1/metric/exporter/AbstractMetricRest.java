@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public abstract class AbstractMetricRest {
             parts = input.split(" ");
         }
         value = Double.valueOf(parts[parts.length - 1]);
-        metricsQueue.putData(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value);
+        metricsQueue.putData(new QueueElement(parts[0], parseParameterGroup(parameters), getOptionsByMetric(parts[0]), Instant.now(), value));
     }
 
     protected boolean isAllowedMetric(String metric){

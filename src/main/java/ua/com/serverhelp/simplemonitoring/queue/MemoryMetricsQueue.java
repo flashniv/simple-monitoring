@@ -50,13 +50,7 @@ public class MemoryMetricsQueue implements MetricsQueue {
     }
 
     @Override
-    public void putData(String path,String json,String options, Instant timestamp, Double value) {
-        QueueElement queueElement=new QueueElement();
-        queueElement.setPath(path);
-        queueElement.setJson(json);
-        queueElement.setTimestamp(timestamp);
-        queueElement.setOptions(options);
-        queueElement.setValue(value);
+    public void putData(QueueElement queueElement) {
         linkedQueue.add(queueElement);
     }
 

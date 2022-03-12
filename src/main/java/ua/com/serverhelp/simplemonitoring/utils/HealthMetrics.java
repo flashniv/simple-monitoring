@@ -7,6 +7,7 @@ import ua.com.serverhelp.simplemonitoring.alerter.Alerter;
 import ua.com.serverhelp.simplemonitoring.entities.alerts.Alert;
 import ua.com.serverhelp.simplemonitoring.entities.trigger.Trigger;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -57,9 +58,9 @@ public class HealthMetrics {
 
     public void commitHealthMetric(){
         if(checkRunCheckMetrics()){
-            metricsQueue.putData("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 1.0);
+            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 1.0));
         }else{
-            metricsQueue.putData("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 0.0);
+            metricsQueue.putData(new QueueElement("internal.cron.runCheckMetrics", "{}", "{}", Instant.now(), 0.0));
             Trigger trigger=new Trigger(){
                 @Override
                 public String getName() {
@@ -78,9 +79,9 @@ public class HealthMetrics {
             alerter.printAlert(alert);
         }
         if(checkMetricsCommit()){
-            metricsQueue.putData("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 1.0);
+            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 1.0));
         }else{
-            metricsQueue.putData("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 0.0);
+            metricsQueue.putData(new QueueElement("internal.cron.checkMetricsCommit", "{}", "{}", Instant.now(), 0.0));
             Trigger trigger=new Trigger(){
                 @Override
                 public String getName() {

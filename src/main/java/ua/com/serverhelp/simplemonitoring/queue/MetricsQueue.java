@@ -32,5 +32,5 @@ import java.util.List;
 
 public interface MetricsQueue {
     List<Event> getEvents();
-    void putData(String path, String json, String options, Instant timestamp, Double value);
+    void putData(QueueElement queueElement);
 }

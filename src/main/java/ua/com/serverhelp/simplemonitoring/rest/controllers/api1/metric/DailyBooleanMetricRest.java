@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.queue.MetricsQueue;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
@@ -25,7 +26,7 @@ public class DailyBooleanMetricRest {
             val=1;
         }
 
-        metricsQueue.putData(path, "{}","{}", Instant.now(), val);
+        metricsQueue.putData(new QueueElement(path, "{}","{}", Instant.now(), val));
         storage.createIfNotExistTrigger(path,"{}","ua.com.serverhelp.simplemonitoring.entities.trigger.BooleanChecker");
         storage.createIfNotExistTrigger(path,"{}","ua.com.serverhelp.simplemonitoring.entities.trigger.Last24hValuesChecker");
 
