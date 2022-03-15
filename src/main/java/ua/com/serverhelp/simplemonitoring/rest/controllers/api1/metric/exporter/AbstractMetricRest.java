@@ -25,7 +25,6 @@ public abstract class AbstractMetricRest {
     private final ConcurrentLinkedQueue<String> inputQueue=new ConcurrentLinkedQueue<>();
     private final Pattern replaceE=Pattern.compile("(.*[0-9]e) ([0-9]+)$");
     private final Pattern parametersSplitToGroup=Pattern.compile("(.*)=\"(.*)\"");
-    private final Pattern itemSplitToGroups=Pattern.compile("(.*)\\{(.*)} (.*)");
 
     private String parseParameterGroup(String part) throws IllegalStateException,IndexOutOfBoundsException{
         JSONObject json=new JSONObject();
@@ -46,25 +45,16 @@ public abstract class AbstractMetricRest {
     }
 
     private void processItem(String input) throws IllegalStateException, IndexOutOfBoundsException, NumberFormatException {
-        double value;
-        //Simple parse first part(path and parameter group)
-        String parameters = "";
         input = input.replace("\r", "");
         input = replaceE.matcher(input).replaceFirst("$1+$2");
-        String[] parts;
-        Matcher m = itemSplitToGroups.matcher(input);
-        if (m.matches()) {
-            parts = new String[3];
-            parts[0] = m.group(1);
-            parameters = m.group(2);
-            parts[2] = m.group(3);
-        } else {
-            parts = input.split(" ");
+        if(input.contains("{")) {
+            input = input.replace('{', ';').replace("} ", ";");
+        }else{
+            input = input.replace(" ", ";;");
         }
-        //Parse value of item
-        value = Double.parseDouble(parts[parts.length - 1]);
+        String[] parts=input.split(";");
         //create response container
-        QueueElement queueElement=new QueueElement(parts[0], parseParameterGroup(parameters), Instant.now(), value);
+        QueueElement queueElement=new QueueElement(parts[1], parseParameterGroup(parts[2]), Instant.parse(parts[0]), Double.parseDouble(parts[3]));
         //add modificators to queue element
         setItemProcessors(queueElement);
         //run modificators
@@ -94,7 +84,7 @@ public abstract class AbstractMetricRest {
             if(queueElement.getPath().contains(avgMetric.getKey())){
                 JSONObject parameters=new JSONObject(queueElement.getJson());
                 parameters.remove(avgMetric.getValue());
-                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString()));
+                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getTimestamp()));
             }
         }
     }

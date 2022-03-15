@@ -12,6 +12,7 @@ import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -28,10 +29,12 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
         String inputData = URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs = inputData.split("\n");
 
+        Instant timestamp=Instant.now();
+
         for (String input : inputs) {
             if (isAllowedMetric(input)) {
                 try {
-                    getInputQueue().add("exporter."+input);
+                    getInputQueue().add(timestamp+";exporter."+input);
                     input = Pattern.compile("(.*)\\{.*").matcher(input).replaceFirst("$1");
                     createTriggersByHost("exporter."+input);
                 } catch (NumberFormatException e) {

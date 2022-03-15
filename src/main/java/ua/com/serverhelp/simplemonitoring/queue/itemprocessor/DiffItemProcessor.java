@@ -14,10 +14,13 @@ public class DiffItemProcessor implements ItemProcessor{
         double res=0.0;
         if(prevValues.containsKey(queueElement.getPath()+queueElement.getJson())){
             QueueElement prevValue=prevValues.get(queueElement.getPath()+queueElement.getJson());
+            log.info("new "+queueElement);
+            log.info("prev "+prevValue);
             Duration duration=Duration.between(prevValue.getTimestamp(), queueElement.getTimestamp());
-            res=(queueElement.getValue()-prevValue.getValue())/ (duration.toNanos()/1000000.0);
+            log.info("dur "+prevValue.getTimestamp()+" "+ queueElement.getTimestamp()+"  res "+duration.toMillis()/1000.0);
+            res=(queueElement.getValue()-prevValue.getValue())/(duration.toMillis()/1000.0);
         }
-        prevValues.put(queueElement.getPath()+queueElement.getJson(),queueElement);
+        prevValues.put(queueElement.getPath()+queueElement.getJson(),queueElement.clone());
 
         queueElement.setValue(res);
 

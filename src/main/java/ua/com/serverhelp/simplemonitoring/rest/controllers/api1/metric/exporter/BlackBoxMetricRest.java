@@ -9,6 +9,7 @@ import ua.com.serverhelp.simplemonitoring.utils.MYLog;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/apiv1/metric/exporter/blackbox")
@@ -24,11 +25,12 @@ public class BlackBoxMetricRest extends AbstractMetricRest{
     ) {
         String inputData = URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs = inputData.split("\n");
+        Instant timestamp=Instant.now();
 
         for (String input : inputs) {
             if (isAllowedMetric(input)) {
                 try {
-                    getInputQueue().add("exporter." + proj + ".blackbox." + siteId + "." + input);
+                    getInputQueue().add(timestamp+";exporter." + proj + ".blackbox." + siteId + "." + input);
                 } catch (NumberFormatException e) {
                     MYLog.printWarn("NodeMetricRest::receiveData number format error " + input);
                     return ResponseEntity.badRequest().body("number format error " + input);

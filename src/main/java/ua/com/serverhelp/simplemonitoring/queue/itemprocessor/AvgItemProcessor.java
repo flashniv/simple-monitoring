@@ -13,12 +13,14 @@ import java.util.concurrent.Semaphore;
 public class AvgItemProcessor implements ItemProcessor {
     private final String path;
     private final String parameterGroup;
+    private final Instant timestamp;
     private static final Semaphore semaphore = new Semaphore(1);
     private static HashMap<String, HashMap<String, Object>> items = new HashMap<>();
 
-    public AvgItemProcessor(String path, String parameterGroup) {
+    public AvgItemProcessor(String path, String parameterGroup, Instant timestamp) {
         this.path=path;
         this.parameterGroup=parameterGroup;
+        this.timestamp = timestamp;
     }
 
     public static List<QueueElement> getQueueElements(){
@@ -27,7 +29,7 @@ public class AvgItemProcessor implements ItemProcessor {
             semaphore.acquire();
             for (String key : items.keySet()) {
                 HashMap<String, Object> item = items.get(key);
-                QueueElement queueElement = new QueueElement("" + item.get("path"), "" + item.get("parameterGroup"), Instant.now(), (Double) item.get("sum") / (Long) item.get("count"));
+                QueueElement queueElement = new QueueElement("" + item.get("path"), "" + item.get("parameterGroup"),(Instant) item.get("timestamp"), (Double) item.get("sum") / (Long) item.get("count"));
                 queueElements.add(queueElement);
             }
             items=new HashMap<>();
@@ -50,6 +52,7 @@ public class AvgItemProcessor implements ItemProcessor {
                 item.put("parameterGroup", parameterGroup);
                 item.put("sum", queueElement.getValue());
                 item.put("count", 1L);
+                item.put("timestamp", timestamp);
                 items.put(path + parameterGroup, item);
             } else {
                 item.put("sum", (Double) item.get("sum") + queueElement.getValue());

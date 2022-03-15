@@ -40,7 +40,7 @@ public class DiskFreeU85pChecker  implements Checker{
             }
         }
         if(usedBytes!=null && freeBytes!=null) {
-            log.error("DiskFreeU85pChecker "+checkerArguments.get(0).getParameterGroup().getMetric()+checkerArguments.get(0).getParameterGroup().getJson()+" freeBytes="+freeBytes+"  usedBytes="+usedBytes+"  freeBytes / (usedBytes+freeBytes)="+freeBytes / (usedBytes+freeBytes)+" res="+(freeBytes / (usedBytes+freeBytes)>0.15));
+            log.debug("DiskFreeU85pChecker "+checkerArguments.get(0).getParameterGroup().getMetric()+checkerArguments.get(0).getParameterGroup().getJson()+" freeBytes="+freeBytes+"  usedBytes="+usedBytes+"  freeBytes / (usedBytes+freeBytes)="+freeBytes / (usedBytes+freeBytes)+" res="+(freeBytes / (usedBytes+freeBytes)>0.15));
             return freeBytes / (usedBytes+freeBytes)>0.15;
         }
         throw new CheckTriggerException("DiskFreeU85pChecker::checkState value is negative");

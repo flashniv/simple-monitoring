@@ -10,6 +10,7 @@ import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,14 @@ public class NodeMetricRest extends AbstractMetricRest{
             @RequestHeader("X-Hostname") String hostname,
             @RequestBody String data
     ) {
+        Instant timestamp=Instant.now();
         String inputData= URLDecoder.decode(data, StandardCharsets.UTF_8);
         String[] inputs=inputData.split("\n");
 
         for (String input:inputs){
             if(isAllowedMetric(input)){
                 try {
-                    getInputQueue().add("exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
+                    getInputQueue().add(timestamp+";exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
                 }catch (NumberFormatException e){
                     log.warn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
@@ -51,14 +53,6 @@ public class NodeMetricRest extends AbstractMetricRest{
     @Override
     protected void createTriggers(String pathPart) {
         /*
-        //create sum metric for cpu
-        List<String> cpuModes = List.of("idle","iowait","irq","nice","softirq","steal","system","user");
-        for (String cpuMode : cpuModes) {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("cpu", "%");
-            jsonObject.put("mode", cpuMode);
-            storage.createIfNotExistCalculateParameterGroup(pathPart+"cpu_seconds_total", jsonObject.toString(), "sum");
-        }*/
         //create trigger for LA
         Metric load15=storage.getOrCreateMetric(pathPart+"load15");
         storage.createIfNotExistTrigger(pathPart+"load15","ua.com.serverhelp.simplemonitoring.entities.trigger.LoadAvgChecker",storage.getOrCreateParameterGroup(load15,"{}"));
@@ -77,6 +71,7 @@ public class NodeMetricRest extends AbstractMetricRest{
         List<ParameterGroup> swapSizeBytesGroupList=storage.getParameterGroups(swapSizeBytes);
         List<ParameterGroup> swapUsageBytesGroupList=storage.getParameterGroups(swapUsageBytes);
         storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
+         */
     }
 
     @Override
