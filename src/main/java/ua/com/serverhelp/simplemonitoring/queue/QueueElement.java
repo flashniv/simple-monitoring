@@ -38,9 +38,9 @@ public class QueueElement{
     public boolean runProcessors(){
         boolean ret=true;
         for (ItemProcessor itemProcessor:itemProcessors){
-            log.info("Before "+itemProcessor.getClass().getSimpleName()+" "+this.toString());
+            //log.info("Before "+itemProcessor.getClass().getSimpleName()+" "+this.toString());
             if(!itemProcessor.runProcessor(this)) ret=false;
-            log.info("After "+itemProcessor.getClass().getSimpleName()+" "+this.toString());
+            //log.info("After "+itemProcessor.getClass().getSimpleName()+" "+this.toString());
         }
         return ret;
     }

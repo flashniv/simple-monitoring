@@ -52,7 +52,6 @@ public class NodeMetricRest extends AbstractMetricRest{
 
     @Override
     protected void createTriggers(String pathPart) {
-        /*
         //create trigger for LA
         Metric load15=storage.getOrCreateMetric(pathPart+"load15");
         storage.createIfNotExistTrigger(pathPart+"load15","ua.com.serverhelp.simplemonitoring.entities.trigger.LoadAvgChecker",storage.getOrCreateParameterGroup(load15,"{}"));
@@ -71,7 +70,6 @@ public class NodeMetricRest extends AbstractMetricRest{
         List<ParameterGroup> swapSizeBytesGroupList=storage.getParameterGroups(swapSizeBytes);
         List<ParameterGroup> swapUsageBytesGroupList=storage.getParameterGroups(swapUsageBytes);
         storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
-         */
     }
 
     @Override
