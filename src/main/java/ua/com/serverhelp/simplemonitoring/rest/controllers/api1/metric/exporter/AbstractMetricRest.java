@@ -102,9 +102,10 @@ public abstract class AbstractMetricRest {
     }
 
     protected void createTriggersByHost(String host){
-        if(!triggers.contains(host)){
+        //TODO Restore trigger cache
+        //if(!triggers.contains(host)){
             createTriggers(host);
-            triggers.add(host);
-        }
+        //    triggers.add(host);
+        //}
     }
 }

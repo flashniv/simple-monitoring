@@ -69,7 +69,10 @@ public class NodeMetricRest extends AbstractMetricRest{
         Metric swapUsageBytes= storage.getOrCreateMetric(pathPart+"memory_SwapFree_bytes");
         List<ParameterGroup> swapSizeBytesGroupList=storage.getParameterGroups(swapSizeBytes);
         List<ParameterGroup> swapUsageBytesGroupList=storage.getParameterGroups(swapUsageBytes);
-        storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
+        //TODO move check triggers to other thread
+        if(!swapSizeBytesGroupList.isEmpty() && !swapUsageBytesGroupList.isEmpty()) {
+            storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
+        }
     }
 
     @Override
