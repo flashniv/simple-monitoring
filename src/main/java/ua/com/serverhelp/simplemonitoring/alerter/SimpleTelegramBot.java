@@ -55,13 +55,4 @@ public class SimpleTelegramBot implements AlertSender{
         return true;
     }
 
-//    public void printAlert(Alert alert) {
-//        if (alertFilters.matchFilters(alert)) return;
-//
-//        if(alert.getStopDate()==null){
-//            printMessage("<b>ERR "+alert.getTrigger().getDescription()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStartDate());
-//        }else {
-//            printMessage("<b>OK "+alert.getTrigger().getDescription()+" in path "+alert.getTrigger().getHost()+"</b>\non event time "+alert.getStopDate());
-//        }
-//    }
 }

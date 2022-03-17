@@ -84,33 +84,13 @@ public abstract class AbstractMetricRest {
         return false;
     }
 
-    private void setItemProcessors(QueueElement queueElement) {
-        //Diff metrics
-        for (String metricExp:getDiffMetrics()){
-            if(queueElement.getPath().contains(metricExp)){
-                queueElement.addItemProcessor(new DiffItemProcessor());
-            }
-        }
-        //Avg metrics
-        for (Map.Entry<String,String> avgMetric:getAvgMetrics().entrySet()){
-            if(queueElement.getPath().contains(avgMetric.getKey())){
-                JSONObject parameters=new JSONObject(queueElement.getJson());
-                parameters.remove(avgMetric.getValue());
-                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getTimestamp()));
-            }
-        }
+    protected void setItemProcessors(QueueElement queueElement) {
     }
 
     protected abstract boolean createTriggers(String pathPart);
 
     protected String[] getAllowedMetrics(){
         return new String[]{};
-    }
-    protected String[] getDiffMetrics(){
-        return new String[]{};
-    }
-    protected Map<String,String> getAvgMetrics(){
-        return Map.of();
     }
 
     protected void addTrigger(String host){

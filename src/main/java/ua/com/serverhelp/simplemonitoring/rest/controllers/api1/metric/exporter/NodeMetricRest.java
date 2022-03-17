@@ -1,11 +1,15 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.AvgItemProcessor;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.DiffItemProcessor;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
@@ -79,6 +83,24 @@ public class NodeMetricRest extends AbstractMetricRest{
     }
 
     @Override
+    protected void setItemProcessors(QueueElement queueElement) {
+        //Diff metrics
+        for (String metricExp:getDiffMetrics()){
+            if(queueElement.getPath().contains(metricExp)){
+                queueElement.addItemProcessor(new DiffItemProcessor());
+            }
+        }
+        //Avg metrics
+        for (Map.Entry<String,String> avgMetric:getAvgMetrics().entrySet()){
+            if(queueElement.getPath().contains(avgMetric.getKey())){
+                JSONObject parameters=new JSONObject(queueElement.getJson());
+                parameters.remove(avgMetric.getValue());
+                queueElement.addItemProcessor(new AvgItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getTimestamp()));
+            }
+        }
+    }
+
+    @Override
     protected String[] getAllowedMetrics() {
         return new String[]{
                 "node_load1",
@@ -97,8 +119,7 @@ public class NodeMetricRest extends AbstractMetricRest{
         };
     }
 
-    @Override
-    protected String[] getDiffMetrics() {
+    private String[] getDiffMetrics() {
         return new String[]{
                 "cpu_seconds_total",
                 "network_transmit_bytes_total",
@@ -106,8 +127,7 @@ public class NodeMetricRest extends AbstractMetricRest{
         };
     }
 
-    @Override
-    protected Map<String, String> getAvgMetrics() {
+    private Map<String, String> getAvgMetrics() {
         return Map.of("cpu_seconds_total","cpu");
     }
 }

@@ -7,6 +7,7 @@ import ua.com.serverhelp.simplemonitoring.entities.event.Event;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entities.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.AvgItemProcessor;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.SumItemProcessor;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 import ua.com.serverhelp.simplemonitoring.utils.HealthMetrics;
 
@@ -52,8 +53,12 @@ public class MemoryMetricsQueue implements MetricsQueue {
     }
 
     private void commitAllOtherItems(){
-        List<QueueElement> queueElements= AvgItemProcessor.getQueueElements();
-        for (QueueElement queueElement:queueElements){
+        List<QueueElement> avgQueueElements= AvgItemProcessor.getQueueElements();
+        for (QueueElement queueElement:avgQueueElements){
+            putData(queueElement);
+        }
+        List<QueueElement> sumQueueElements= SumItemProcessor.getQueueElements();
+        for (QueueElement queueElement:sumQueueElements){
             putData(queueElement);
         }
     }

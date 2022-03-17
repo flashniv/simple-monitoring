@@ -1,6 +1,7 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.serverhelp.simplemonitoring.entities.metric.Metric;
+import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
+import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.SumItemProcessor;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
 
 import java.net.URLDecoder;
@@ -54,8 +57,10 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
     protected boolean createTriggers(String pathPart) {
         //create trigger for LA
         Metric metric=storage.getOrCreateMetric(pathPart);
-        storage.createIfNotExistTrigger(pathPart+".GET.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"GET\"}"));
-        storage.createIfNotExistTrigger(pathPart+".POST.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"POST\"}"));
+        storage.createIfNotExistTrigger(pathPart+".GET.5XX-errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"5XX\",\"method\":\"GET\"}"));
+        storage.createIfNotExistTrigger(pathPart+".POST.5XX-errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"5XX\",\"method\":\"POST\"}"));
+        storage.createIfNotExistTrigger(pathPart+".GET.4XX-errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog400Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"4XX\",\"method\":\"GET\"}"));
+        storage.createIfNotExistTrigger(pathPart+".POST.4XX-errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog400Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"4XX\",\"method\":\"POST\"}"));
         return true;
     }
 
@@ -64,5 +69,19 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
         return new String[]{
                 "nginx_access_log"
         };
+    }
+
+    @Override
+    protected void setItemProcessors(QueueElement queueElement) {
+        JSONObject parameters=new JSONObject(queueElement.getJson());
+        String code= parameters.getString("code");
+        if (code.charAt(0)=='4'){
+            parameters.put("code", "4XX");
+            queueElement.addItemProcessor(new SumItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getTimestamp()));
+        }
+        if (code.charAt(0)=='5'){
+            parameters.put("code", "5XX");
+            queueElement.addItemProcessor(new SumItemProcessor(queueElement.getPath(), parameters.toString(), queueElement.getTimestamp()));
+        }
     }
 }

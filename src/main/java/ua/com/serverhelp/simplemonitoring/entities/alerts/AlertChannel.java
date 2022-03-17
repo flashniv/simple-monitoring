@@ -29,14 +29,16 @@ public class AlertChannel {
     private String alerterClass;
     private String parameters;
 
-    public void printAlert(Storage storage,Alert alert){
+    public boolean printAlert(Storage storage,Alert alert){
         List<AlertChannelFilter> alertChannelFilters=storage.getAlertChannelFilters(this);
         boolean matched=false;
+        //check filters
         for (AlertChannelFilter alertChannelFilter: alertChannelFilters){
             if(alertChannelFilter.matchFilter(alert)){
                 matched=true;
             }
         }
+
         if(matched) {
             AlertSender alertSender=null;
             if (alerterClass.equals("ua.com.serverhelp.simplemonitoring.alerter.SimpleTelegramBot")) {
@@ -54,6 +56,8 @@ public class AlertChannel {
                     log.error("Error send alert message",exception);
                 }
             }
+            return true;
         }
+        return false;
     }
 }
