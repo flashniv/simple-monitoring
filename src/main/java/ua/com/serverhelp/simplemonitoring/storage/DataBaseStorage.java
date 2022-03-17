@@ -246,6 +246,7 @@ public class DataBaseStorage implements Storage {
                 parameterGroupCheckerArgument.setTrigger(newTrigger);
                 parameterGroupCheckerArguments.add(parameterGroupCheckerArgument);
             }
+            log.info("createIfNotExistTrigger parameterGroupCheckerArguments "+parameterGroupCheckerArguments);
             parameterGroupCheckerArgumentRepository.saveAll(parameterGroupCheckerArguments);
         }
     }
@@ -256,7 +257,7 @@ public class DataBaseStorage implements Storage {
         Metric metric1=getOrCreateMetric(metric);
         ParameterGroup parameterGroup=getOrCreateParameterGroup(metric1, json);
         Optional<Trigger> parameterGroupTrigger=triggerRepository.findByHostAndCheckerClass(metric, checkerClass);
-        log.info("createIfNotExistTrigger parameterGroupTrigger "+parameterGroupTrigger.isPresent());
+        log.info("createIfNotExistTrigger JSON parameterGroupTrigger "+parameterGroupTrigger.isPresent());
         if (parameterGroupTrigger.isEmpty()){
             Trigger newTrigger=new Trigger();
             newTrigger.setCheckerClass(checkerClass);
@@ -267,6 +268,7 @@ public class DataBaseStorage implements Storage {
             checkerArgument.setPosition(1);
             checkerArgument.setParameterGroup(parameterGroup);
             checkerArgument.setTrigger(newTrigger);
+            log.info("createIfNotExistTrigger JSON checkerArgument "+checkerArgument);
             parameterGroupCheckerArgumentRepository.save(checkerArgument);
         }
     }
