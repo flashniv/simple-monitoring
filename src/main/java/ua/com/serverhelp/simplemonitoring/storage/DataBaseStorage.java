@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.storage;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import ua.com.serverhelp.simplemonitoring.entities.account.Role;
@@ -26,9 +27,11 @@ import ua.com.serverhelp.simplemonitoring.utils.HealthMetrics;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class DataBaseStorage implements Storage {
     @Autowired
     private MetricsQueue metricsQueue;
@@ -144,13 +147,16 @@ public class DataBaseStorage implements Storage {
     @Override
     public ParameterGroup getOrCreateParameterGroup(Metric metric, String json) {
         Optional<ParameterGroup> res=parameterGroupRepository.findByMetricAndJson(metric, json);
+        ParameterGroup parameterGroup;
         if (res.isPresent()){
-            return res.get();
+            parameterGroup=res.get();
+        }else {
+            parameterGroup = new ParameterGroup();
+            parameterGroup.setMetric(metric);
+            parameterGroup.setJson(json);
+            saveParameterGroup(parameterGroup);
         }
-        ParameterGroup parameterGroup=new ParameterGroup();
-        parameterGroup.setMetric(metric);
-        parameterGroup.setJson(json);
-        saveParameterGroup(parameterGroup);
+        log.info("getOrCreateParameterGroup "+parameterGroup);
         return parameterGroup;
     }
 
@@ -223,6 +229,7 @@ public class DataBaseStorage implements Storage {
 
     @Override
     public void createIfNotExistTrigger(String host, String checkerClass,ParameterGroup... parameterGroups) {
+        log.info("createIfNotExistTrigger with ParameterGroups "+ Arrays.toString(parameterGroups));
         Optional<Trigger> trigger=triggerRepository.findByHostAndCheckerClass(host, checkerClass);
         if (trigger.isEmpty()){
             Trigger newTrigger=new Trigger();
@@ -245,9 +252,11 @@ public class DataBaseStorage implements Storage {
 
     @Override
     public void createIfNotExistTrigger(String metric, String json, String checkerClass) {
+        log.info("createIfNotExistTrigger with JSON "+json);
         Metric metric1=getOrCreateMetric(metric);
         ParameterGroup parameterGroup=getOrCreateParameterGroup(metric1, json);
         Optional<Trigger> parameterGroupTrigger=triggerRepository.findByHostAndCheckerClass(metric, checkerClass);
+        log.info("createIfNotExistTrigger parameterGroupTrigger "+parameterGroupTrigger.isPresent());
         if (parameterGroupTrigger.isEmpty()){
             Trigger newTrigger=new Trigger();
             newTrigger.setCheckerClass(checkerClass);

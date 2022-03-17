@@ -2,6 +2,7 @@ package ua.com.serverhelp.simplemonitoring.entities.parametergroup;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@ToString
 public class ParameterGroup implements IParameterGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
