@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
+import io.sentry.Sentry;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,11 @@ public class NodeMetricRest extends AbstractMetricRest{
                 try {
                     getInputQueue().add(timestamp+";exporter."+proj+"."+hostname+".node."+input.replace("node_", ""));
                 }catch (NumberFormatException e){
+                    Sentry.captureException(e);
                     log.warn("NodeMetricRest::receiveData number format error "+input);
                     return ResponseEntity.badRequest().body("number format error "+input);
                 }catch (IllegalStateException | IndexOutOfBoundsException e){
+                    Sentry.captureException(e);
                     log.warn("NodeMetricRest::receiveData regexp match error "+input);
                     return ResponseEntity.badRequest().body("regexp match error "+input);
                 }

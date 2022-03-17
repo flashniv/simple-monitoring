@@ -51,7 +51,7 @@ public class Cron {
         log.info("Cron::clearHistory Stop check health");
     }
 
-    @Scheduled(initialDelay = 90000L,fixedRate = 60000L)
+    @Scheduled(initialDelay = 90000L,fixedRate = 300000L)
     public void commitTriggers(){
         log.info("Cron::commitTriggers Start commit Triggers");
         storage.commitTriggers();

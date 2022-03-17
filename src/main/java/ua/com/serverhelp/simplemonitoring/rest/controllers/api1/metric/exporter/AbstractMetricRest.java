@@ -46,10 +46,10 @@ public abstract class AbstractMetricRest {
 
     public void processTriggers(){
         for (Map.Entry<String,Boolean> entry:((HashMap<String,Boolean>)triggers.clone()).entrySet()){
-            log.info("Trigger check "+entry.getKey());
+            //log.info("Trigger check "+entry.getKey());
             if(!entry.getValue()){
                 if(createTriggers(entry.getKey())){
-                    log.info("Trigger created "+entry.getKey());
+                    //log.info("Trigger created "+entry.getKey());
                     triggers.put(entry.getKey(), true);
                 }
             }
@@ -95,7 +95,7 @@ public abstract class AbstractMetricRest {
 
     protected void addTrigger(String host){
         if(!triggers.containsKey(host)){
-            log.info("Trigger add "+host);
+            //log.info("Trigger add "+host);
             triggers.put(host, false);
         }
     }

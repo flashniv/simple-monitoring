@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.queue.itemprocessor;
 
+import io.sentry.Sentry;
 import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.queue.QueueElement;
 
@@ -34,6 +35,7 @@ public class AvgItemProcessor implements ItemProcessor {
             }
             items=new HashMap<>();
         }catch (Exception e){
+            Sentry.captureException(e);
             log.warn("Semaphore not ack",e);
         }finally {
             semaphore.release();
@@ -59,6 +61,7 @@ public class AvgItemProcessor implements ItemProcessor {
                 item.put("count", ((Long) item.get("count")) + 1L);
             }
         } catch (Exception e) {
+            Sentry.captureException(e);
             log.warn("Semaphore not ack",e);
         } finally {
             semaphore.release();

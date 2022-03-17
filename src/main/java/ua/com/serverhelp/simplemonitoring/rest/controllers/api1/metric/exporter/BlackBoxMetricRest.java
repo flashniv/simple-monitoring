@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.controllers.api1.metric.exporter;
 
+import io.sentry.Sentry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,11 @@ public class BlackBoxMetricRest extends AbstractMetricRest{
                 try {
                     getInputQueue().add(timestamp+";exporter." + proj + ".blackbox." + siteId + "." + input);
                 } catch (NumberFormatException e) {
+                    Sentry.captureException(e);
                     MYLog.printWarn("NodeMetricRest::receiveData number format error " + input);
                     return ResponseEntity.badRequest().body("number format error " + input);
                 } catch (IllegalStateException | IndexOutOfBoundsException e) {
+                    Sentry.captureException(e);
                     MYLog.printWarn("NodeMetricRest::receiveData regexp match error " + input);
                     return ResponseEntity.badRequest().body("regexp match error " + input);
                 }

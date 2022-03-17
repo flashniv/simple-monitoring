@@ -156,7 +156,7 @@ public class DataBaseStorage implements Storage {
             parameterGroup.setJson(json);
             saveParameterGroup(parameterGroup);
         }
-        log.info("getOrCreateParameterGroup "+parameterGroup);
+        //log.info("getOrCreateParameterGroup "+parameterGroup);
         return parameterGroup;
     }
 
@@ -229,7 +229,7 @@ public class DataBaseStorage implements Storage {
 
     @Override
     public void createIfNotExistTrigger(String host, String checkerClass,ParameterGroup... parameterGroups) {
-        log.info("createIfNotExistTrigger with ParameterGroups "+ Arrays.toString(parameterGroups));
+        //log.info("createIfNotExistTrigger with ParameterGroups "+ Arrays.toString(parameterGroups));
         Optional<Trigger> trigger=triggerRepository.findByHostAndCheckerClass(host, checkerClass);
         if (trigger.isEmpty()){
             Trigger newTrigger=new Trigger();
@@ -246,18 +246,18 @@ public class DataBaseStorage implements Storage {
                 parameterGroupCheckerArgument.setTrigger(newTrigger);
                 parameterGroupCheckerArguments.add(parameterGroupCheckerArgument);
             }
-            log.info("createIfNotExistTrigger parameterGroupCheckerArguments "+parameterGroupCheckerArguments);
+            //log.info("createIfNotExistTrigger parameterGroupCheckerArguments "+parameterGroupCheckerArguments);
             parameterGroupCheckerArgumentRepository.saveAll(parameterGroupCheckerArguments);
         }
     }
 
     @Override
     public void createIfNotExistTrigger(String metric, String json, String checkerClass) {
-        log.info("createIfNotExistTrigger with JSON "+json);
+        //log.info("createIfNotExistTrigger with JSON "+json);
         Metric metric1=getOrCreateMetric(metric);
         ParameterGroup parameterGroup=getOrCreateParameterGroup(metric1, json);
         Optional<Trigger> parameterGroupTrigger=triggerRepository.findByHostAndCheckerClass(metric, checkerClass);
-        log.info("createIfNotExistTrigger JSON parameterGroupTrigger "+parameterGroupTrigger.isPresent());
+        //log.info("createIfNotExistTrigger JSON parameterGroupTrigger "+parameterGroupTrigger.isPresent());
         if (parameterGroupTrigger.isEmpty()){
             Trigger newTrigger=new Trigger();
             newTrigger.setCheckerClass(checkerClass);
@@ -268,7 +268,7 @@ public class DataBaseStorage implements Storage {
             checkerArgument.setPosition(1);
             checkerArgument.setParameterGroup(parameterGroup);
             checkerArgument.setTrigger(newTrigger);
-            log.info("createIfNotExistTrigger JSON checkerArgument "+checkerArgument);
+            //log.info("createIfNotExistTrigger JSON checkerArgument "+checkerArgument);
             parameterGroupCheckerArgumentRepository.save(checkerArgument);
         }
     }

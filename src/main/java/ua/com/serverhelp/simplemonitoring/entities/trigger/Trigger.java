@@ -1,7 +1,9 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import io.sentry.Sentry;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import ua.com.serverhelp.simplemonitoring.storage.Storage;
@@ -17,6 +19,7 @@ import java.util.List;
 @Entity
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Slf4j
 public class Trigger{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +43,7 @@ public class Trigger{
             List<? extends CheckerArgument> checkerArguments=storage.getCheckerArgumentsByTrigger(this);
             return checker.checkState(checkerArguments,storage);
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            Sentry.captureException(e);
             throw new CheckTriggerException("ParameterGroupTrigger::checkState "+e.getLocalizedMessage());
         }
     }
@@ -51,7 +55,8 @@ public class Trigger{
             Checker checker = (Checker) cons.newInstance();
             return checker.getName();
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            MYLog.printError("ParameterGroupTrigger::getName can not load class "+checkerClass,e);
+            Sentry.captureException(e);
+            log.error("ParameterGroupTrigger::getName can not load class "+checkerClass,e);
         }
         return "";
     }
@@ -63,7 +68,8 @@ public class Trigger{
             Checker checker = (Checker) cons.newInstance();
             return checker.getDescription();
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            MYLog.printError("ParameterGroupTrigger::getName can not load class "+checkerClass,e);
+            Sentry.captureException(e);
+            log.error("ParameterGroupTrigger::getName can not load class "+checkerClass,e);
         }
         return "";
     }

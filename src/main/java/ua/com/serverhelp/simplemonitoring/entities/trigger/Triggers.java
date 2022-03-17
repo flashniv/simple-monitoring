@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.entities.trigger;
 
+import io.sentry.Sentry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,7 @@ public class Triggers {
                     }
                 }
             } catch (CheckTriggerException e) {
+                Sentry.captureException(e);
                 log.warn("Triggers::checkTriggers check trigger error "+trigger.getHost()+" name "+trigger.getName());
             } catch (MetricUnreachableException e) {
                 log.warn("Triggers::checkTriggers metric unreachable "+trigger.getHost()+" name "+trigger.getName());
