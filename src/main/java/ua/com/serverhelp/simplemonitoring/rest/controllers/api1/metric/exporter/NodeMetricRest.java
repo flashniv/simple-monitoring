@@ -45,13 +45,14 @@ public class NodeMetricRest extends AbstractMetricRest{
             }
         }
         //add triggers and calculate metrics
-        createTriggersByHost("exporter."+proj+"."+hostname+".node.");
+        addTrigger("exporter."+proj+"."+hostname+".node.");
 
         return ResponseEntity.ok().body("Success");
     }
 
     @Override
-    protected void createTriggers(String pathPart) {
+    protected boolean createTriggers(String pathPart) {
+        boolean diskTrigger=false,swapTrigger=false;
         //create trigger for LA
         Metric load15=storage.getOrCreateMetric(pathPart+"load15");
         storage.createIfNotExistTrigger(pathPart+"load15","ua.com.serverhelp.simplemonitoring.entities.trigger.LoadAvgChecker",storage.getOrCreateParameterGroup(load15,"{}"));
@@ -63,16 +64,18 @@ public class NodeMetricRest extends AbstractMetricRest{
         List<ParameterGroup> availParameterGroupList=storage.getParameterGroups(filesystemAvailBytes);
         for (int i=0;i< sizeParameterGroupList.size();i++) {
             storage.createIfNotExistTrigger(pathPart + "disk." +availParameterGroupList.get(i).getParameters().get("mountpoint"), "ua.com.serverhelp.simplemonitoring.entities.trigger.DiskFree85pChecker", availParameterGroupList.get(i), sizeParameterGroupList.get(i));
+            diskTrigger=true;
         }
         //Swap usage checker
         Metric swapSizeBytes= storage.getOrCreateMetric(pathPart+"memory_SwapTotal_bytes");
         Metric swapUsageBytes= storage.getOrCreateMetric(pathPart+"memory_SwapFree_bytes");
         List<ParameterGroup> swapSizeBytesGroupList=storage.getParameterGroups(swapSizeBytes);
         List<ParameterGroup> swapUsageBytesGroupList=storage.getParameterGroups(swapUsageBytes);
-        //TODO move check triggers to other thread
         if(!swapSizeBytesGroupList.isEmpty() && !swapUsageBytesGroupList.isEmpty()) {
             storage.createIfNotExistTrigger(pathPart + "memory.swap", "ua.com.serverhelp.simplemonitoring.entities.trigger.SwapUsageChecker", swapUsageBytesGroupList.get(0), swapSizeBytesGroupList.get(0));
+            swapTrigger=true;
         }
+        return diskTrigger && swapTrigger;
     }
 
     @Override

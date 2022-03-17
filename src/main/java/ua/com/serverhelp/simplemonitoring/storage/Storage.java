@@ -36,6 +36,7 @@ public interface Storage {
 
     void clearHistory();
     void commitHistory();
+    void commitTriggers();
 
     List<AlertFilter> getAllAlertFilters();
     void saveAlertFilter(AlertFilter alertFilter);

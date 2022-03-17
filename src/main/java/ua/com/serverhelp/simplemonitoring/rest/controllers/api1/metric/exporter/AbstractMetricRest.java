@@ -10,7 +10,7 @@ import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.AvgItemProcessor;
 import ua.com.serverhelp.simplemonitoring.queue.itemprocessor.DiffItemProcessor;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Matcher;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public abstract class AbstractMetricRest {
     @Autowired
     private MetricsQueue metricsQueue;
-    private static final ArrayList<String> triggers=new ArrayList<>();
+    private final HashMap<String,Boolean> triggers=new HashMap<>();
     @Getter
     private final ConcurrentLinkedQueue<String> inputQueue=new ConcurrentLinkedQueue<>();
     private final Pattern replaceE=Pattern.compile("(.*[0-9]e) ([0-9]+)$");
@@ -41,6 +41,18 @@ public abstract class AbstractMetricRest {
     public void processItems(){
         while (!inputQueue.isEmpty()){
             processItem(inputQueue.poll());
+        }
+    }
+
+    public void processTriggers(){
+        for (Map.Entry<String,Boolean> entry:((HashMap<String,Boolean>)triggers.clone()).entrySet()){
+            log.info("Trigger check "+entry.getKey());
+            if(!entry.getValue()){
+                if(createTriggers(entry.getKey())){
+                    log.info("Trigger created "+entry.getKey());
+                    triggers.put(entry.getKey(), true);
+                }
+            }
         }
     }
 
@@ -89,7 +101,7 @@ public abstract class AbstractMetricRest {
         }
     }
 
-    protected abstract void createTriggers(String pathPart);
+    protected abstract boolean createTriggers(String pathPart);
 
     protected String[] getAllowedMetrics(){
         return new String[]{};
@@ -101,11 +113,10 @@ public abstract class AbstractMetricRest {
         return Map.of();
     }
 
-    protected void createTriggersByHost(String host){
-        //TODO Restore trigger cache
-        //if(!triggers.contains(host)){
-            createTriggers(host);
-        //    triggers.add(host);
-        //}
+    protected void addTrigger(String host){
+        if(!triggers.containsKey(host)){
+            log.info("Trigger add "+host);
+            triggers.put(host, false);
+        }
     }
 }

@@ -74,6 +74,13 @@ public class DataBaseStorage implements Storage {
     }
 
     @Override
+    public void commitTriggers() {
+        nginxAccessLogMetricRest.processTriggers();
+        blackBoxMetricRest.processTriggers();
+        nodeMetricRest.processTriggers();
+    }
+
+    @Override
     public List<IParameterGroup> getAllTypeParameterGroups(Metric metric) {
         List<ParameterGroup> realParameterGroups=parameterGroupRepository.findByMetric(metric);
         List<CalculateParameterGroup> calculateParameterGroupList=calculateParameterGroupRepository.findByMetric(metric);

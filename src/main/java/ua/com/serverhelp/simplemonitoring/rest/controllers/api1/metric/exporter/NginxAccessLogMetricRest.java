@@ -36,7 +36,7 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
                 try {
                     getInputQueue().add(timestamp+";exporter."+input);
                     input = Pattern.compile("(.*)\\{.*").matcher(input).replaceFirst("$1");
-                    createTriggersByHost("exporter."+input);
+                    addTrigger("exporter."+input);
                 } catch (NumberFormatException e) {
                     log.warn("NodeMetricRest::receiveData number format error " + input);
                     return ResponseEntity.badRequest().body("number format error " + input);
@@ -51,11 +51,12 @@ public class NginxAccessLogMetricRest extends AbstractMetricRest{
     }
 
     @Override
-    protected void createTriggers(String pathPart) {
+    protected boolean createTriggers(String pathPart) {
         //create trigger for LA
         Metric metric=storage.getOrCreateMetric(pathPart);
         storage.createIfNotExistTrigger(pathPart+".GET.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"GET\"}"));
         storage.createIfNotExistTrigger(pathPart+".POST.500errors","ua.com.serverhelp.simplemonitoring.entities.trigger.NginxAccessLog500Checker",storage.getOrCreateParameterGroup(metric,"{\"code\":\"500\",\"method\":\"POST\"}"));
+        return true;
     }
 
     @Override

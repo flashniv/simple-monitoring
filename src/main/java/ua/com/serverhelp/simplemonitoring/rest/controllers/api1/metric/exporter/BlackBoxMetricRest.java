@@ -41,17 +41,18 @@ public class BlackBoxMetricRest extends AbstractMetricRest{
             }
         }
         //add triggers and calculate metrics
-        createTriggersByHost("exporter." + proj + ".blackbox." + siteId + ".");
+        addTrigger("exporter." + proj + ".blackbox." + siteId + ".");
 
         return ResponseEntity.ok().body("Success");
     }
 
     @Override
-    protected void createTriggers(String pathPart) {
+    protected boolean createTriggers(String pathPart) {
         //create trigger for LA
         Metric probeSuccess=storage.getOrCreateMetric(pathPart+"probe_success");
         storage.createIfNotExistTrigger(pathPart+"probe_success","ua.com.serverhelp.simplemonitoring.entities.trigger.Last15minValuesChecker",storage.getOrCreateParameterGroup(probeSuccess,"{}"));
         storage.createIfNotExistTrigger(pathPart+"probe_success","ua.com.serverhelp.simplemonitoring.entities.trigger.BooleanChecker",storage.getOrCreateParameterGroup(probeSuccess,"{}"));
+        return true;
     }
 
     @Override
