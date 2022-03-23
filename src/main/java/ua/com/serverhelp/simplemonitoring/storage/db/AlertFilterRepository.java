@@ -10,6 +10,10 @@ import java.util.List;
 public interface AlertFilterRepository extends JpaRepository<AlertFilter,Long> {
     @Cacheable(value = "AlertFilterRepository")
     List<AlertFilter> findAll();
-    @CacheEvict(value = "AlertFilterRepository")
+
+    @CacheEvict(value = "AlertFilterRepository",allEntries = true)
     AlertFilter save(AlertFilter alertFilter);
+
+    @CacheEvict(value = "AlertFilterRepository",allEntries = true)
+    void deleteById(Long id);
 }
