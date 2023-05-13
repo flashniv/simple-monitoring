@@ -1,0 +1,6 @@
+type Metric {
+    id: ID!
+    name:String!
+    organization:Organization!
+    parameterGroups:[ParameterGroup!]!
+}

@@ -1,0 +1,5 @@
+type ParameterGroup {
+    id: ID!
+    parameters:[String!]
+    metric:Metric!
+}
