@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
+import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -24,4 +27,7 @@ public class Metric {
     @JoinColumn(nullable = false)
     private Organization organization;
 
+    @OneToMany
+    @JoinColumn(name = "metric_id")
+    private List<ParameterGroup> parameterGroups;
 }

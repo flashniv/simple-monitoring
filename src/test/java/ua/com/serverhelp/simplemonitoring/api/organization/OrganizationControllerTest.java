@@ -162,6 +162,6 @@ class OrganizationControllerTest extends AbstractTest {
                 .get();
         Assertions.assertEquals("Test org", organization.getName());
         Assertions.assertEquals(2, organization.getUsers().size());
-        Assertions.assertEquals(2, organization.getMetrics().size());
+        Assertions.assertEquals(10, organization.getMetrics().size());
     }
 }

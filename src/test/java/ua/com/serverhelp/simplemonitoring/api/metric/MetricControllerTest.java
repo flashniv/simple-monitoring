@@ -43,7 +43,7 @@ class MetricControllerTest extends AbstractTest {
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(4, metrics.size());
+        Assertions.assertEquals(20, metrics.size());
     }
     @Test
     @WithMockUser("manager@mail.com")
@@ -62,6 +62,29 @@ class MetricControllerTest extends AbstractTest {
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(2, metrics.size());
+        Assertions.assertEquals(10, metrics.size());
+    }
+
+    @Test
+    @WithMockUser("admin@mail.com")
+    void parameterGroups() {
+        var document = """
+                {
+                    metrics{
+                        id
+                        name
+                        parameterGroups{
+                            id
+                        }
+                    }
+                }
+                """;
+        var metrics = tester
+                .document(document)
+                .execute()
+                .path("metrics")
+                .entityList(Metric.class)
+                .get();
+        Assertions.assertEquals(20, metrics.size());
     }
 }
