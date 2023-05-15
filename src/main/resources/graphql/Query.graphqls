@@ -2,4 +2,6 @@ type Query {
     user: User!
     organizations:[Organization!]!
     organization(id:ID!):Organization!
+    metrics:[Metric!]
+    metric(metricId:ID!):Metric!
 }

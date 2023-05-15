@@ -1,6 +1,5 @@
 package ua.com.serverhelp.simplemonitoring.api.organization;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -56,9 +55,10 @@ public class OrganizationController {
     public List<User> users(Organization organization) {
         return organization.getUsers();
     }
+
     @SchemaMapping(typeName = "Organization", field = "metrics")
     public List<Metric> metrics(Organization organization) {
-        var persOrg=organizationRepository.findByIdWithMetrics(organization.getId()).orElseThrow();
-        return persOrg.getMetrics();
+        var persistentOrg = organizationRepository.findByIdWithMetrics(organization.getId()).orElseThrow();
+        return persistentOrg.getMetrics();
     }
 }
