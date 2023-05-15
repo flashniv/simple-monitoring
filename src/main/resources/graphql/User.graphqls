@@ -4,5 +4,5 @@ type User {
     lastname:String
     email:String!
     role:String!
-    organizations:[Organization!]!
+    organizations:[Organization]!
 }

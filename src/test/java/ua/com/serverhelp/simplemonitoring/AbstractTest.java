@@ -1,7 +1,10 @@
 package ua.com.serverhelp.simplemonitoring;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.instancio.Instancio;
+import org.instancio.Random;
 import org.instancio.generator.Generator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -115,14 +118,17 @@ public abstract class AbstractTest {
                 .size(15)
                 .ignore(field(ParameterGroup::getId))
                 .set(field(ParameterGroup::getMetric), metric)
-                .generate(field(ParameterGroup::getParameters), gen -> (Generator<Map<String, String>>) random -> {
-                            Map<String, String> res = new HashMap<>();
-                            for (int i = 0; i < random.intRange(0, 10); i++) {
-                                res.put(random.lowerCaseAlphabetic(10),random.lowerCaseAlphabetic(10));
-                            }
-                            return res;
-                        }
-                )
+                .generate(field(ParameterGroup::getParameters), gen-> (Generator<String>) random -> {
+                    Map<String,String> res=new HashMap<>();
+                    for (int i = 0; i < random.intRange(0, 10); i++) {
+                        res.put(random.lowerCaseAlphabetic(10), random.lowerCaseAlphabetic(10));
+                    }
+                    try {
+                        return new ObjectMapper().writeValueAsString(res);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
                 .create();
         parameterGroupRepository.saveAll(parameterGroups);
     }

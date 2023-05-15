@@ -4,4 +4,5 @@ type Query {
     organization(id:ID!):Organization!
     metrics:[Metric!]
     metric(metricId:ID!):Metric!
+    parameterGroup(parameterGroupID:ID!):ParameterGroup!
 }

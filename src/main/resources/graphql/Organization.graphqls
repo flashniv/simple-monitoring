@@ -2,5 +2,5 @@ type Organization {
     id: ID!
     name:String!
     users:[User!]!
-    metrics:[Metric!]!
+    metrics:[Metric]!
 }
