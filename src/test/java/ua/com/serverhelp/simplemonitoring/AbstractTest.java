@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.instancio.Instancio;
-import org.instancio.Random;
 import org.instancio.generator.Generator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import ua.com.serverhelp.simplemonitoring.api.auth.type.RegisterRequest;
+import ua.com.serverhelp.simplemonitoring.entity.accesstoken.AccessToken;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
@@ -43,10 +43,14 @@ public abstract class AbstractTest {
     protected ParameterGroupRepository parameterGroupRepository;
     @Autowired
     protected MetricRepository metricRepository;
+    @Autowired
+    protected AccessTokenRepository accessTokenRepository;
+    protected AccessToken accessToken;
 
 
     @AfterEach
     void tearDown() {
+        accessTokenRepository.deleteAll();
         tokenRepository.deleteAll();
         parameterGroupRepository.deleteAll();
         metricRepository.deleteAll();
@@ -85,6 +89,8 @@ public abstract class AbstractTest {
                 .build();
         var org1 = organizationRepository.save(organization);
 
+        accessToken=createAccessToken(org1);
+
         createMetrics(org1);
 
         var organization1 = Organization.builder()
@@ -118,8 +124,8 @@ public abstract class AbstractTest {
                 .size(15)
                 .ignore(field(ParameterGroup::getId))
                 .set(field(ParameterGroup::getMetric), metric)
-                .generate(field(ParameterGroup::getParameters), gen-> (Generator<String>) random -> {
-                    Map<String,String> res=new HashMap<>();
+                .generate(field(ParameterGroup::getParameters), gen -> (Generator<String>) random -> {
+                    Map<String, String> res = new HashMap<>();
                     for (int i = 0; i < random.intRange(0, 10); i++) {
                         res.put(random.lowerCaseAlphabetic(10), random.lowerCaseAlphabetic(10));
                     }
@@ -131,5 +137,12 @@ public abstract class AbstractTest {
                 })
                 .create();
         parameterGroupRepository.saveAll(parameterGroups);
+    }
+
+    @Transactional
+    private AccessToken createAccessToken(Organization organization) {
+        return accessTokenRepository.save(AccessToken.builder()
+                .organization(organization)
+                .build());
     }
 }
