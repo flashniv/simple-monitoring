@@ -1,0 +1,4 @@
+type DataItem{
+    timestamp:String!
+    value:Float!
+}

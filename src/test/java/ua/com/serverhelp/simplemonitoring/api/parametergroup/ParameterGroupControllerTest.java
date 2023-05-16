@@ -59,4 +59,31 @@ class ParameterGroupControllerTest extends AbstractTest {
         Assertions.assertNotNull(parameterGroup.getMetric());
         Assertions.assertTrue(parameterGroup.getParameters().contains("{"));
     }
+
+    @Test
+    @WithMockUser("admin@mail.com")
+    void dataItems() {
+        var document = """
+                {
+                    metrics{
+                        id
+                        name
+                        parameterGroups{
+                            id
+                            parameters
+                            dataItems{
+                                timestamp
+                                value
+                            }
+                        }
+                    }
+                }
+                """;
+        var metrics = tester
+                .document(document)
+                .execute()
+                .path("metrics")
+                .entityList(Metric.class)
+                .get();
+    }
 }
