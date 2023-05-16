@@ -20,7 +20,7 @@ public class Metric {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String name;
 
     @ManyToOne

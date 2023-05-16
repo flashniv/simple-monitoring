@@ -1,4 +1,0 @@
-type Parameter{
-    key:String!
-    value:String!
-}
