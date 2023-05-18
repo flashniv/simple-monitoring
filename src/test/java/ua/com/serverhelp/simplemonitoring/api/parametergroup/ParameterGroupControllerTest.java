@@ -59,7 +59,7 @@ class ParameterGroupControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser("admin@mail.com")
-    void dataItems() {
+    void dataItems() { //TODO release it
         var document = """
                 {
                     metrics{

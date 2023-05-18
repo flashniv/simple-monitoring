@@ -138,8 +138,4 @@ class FileManagementServiceTest extends AbstractTest {
                 parameterGroupId +
                 File.separatorChar;
     }
-
-    @Test
-    void readLastEventOfMetric() {
-    }
 }
