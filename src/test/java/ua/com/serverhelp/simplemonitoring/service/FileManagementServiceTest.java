@@ -87,10 +87,30 @@ class FileManagementServiceTest extends AbstractTest {
         dataItems.forEach(dataItem -> fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem));
 
         var metric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.allItemsCollector());
-        metric.forEach(dataItem -> {
+        metric.orElseThrow().forEach(dataItem -> {
             var duration = Duration.between(dataItem.getTimestamp(), Instant.now());
             Assertions.assertTrue(duration.toHours() < 24);
         });
+    }
+    @Test
+    void readMetricLastItemCollector() throws Exception {
+        var uuid = UUID.randomUUID().toString();
+        var parameterGroupId = 1L;
+
+        var dataItems = Instancio.ofList(DataItem.class)
+                .size(20)
+                .set(Select.field(DataItem::getOrganization), null)
+                .set(Select.field(DataItem::getPath), null)
+                .set(Select.field(DataItem::getParameters), null)
+                .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().range(Instant.now().minus(2, ChronoUnit.DAYS), Instant.now()))
+                .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
+                .create();
+        dataItems.forEach(dataItem -> fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem));
+
+        var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemCollector());
+        Assertions.assertTrue(optionalMetric.isPresent());
+        var metric=optionalMetric.get();
+        Assertions.assertTrue(Instant.now().minus(1, ChronoUnit.DAYS).isBefore(metric.getTimestamp()));
     }
 
     private void deleteDirectory(File directoryToBeDeleted) {
