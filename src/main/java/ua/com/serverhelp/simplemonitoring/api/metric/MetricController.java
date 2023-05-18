@@ -22,14 +22,15 @@ public class MetricController {
     private final ParameterGroupRepository parameterGroupRepository;
 
     @QueryMapping
-    public List<Metric> metrics(Authentication authentication){
+    public List<Metric> metrics(Authentication authentication) {
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
 
         return metricRepository.findAllByUser(user);
     }
-    @SchemaMapping(typeName = "Metric",field = "parameterGroups")
-    public List<ParameterGroup> parameterGroups(Metric metric){
+
+    @SchemaMapping(typeName = "Metric", field = "parameterGroups")
+    public List<ParameterGroup> parameterGroups(Metric metric) {
         return parameterGroupRepository.findAllByMetric(metric);
     }
 }

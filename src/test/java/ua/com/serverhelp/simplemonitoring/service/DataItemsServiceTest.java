@@ -25,9 +25,9 @@ class DataItemsServiceTest extends AbstractTest {
         Organization organization = organizations.get(0);
         var dataItems = Instancio.ofList(DataItem.class)
                 .size(10)
-                .set(Select.field(DataItem::getOrganization),organization)
-                .generate(Select.field(DataItem::getPath), gen-> gen.oneOf("test.organization.item1","test.organization.item2","test.organization.item3"))
-                .generate(Select.field(DataItem::getParameters), gen-> gen.oneOf("{}","{\"key\":\"val\"}","{\"key1\":\"val1\"}"))
+                .set(Select.field(DataItem::getOrganization), organization)
+                .generate(Select.field(DataItem::getPath), gen -> gen.oneOf("test.organization.item1", "test.organization.item2", "test.organization.item3"))
+                .generate(Select.field(DataItem::getParameters), gen -> gen.oneOf("{}", "{\"key\":\"val\"}", "{\"key1\":\"val1\"}"))
                 .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().past())
                 .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
                 .create();

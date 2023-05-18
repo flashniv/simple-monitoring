@@ -10,9 +10,6 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.security.test.context.support.WithMockUser;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
-import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @AutoConfigureGraphQlTester
@@ -45,6 +42,7 @@ class MetricControllerTest extends AbstractTest {
                 .get();
         Assertions.assertEquals(20, metrics.size());
     }
+
     @Test
     @WithMockUser("manager@mail.com")
     void metricsByManager() {

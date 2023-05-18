@@ -23,6 +23,6 @@ public class ParameterGroup {
     @JoinColumn(nullable = false)
     private Metric metric;
 
-    @Column(columnDefinition="TEXT")
+    @Column(columnDefinition = "TEXT")
     private String parameters = "{}";
 }

@@ -10,9 +10,6 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.security.test.context.support.WithMockUser;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
-import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
-
-import java.util.List;
 
 @Slf4j
 @AutoConfigureGraphQlTester
@@ -52,10 +49,10 @@ class ParameterGroupControllerTest extends AbstractTest {
                 .entityList(Metric.class)
                 .get();
         Assertions.assertEquals(20, metrics.size());
-        var parameterGroups=metrics.get(0).getParameterGroups();
+        var parameterGroups = metrics.get(0).getParameterGroups();
 
         Assertions.assertEquals(15, parameterGroups.size());
-        var parameterGroup=parameterGroups.get(0);
+        var parameterGroup = parameterGroups.get(0);
         Assertions.assertNotNull(parameterGroup.getMetric());
         Assertions.assertTrue(parameterGroup.getParameters().contains("{"));
     }

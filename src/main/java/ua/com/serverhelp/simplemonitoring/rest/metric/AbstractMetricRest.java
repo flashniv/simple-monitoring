@@ -27,8 +27,8 @@ public abstract class AbstractMetricRest {
     @Autowired
     protected DataItemsService dataItemsService;
 
-    protected Organization getOrganization(UUID token){
-        var accessToken=accessTokenRepository.findById(token).orElseThrow(() -> new AccessDeniedError("Token not valid"));
+    protected Organization getOrganization(UUID token) {
+        var accessToken = accessTokenRepository.findById(token).orElseThrow(() -> new AccessDeniedError("Token not valid"));
         return accessToken.getOrganization();
     }
 }

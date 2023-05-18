@@ -89,7 +89,7 @@ public abstract class AbstractTest {
                 .build();
         var org1 = organizationRepository.save(organization);
 
-        accessToken=createAccessToken(org1);
+        accessToken = createAccessToken(org1);
 
         createMetrics(org1);
 

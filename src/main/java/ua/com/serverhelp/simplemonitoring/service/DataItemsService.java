@@ -1,7 +1,5 @@
 package ua.com.serverhelp.simplemonitoring.service;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
@@ -10,6 +8,7 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.repository.MetricRepository;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
+import ua.com.serverhelp.simplemonitoring.service.filemanagement.FileManagementService;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -28,19 +27,19 @@ public class DataItemsService {
     public void processItems() {
         while (queue.peek() != null) {
             var dataItem = queue.poll();
-            var orgId=dataItem.getOrganization().getId();
-            var parameterGroupId=getOrCreateParameterGroup(dataItem.getOrganization(), dataItem.getPath(), dataItem.getParameters()).getId();
+            var orgId = dataItem.getOrganization().getId();
+            var parameterGroupId = getOrCreateParameterGroup(dataItem.getOrganization(), dataItem.getPath(), dataItem.getParameters()).getId();
             fileManagementService.writeDataItem(orgId.toString(), parameterGroupId, dataItem);
         }
     }
 
     private ParameterGroup getOrCreateParameterGroup(Organization organization, String path, String parameters) {
-        var metric=getOrCreateMetric(organization, path);
-        var optionParameterGroup=parameterGroupRepository.findByMetricAndParameters(metric,parameters);
-        if (optionParameterGroup.isPresent()){
+        var metric = getOrCreateMetric(organization, path);
+        var optionParameterGroup = parameterGroupRepository.findByMetricAndParameters(metric, parameters);
+        if (optionParameterGroup.isPresent()) {
             return optionParameterGroup.get();
         }
-        var parameterGroup=ParameterGroup.builder()
+        var parameterGroup = ParameterGroup.builder()
                 .metric(metric)
                 .parameters(parameters)
                 .build();

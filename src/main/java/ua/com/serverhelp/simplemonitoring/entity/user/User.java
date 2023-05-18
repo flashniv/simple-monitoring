@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "_user")
-@NamedEntityGraph(name = "User.organizations",attributeNodes = {@NamedAttributeNode("organizations")})
+@NamedEntityGraph(name = "User.organizations", attributeNodes = {@NamedAttributeNode("organizations")})
 //@NamedQuery(name = "User.findMetricsByUserAndMetric",query = "select p from ParameterGroup p join Metric m on p.metric=m join Organization o on m.organization=o join o.users u where p=:parameterGroup and u = :user")
 public class User {
 
