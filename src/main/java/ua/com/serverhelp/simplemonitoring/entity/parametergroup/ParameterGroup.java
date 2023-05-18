@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,4 +27,7 @@ public class ParameterGroup {
 
     @Column(columnDefinition = "TEXT")
     private String parameters = "{}";
+
+    @Transient
+    private List<DataItem> dataItems;
 }

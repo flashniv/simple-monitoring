@@ -70,6 +70,13 @@ class FileManagementServiceTest extends AbstractTest {
         });
         Assertions.assertEquals(20, count.get());
     }
+    @Test
+    void readMetricWithHookException() {
+        var uuid = UUID.randomUUID().toString();
+        var parameterGroupId = 1L;
+
+        Assertions.assertThrows(Exception.class, () -> fileManagementService.readMetricWithHook(uuid, parameterGroupId, dataItem -> { }));
+    }
 
     @Test
     void readMetricAllItemsCollector() throws Exception {
