@@ -27,7 +27,10 @@ public class BooleanMetricRest extends AbstractMetricRest {
             @RequestParam(defaultValue = "true") Boolean value
     ) {
         var organization = getOrganization(token);
-        dataItemsService.putDataItem(organization, path, "{}", DataItem.builder()
+        dataItemsService.putDataItem(DataItem.builder()
+                .organization(organization)
+                .path(path)
+                .parameters("{}")
                 .timestamp(Instant.now())
                 .value(value ? 1.0 : 0.0)
                 .build()

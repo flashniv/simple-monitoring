@@ -13,39 +13,24 @@ import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@Data
-@Builder
-class FullDataItem {
-    private Organization organization;
-    private String path;
-    private String parameters;
-    private DataItem dataItem;
-}
-
 @Service
 @RequiredArgsConstructor
 public class DataItemsService {
     private final ParameterGroupRepository parameterGroupRepository;
     private final MetricRepository metricRepository;
     private final FileManagementService fileManagementService;
-    private final ConcurrentLinkedQueue<FullDataItem> queue = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<DataItem> queue = new ConcurrentLinkedQueue<>();
 
-    public void putDataItem(Organization organization, String path, String parameters, DataItem dataItem) {
-        var fullDataItem = FullDataItem.builder()
-                .organization(organization)
-                .path(path)
-                .parameters(parameters)
-                .dataItem(dataItem)
-                .build();
-        queue.add(fullDataItem);
+    public void putDataItem(DataItem dataItem) {
+        queue.add(dataItem);
     }
 
     public void processItems() {
         while (queue.peek() != null) {
-            var fullDataItem = queue.poll();
-            var orgId=fullDataItem.getOrganization().getId();
-            var parameterGroupId=getOrCreateParameterGroup(fullDataItem.getOrganization(), fullDataItem.getPath(), fullDataItem.getParameters()).getId();
-            fileManagementService.writeDataItem(orgId.toString(), parameterGroupId, fullDataItem.getDataItem());
+            var dataItem = queue.poll();
+            var orgId=dataItem.getOrganization().getId();
+            var parameterGroupId=getOrCreateParameterGroup(dataItem.getOrganization(), dataItem.getPath(), dataItem.getParameters()).getId();
+            fileManagementService.writeDataItem(orgId.toString(), parameterGroupId, dataItem);
         }
     }
 
