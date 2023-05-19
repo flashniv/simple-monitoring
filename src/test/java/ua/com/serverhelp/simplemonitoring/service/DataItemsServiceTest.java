@@ -52,11 +52,12 @@ class DataItemsServiceTest extends AbstractTest {
 
         dataItemsService.processItems();
 
-        var metrics=metricRepository.findAll();
-        var parameterGroup=parameterGroupRepository.findAll();
+        var metrics = metricRepository.findAll();
+        var parameterGroup = parameterGroupRepository.findAll();
         Assertions.assertEquals(3, metrics.size());
         Assertions.assertEquals(6, parameterGroup.size());
     }
+
     private void deleteDirectory(File directoryToBeDeleted) {
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents != null) {

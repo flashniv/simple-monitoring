@@ -70,12 +70,14 @@ class FileManagementServiceTest extends AbstractTest {
         });
         Assertions.assertEquals(20, count.get());
     }
+
     @Test
     void readMetricWithHookException() {
         var uuid = UUID.randomUUID().toString();
         var parameterGroupId = 1L;
 
-        Assertions.assertThrows(Exception.class, () -> fileManagementService.readMetricWithHook(uuid, parameterGroupId, dataItem -> { }));
+        Assertions.assertThrows(Exception.class, () -> fileManagementService.readMetricWithHook(uuid, parameterGroupId, dataItem -> {
+        }));
     }
 
     @Test
@@ -99,6 +101,7 @@ class FileManagementServiceTest extends AbstractTest {
             Assertions.assertTrue(duration.toHours() < 24);
         });
     }
+
     @Test
     void readMetricLastItemCollector() throws Exception {
         var uuid = UUID.randomUUID().toString();
@@ -116,7 +119,7 @@ class FileManagementServiceTest extends AbstractTest {
 
         var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemCollector());
         Assertions.assertTrue(optionalMetric.isPresent());
-        var metric=optionalMetric.get();
+        var metric = optionalMetric.get();
         Assertions.assertTrue(Instant.now().minus(1, ChronoUnit.DAYS).isBefore(metric.getTimestamp()));
     }
 

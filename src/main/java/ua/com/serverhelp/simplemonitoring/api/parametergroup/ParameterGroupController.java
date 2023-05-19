@@ -24,7 +24,7 @@ public class ParameterGroupController {
 
     @SchemaMapping(typeName = "ParameterGroup", field = "dataItems")
     public List<DataItem> dataItems(ParameterGroup parameterGroup) throws Exception {
-        Optional<List<DataItem>> optionalDataItems=fileManagementService.readMetric(
+        Optional<List<DataItem>> optionalDataItems = fileManagementService.readMetric(
                 parameterGroup.getMetric().getOrganization().getId().toString(),
                 parameterGroup.getId(),
                 Instant.now().minus(1, ChronoUnit.DAYS),

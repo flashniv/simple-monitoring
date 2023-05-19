@@ -86,7 +86,7 @@ class ParameterGroupControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser("admin@mail.com")
-    void dataItems() { //TODO release it
+    void dataItems() {
         var document = """
                 {
                     metrics{
@@ -118,6 +118,6 @@ class ParameterGroupControllerTest extends AbstractTest {
         var dataItems = parameterGroup.getDataItems();
         Assertions.assertEquals(3, dataItems.size());
         var dataItem = dataItems.get(0);
-        Assertions.assertEquals(0.0,dataItem.getValue());
+        Assertions.assertEquals(0.0, dataItem.getValue());
     }
 }
