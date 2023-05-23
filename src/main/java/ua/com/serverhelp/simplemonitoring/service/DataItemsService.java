@@ -19,7 +19,7 @@ public class DataItemsService {
         queue.add(dataItem);
     }
 
-    public void processItems() {
+    public void processItems() throws Exception {
         while (queue.peek() != null) {
             var dataItem = queue.poll();
             var orgId = dataItem.getOrganization().getId();

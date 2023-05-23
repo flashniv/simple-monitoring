@@ -30,13 +30,13 @@ logging:
       com:
         serverhelp:
           simplemonitoring: DEBUG
-    org:
-      hibernate:
-        type: trace
-        orm:
-          jdbc:
-            bind: trace
-            extract: trace
+#    org:
+#      hibernate:
+#        type: trace
+#        orm:
+#          jdbc:
+#            bind: trace
+#            extract: trace
 
 metric-storage:
   metrics-directory: ./metrics

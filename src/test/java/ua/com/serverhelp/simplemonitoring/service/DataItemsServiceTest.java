@@ -46,7 +46,7 @@ class DataItemsServiceTest extends AbstractTest {
     }
 
     @Test
-    void processItems() {
+    void processItems() throws Exception {
         parameterGroupRepository.deleteAll();
         metricRepository.deleteAll();
 

@@ -33,7 +33,7 @@ class FileManagementServiceTest extends AbstractTest {
     }
 
     @Test
-    void writeDataItem() {
+    void writeDataItem() throws Exception {
         var uuid = UUID.randomUUID().toString();
         var parameterGroupId = 1L;
         var filepath = getPath(uuid, parameterGroupId) + getPeriod();
@@ -63,7 +63,13 @@ class FileManagementServiceTest extends AbstractTest {
                 .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().range(Instant.now().minus(2, ChronoUnit.DAYS), Instant.now()))
                 .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
                 .create();
-        dataItems.forEach(dataItem -> fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem));
+        dataItems.forEach(dataItem -> {
+            try {
+                fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         fileManagementService.readMetricWithHook(uuid, parameterGroupId, dataItem -> {
             count.incrementAndGet();
@@ -93,7 +99,13 @@ class FileManagementServiceTest extends AbstractTest {
                 .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().range(Instant.now().minus(2, ChronoUnit.DAYS), Instant.now()))
                 .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
                 .create();
-        dataItems.forEach(dataItem -> fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem));
+        dataItems.forEach(dataItem -> {
+            try {
+                fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         var metric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.allItemsCollector());
         metric.orElseThrow().forEach(dataItem -> {
@@ -115,7 +127,13 @@ class FileManagementServiceTest extends AbstractTest {
                 .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().range(Instant.now().minus(2, ChronoUnit.DAYS), Instant.now()))
                 .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
                 .create();
-        dataItems.forEach(dataItem -> fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem));
+        dataItems.forEach(dataItem -> {
+            try {
+                fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemCollector());
         Assertions.assertTrue(optionalMetric.isPresent());

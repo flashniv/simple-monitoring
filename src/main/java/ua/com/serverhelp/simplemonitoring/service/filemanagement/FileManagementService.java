@@ -21,26 +21,22 @@ public class FileManagementService {
     @Value("${metric-storage.metrics-directory}")
     private String dirPath;
 
-    public void writeDataItem(String orgId, Long parameterGroupId, DataItem dataItem) {
+    public void writeDataItem(String orgId, Long parameterGroupId, DataItem dataItem) throws Exception {
         String path = getPath(orgId, parameterGroupId) + getPeriod();
-        try {
-            File dataFile = new File(path);
-            //noinspection ResultOfMethodCallIgnored
-            dataFile.getParentFile().mkdirs();
-            if (dataFile.createNewFile()) {
-                log.info("FileDriver::writeMetric file " + path + " created for metric " + parameterGroupId);
-            }
-            FileOutputStream fos = new FileOutputStream(dataFile, true);
-            DataOutputStream dos = new DataOutputStream(fos);
-
-            dos.writeLong(dataItem.getTimestamp().getEpochSecond());
-            dos.writeDouble(dataItem.getValue());
-
-            dos.close();
-            log.debug("FileDriver::writeMetric Metric " + path + " was write");
-        } catch (Exception e) {
-            log.error("Error metric writing " + path, e);
+        File dataFile = new File(path);
+        //noinspection ResultOfMethodCallIgnored
+        dataFile.getParentFile().mkdirs();
+        if (dataFile.createNewFile()) {
+            log.info("FileDriver::writeMetric file " + path + " created for metric " + parameterGroupId);
         }
+        FileOutputStream fos = new FileOutputStream(dataFile, true);
+        DataOutputStream dos = new DataOutputStream(fos);
+
+        dos.writeLong(dataItem.getTimestamp().getEpochSecond());
+        dos.writeDouble(dataItem.getValue());
+
+        dos.close();
+        log.debug("FileDriver::writeMetric Metric " + path + " was write");
     }
 
     private String getPath(String orgId, Long parameterGroupId) {
