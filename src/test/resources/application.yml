@@ -1,0 +1,50 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+  graphql:
+    schema:
+      locations: classpath:graphql/
+  flyway:
+    locations: classpath:db/migration/{vendor}
+
+server:
+  servlet:
+    session:
+      timeout: 12h
+
+logging:
+  level:
+    root: INFO
+    ua:
+      com:
+        serverhelp:
+          simplemonitoring: DEBUG
+    org:
+      hibernate:
+        type: trace
+        orm:
+          jdbc:
+            bind: trace
+            extract: trace
+
+metric-storage:
+  metrics-directory: ./metrics
+
+application:
+  security:
+    jwt:
+      secret-key: huiJO5tYE1FeWLYIX55Anp9fLb/YWLNBWyfSeVQnAB4+SLGND3DsbWjmtSzg7IEkzZ50Re0od2LZab8kBAVcPQ==
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days

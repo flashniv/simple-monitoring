@@ -1,0 +1,12 @@
+--INSERT INTO public._user
+--VALUES('dea3795d-5cc0-417d-aec5-13084f91c4aa','admin@mail.com','Admin','Admin','$2a$10$jqnW.l7clEU4T49z/CpCKOeSXyBJ544RnfMEILBISCs24aJg09G5i','ADMIN');
+--INSERT INTO public._user
+--VALUES('0676468d-03d6-4f6e-9529-56552613ab95','manager@mail.com','Admin','Admin','$2a$10$jqnW.l7clEU4T49z/CpCKOeSXyBJ544RnfMEILBISCs24aJg09G5i','MANAGER');
+--INSERT INTO public.organization
+--VALUES('934163a9-a82e-4cc3-b1f5-8baffe00f034','Test ORG');
+--INSERT INTO public.organization
+--VALUES('8182bdba-4642-46b7-aa66-9fff26fa1e66','Test ORG 1');
+--INSERT INTO public.organization_user
+--VALUES('934163a9-a82e-4cc3-b1f5-8baffe00f034','dea3795d-5cc0-417d-aec5-13084f91c4aa'),('934163a9-a82e-4cc3-b1f5-8baffe00f034','0676468d-03d6-4f6e-9529-56552613ab95');
+--INSERT INTO public.organization_user
+--VALUES('8182bdba-4642-46b7-aa66-9fff26fa1e66','dea3795d-5cc0-417d-aec5-13084f91c4aa');
