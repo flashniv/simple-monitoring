@@ -19,7 +19,7 @@ class ConstantDoubleExpressionTest {
         var expression=new ConstantDoubleExpression();
         Assertions.assertThrows(ExpressionException.class, expression::getJSON);
         Assertions.assertThrows(ExpressionException.class, expression::getValue);
-        expression.initialize("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\",\"parameters\":{\"value\":123.456}}");
+        expression.initialize("{\"value\":123.456}");
         Assertions.assertEquals(123.456, expression.getValue());
     }
 }

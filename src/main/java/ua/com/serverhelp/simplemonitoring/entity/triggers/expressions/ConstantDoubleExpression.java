@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConstantDoubleExpression implements Expression<Double> {
-    private final ObjectMapper objectMapper=new ObjectMapper();
     private Double value;
 
     @Override
@@ -19,8 +18,9 @@ public class ConstantDoubleExpression implements Expression<Double> {
             throw new ExpressionException("Expression not initialized");
         }
         try {
-            ObjectNode res = objectMapper.createObjectNode();
-            ObjectNode params = objectMapper.createObjectNode();
+            var objectMapper=new ObjectMapper();
+            var res = objectMapper.createObjectNode();
+            var params = objectMapper.createObjectNode();
 
             params.put("value", value);
 
@@ -44,7 +44,8 @@ public class ConstantDoubleExpression implements Expression<Double> {
     @Override
     public void initialize(String parametersJson) throws ExpressionException {
         try {
-            JsonNode parameters = objectMapper.readTree(parametersJson).get("parameters");
+            var objectMapper=new ObjectMapper();
+            var parameters = objectMapper.readTree(parametersJson);
             value = parameters.get("value").asDouble();
         } catch (JsonProcessingException e) {
             throw new ExpressionException("JSON decode error", e);
