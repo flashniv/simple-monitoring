@@ -13,18 +13,17 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
+import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.service.DataItemsService;
-import ua.com.serverhelp.simplemonitoring.service.filemanagement.FileManagementService;
 
 import java.lang.reflect.Field;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class BooleanMetricRestTest extends AbstractTest {
     @Autowired
     private DataItemsService dataItemsService;
-    @MockBean
-    private FileManagementService fileManagementService;
     @MockBean
     private ParameterGroupRepository parameterGroupRepository;
 
@@ -38,7 +37,7 @@ class BooleanMetricRestTest extends AbstractTest {
     @Test
     void getAddEvent() throws Exception {
         registerTestUsers();
-        createOrganization();
+        var organizations = createOrganization();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/metric/simple/boolean/")
                         .header("X-Simple-Token", accessToken.getId())
@@ -62,7 +61,28 @@ class BooleanMetricRestTest extends AbstractTest {
 
         dataItemsService.processItems();
 
-        Mockito.verify(fileManagementService).writeDataItem(Mockito.anyString(), Mockito.anyLong(), Mockito.any());
-        Mockito.verify(parameterGroupRepository).getOrCreateParameterGroup(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.verify(parameterGroupRepository, Mockito.times(2)).getOrCreateParameterGroup(Mockito.any(), Mockito.any(), Mockito.any());
+        //Check trigger
+        Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organizations.get(0), "test.stage.db.booleanitem1{}.boolean");
+        Assertions.assertTrue(optionalTrigger.isPresent());
+        Trigger trigger = optionalTrigger.get();
+        Assertions.assertTrue(trigger.checkTrigger());
+
+        Thread.sleep(1000);
+
+        //Check false
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/metric/simple/boolean/")
+                        .header("X-Simple-Token", accessToken.getId())
+                        .param("path", "test.stage.db.booleanitem1")
+                        .param("triggerName", "Boolean trigger %s receive false")
+                        .param("value", "false")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string("Success"));
+
+        dataItemsService.processItems();
+        Assertions.assertFalse(trigger.checkTrigger());
     }
 }

@@ -49,6 +49,8 @@ public abstract class AbstractTest {
     protected MetricRepository metricRepository;
     @Autowired
     protected AccessTokenRepository accessTokenRepository;
+    @Autowired
+    protected TriggerRepository triggerRepository;
     protected AccessToken accessToken;
 
 

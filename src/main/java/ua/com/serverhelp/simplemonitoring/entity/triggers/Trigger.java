@@ -3,8 +3,10 @@ package ua.com.serverhelp.simplemonitoring.entity.triggers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.Expression;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ExpressionException;
@@ -15,6 +17,8 @@ import java.time.Instant;
 @Entity
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Trigger {
     @Id
     @GeneratedValue
@@ -22,6 +26,9 @@ public class Trigger {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String triggerId;
 
     @Column(columnDefinition = "TEXT")
     private String description = "";
