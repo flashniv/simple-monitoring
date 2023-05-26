@@ -3,6 +3,7 @@ package ua.com.serverhelp.simplemonitoring.entity.triggers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.Expression;
@@ -12,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 
 @Entity
+@Builder
 @Data
 public class Trigger {
     @Id

@@ -90,10 +90,6 @@ public class FileManagementService {
         return now.getYear() + "_" + now.getMonthValue() + "_" + now.getDayOfMonth();
     }
 
-    public List<File> getAllFiles() throws IOException {
-        return getFilesRecursive(new File(dirPath));
-    }
-
     private List<File> getFilesRecursive(File file) {
         List<File> res = new ArrayList<>();
         if (file.isDirectory()) {

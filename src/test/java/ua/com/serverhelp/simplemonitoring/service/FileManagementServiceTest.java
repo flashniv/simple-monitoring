@@ -23,15 +23,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 class FileManagementServiceTest extends AbstractTest {
     @Autowired
     private FileManagementService fileManagementService;
-    @Value("${metric-storage.metrics-directory}")
-    private String dirPath;
-
-    @AfterEach
-    void tearDown2() throws Exception {
-        File dir = new File(dirPath);
-        deleteDirectory(dir);
-    }
-
     @Test
     void writeDataItem() throws Exception {
         var uuid = UUID.randomUUID().toString();
@@ -137,16 +128,6 @@ class FileManagementServiceTest extends AbstractTest {
 
         var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemValueCollector());
         Assertions.assertTrue(optionalMetric.isPresent());
-    }
-
-    private void deleteDirectory(File directoryToBeDeleted) {
-        File[] allContents = directoryToBeDeleted.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                deleteDirectory(file);
-            }
-        }
-        directoryToBeDeleted.delete();
     }
 
     private String getPeriod() {

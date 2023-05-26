@@ -18,14 +18,6 @@ import java.util.List;
 class DataItemsServiceTest extends AbstractTest {
     @Autowired
     private DataItemsService dataItemsService;
-    @Value("${metric-storage.metrics-directory}")
-    private String dirPath;
-
-    @AfterEach
-    void tearDown2() throws Exception {
-        File dir = new File(dirPath);
-        deleteDirectory(dir);
-    }
 
     @BeforeEach
     void setUp() {
@@ -57,15 +49,4 @@ class DataItemsServiceTest extends AbstractTest {
         Assertions.assertEquals(3, metrics.size());
         Assertions.assertEquals(6, parameterGroup.size());
     }
-
-    private void deleteDirectory(File directoryToBeDeleted) {
-        File[] allContents = directoryToBeDeleted.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                deleteDirectory(file);
-            }
-        }
-        directoryToBeDeleted.delete();
-    }
-
 }

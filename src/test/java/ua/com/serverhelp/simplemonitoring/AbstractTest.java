@@ -8,6 +8,7 @@ import org.instancio.generator.Generator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +21,7 @@ import ua.com.serverhelp.simplemonitoring.entity.user.Role;
 import ua.com.serverhelp.simplemonitoring.repository.*;
 import ua.com.serverhelp.simplemonitoring.service.AuthenticationService;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,8 @@ import static org.instancio.Select.field;
 public abstract class AbstractTest {
     @Autowired
     protected MockMvc mockMvc;
+    @Value("${metric-storage.metrics-directory}")
+    protected String dirPath;
     @Autowired
     protected AuthenticationService authenticationService;
     @Autowired
@@ -56,6 +60,8 @@ public abstract class AbstractTest {
         metricRepository.deleteAll();
         organizationRepository.deleteAll();
         userRepository.deleteAll();
+        File dir = new File(dirPath);
+        deleteDirectory(dir);
     }
 
     protected void registerTestUsers() {
@@ -145,4 +151,15 @@ public abstract class AbstractTest {
                 .organization(organization)
                 .build());
     }
+
+    private void deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        directoryToBeDeleted.delete();
+    }
+
 }
