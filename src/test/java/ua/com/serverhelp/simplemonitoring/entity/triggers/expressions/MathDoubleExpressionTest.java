@@ -7,9 +7,13 @@ class MathDoubleExpressionTest {
 
     @Test
     void getJSON() throws ExpressionException {
-        var oneDigit = new ConstantDoubleExpression(1.0);
-        var twoDigit = new ConstantDoubleExpression(2.0);
-        var expression = new MathDoubleExpression(oneDigit, twoDigit, "<");
+        var oneDigit = ConstantDoubleExpression.builder().value(1.0).build();
+        var twoDigit = ConstantDoubleExpression.builder().value(2.0).build();
+        var expression = MathDoubleExpression.builder()
+                .arg1(oneDigit)
+                .arg2(twoDigit)
+                .operation("<")
+                .build();
         var json = expression.getJSON();
         Assertions.assertEquals("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.MathDoubleExpression\",\"parameters\":{\"arg1\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":1.0}}\",\"arg2\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":2.0}}\",\"operation\":\"<\"}}", json);
     }

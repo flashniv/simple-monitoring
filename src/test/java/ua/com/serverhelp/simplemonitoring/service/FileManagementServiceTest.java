@@ -115,7 +115,7 @@ class FileManagementServiceTest extends AbstractTest {
     }
 
     @Test
-    void readMetricLastItemCollector() throws Exception {
+    void readMetricLastItemValueCollector() throws Exception {
         var uuid = UUID.randomUUID().toString();
         var parameterGroupId = 1L;
 
@@ -135,10 +135,8 @@ class FileManagementServiceTest extends AbstractTest {
             }
         });
 
-        var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemCollector());
+        var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemValueCollector());
         Assertions.assertTrue(optionalMetric.isPresent());
-        var metric = optionalMetric.get();
-        Assertions.assertTrue(Instant.now().minus(1, ChronoUnit.DAYS).isBefore(metric.getTimestamp()));
     }
 
     private void deleteDirectory(File directoryToBeDeleted) {

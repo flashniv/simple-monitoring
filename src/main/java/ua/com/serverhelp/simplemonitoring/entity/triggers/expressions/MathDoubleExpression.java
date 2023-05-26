@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.lang.reflect.InvocationTargetException;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MathDoubleExpression implements Expression<Double> {
@@ -43,7 +45,8 @@ public class MathDoubleExpression implements Expression<Double> {
 
     @Override
     public Double getValue() throws ExpressionException {
-        if (operation == null) throw new ExpressionException("Expression not initialized. Operation is null", new Exception());
+        if (operation == null)
+            throw new ExpressionException("Expression not initialized. Operation is null", new Exception());
         return switch (operation) {
             case "+" -> arg1.getValue() + arg2.getValue();
             case "-" -> arg1.getValue() - arg2.getValue();

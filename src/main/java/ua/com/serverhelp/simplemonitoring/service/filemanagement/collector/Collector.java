@@ -10,8 +10,8 @@ public interface Collector<R> {
         return new AllItemsCollector();
     }
 
-    static Collector<DataItem> lastItemCollector() {
-        return new LastItemCollector();
+    static Collector<Double> lastItemValueCollector() {
+        return new LastItemValueCollector();
     }
 
     void processItem(DataItem dataItem);

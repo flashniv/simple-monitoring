@@ -1,8 +1,11 @@
 package ua.com.serverhelp.simplemonitoring.entity.triggers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.Data;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
+import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.Expression;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ExpressionException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -39,16 +42,16 @@ public class Trigger {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String conf;
 
-    public Boolean checkTrigger() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassCastException, ExpressionException {
-        /*JSONObject confJson = new JSONObject(conf);
+    public Boolean checkTrigger() throws JsonProcessingException, ClassNotFoundException, NoSuchMethodException, ExpressionException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        var objectMapper = new ObjectMapper();
+        var confNode = objectMapper.readTree(conf);
 
-        String className = confJson.getString("class");
+        String className = confNode.get("class").asText();
         Class<?> classType = Class.forName(className);
-        Expression<Boolean> expression = (Expression<Boolean>) classType.getConstructor().newInstance();
-        expression.initialize(confJson.getJSONObject("parameters").toString());
 
-        return expression.getValue();*/
-        //TODO release it
-        return true;
+        Expression<Boolean> expression = (Expression<Boolean>) classType.getConstructor().newInstance();
+        expression.initialize(objectMapper.writeValueAsString(confNode.get("parameters")));
+
+        return expression.getValue();
     }
 }

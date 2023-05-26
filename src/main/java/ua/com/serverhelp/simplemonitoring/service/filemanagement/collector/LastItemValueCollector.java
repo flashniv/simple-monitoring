@@ -4,7 +4,7 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 
 import java.util.Optional;
 
-public class LastItemCollector implements Collector<DataItem> {
+public class LastItemValueCollector implements Collector<Double> {
     private DataItem resDataItem;
 
     @Override
@@ -15,10 +15,10 @@ public class LastItemCollector implements Collector<DataItem> {
     }
 
     @Override
-    public Optional<DataItem> getResult() {
+    public Optional<Double> getResult() {
         if (resDataItem == null) {
             return Optional.empty();
         }
-        return Optional.of(resDataItem);
+        return Optional.of(resDataItem.getValue());
     }
 }
