@@ -1,7 +1,5 @@
 package ua.com.serverhelp.simplemonitoring.service.filemanagement;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,6 @@ import java.util.function.Consumer;
 
 @Service
 @Slf4j
-@AllArgsConstructor
-@NoArgsConstructor
 public class FileManagementService {
     @Value("${metric-storage.metrics-directory}")
     private String dirPath;

@@ -52,7 +52,7 @@ public class Trigger {
         Class<?> classType = Class.forName(className);
 
         Expression<Boolean> expression = (Expression<Boolean>) classType.getConstructor().newInstance();
-        expression.initialize(objectMapper.writeValueAsString(confNode.get("parameters")));
+        expression.initialize(objectMapper.writeValueAsString(confNode.get("parameters")).replaceAll("__organizationID__", organization.getId().toString()));
 
         return expression.getValue();
     }

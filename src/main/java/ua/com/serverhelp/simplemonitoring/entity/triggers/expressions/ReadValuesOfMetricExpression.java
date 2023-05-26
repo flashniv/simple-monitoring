@@ -58,15 +58,12 @@ public class ReadValuesOfMetricExpression<T> implements Expression<T> {
         }
         try {
             var appCtx = SpringContext.getAppContext();
-            var environment = appCtx.getEnvironment();
-            var path = environment.getProperty("metric-storage.metrics-directory");
 
             Class<?> classType = Class.forName(collectorClass);
 
             Collector<T> collector = (Collector<T>) classType.getConstructor().newInstance();
 
-
-            var fileManagementService = new FileManagementService(path);
+            var fileManagementService = appCtx.getBean(FileManagementService.class);
             var metricsOptional = fileManagementService.readMetric(
                     organizationId.toString(),
                     parameterGroup,
