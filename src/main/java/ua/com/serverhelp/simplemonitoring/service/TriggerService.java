@@ -40,7 +40,7 @@ public class TriggerService {
             double constant,
             String operation
     ) {
-        if (!checkExist(organization, triggerId)) {
+        if (checkNotExist(organization, triggerId)) {
             var conf = ("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression\"," +
                     "\"parameters\":{" +
                     "\"arg1\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":__const__}}\"," +
@@ -54,19 +54,21 @@ public class TriggerService {
     }
 
     public void createTriggerIfNotExist(Organization organization, String triggerId, String path, String parameters, String triggerName, TriggerPriority priority, String conf) {
-        if (!checkExist(organization, triggerId)) {
+        if (checkNotExist(organization, triggerId)) {
             createTrigger(organization, triggerId, path, parameters, triggerName, priority, conf);
         }
     }
 
-    private boolean checkExist(Organization organization, String triggerId) {
+    private boolean checkNotExist(Organization organization, String triggerId) {
         Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organization,triggerId);
-        return optionalTrigger.isPresent();
+        return optionalTrigger.isEmpty();
     }
 
     private void createTrigger(Organization organization, String triggerId, String path, String parameters, String triggerName, TriggerPriority priority, String conf) {
         var parameterGroup = parameterGroupRepository.getOrCreateParameterGroup(organization, path, parameters);
-        var resConf = conf.replace("__organizationID__", organization.getId().toString()).replace("__parameterGroup__", String.valueOf(parameterGroup.getId()));
+        var resConf = conf
+                .replace("__organizationID__", organization.getId().toString())
+                .replace("__parameterGroup__", String.valueOf(parameterGroup.getId()));
         var trigger = Trigger.builder()
                 .triggerId(triggerId)
                 .organization(organization)
