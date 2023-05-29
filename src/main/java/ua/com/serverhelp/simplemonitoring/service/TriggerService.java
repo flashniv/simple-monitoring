@@ -82,8 +82,6 @@ public class TriggerService {
             compareDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression");
             compareDoubleExpression.set("parameters", compareDoubleExpressionParameters);
 
-
-
             createTrigger(organization, triggerId, path, parameters, triggerName, priority, objectMapper.writeValueAsString(compareDoubleExpression));
         }
     }
