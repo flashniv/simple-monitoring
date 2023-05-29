@@ -14,6 +14,10 @@ public interface Collector<R> {
         return new LastItemValueCollector();
     }
 
+    static Collector<Double> lastItemTimestampCollector() {
+        return new LastItemTimestampCollector();
+    }
+
     void processItem(DataItem dataItem);
 
     Optional<R> getResult();

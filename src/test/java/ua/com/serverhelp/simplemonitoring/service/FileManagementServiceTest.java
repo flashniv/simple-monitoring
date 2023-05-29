@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.instancio.Instancio;
 import org.instancio.Select;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +21,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 class FileManagementServiceTest extends AbstractTest {
     @Autowired
     private FileManagementService fileManagementService;
@@ -128,6 +130,32 @@ class FileManagementServiceTest extends AbstractTest {
 
         var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemValueCollector());
         Assertions.assertTrue(optionalMetric.isPresent());
+    }
+
+    @Test
+    void readMetricLastItemTimestampCollector() throws Exception {
+        var uuid = UUID.randomUUID().toString();
+        var parameterGroupId = 1L;
+
+        var dataItems = Instancio.ofList(DataItem.class)
+                .size(20)
+                .set(Select.field(DataItem::getOrganization), null)
+                .set(Select.field(DataItem::getPath), null)
+                .set(Select.field(DataItem::getParameters), null)
+                .generate(Select.field(DataItem::getTimestamp), gen -> gen.temporal().instant().range(Instant.now().minus(2, ChronoUnit.DAYS), Instant.now()))
+                .generate(Select.field(DataItem::getValue), gen -> gen.doubles().range(-1000.0, 1000.0))
+                .create();
+        dataItems.forEach(dataItem -> {
+            try {
+                fileManagementService.writeDataItem(uuid, parameterGroupId, dataItem);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemTimestampCollector());
+        Assertions.assertTrue(optionalMetric.isPresent());
+        log.debug("got timestamp"+Instant.ofEpochSecond(Math.round(optionalMetric.get())));
     }
 
     private String getPeriod() {

@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.metric.simple;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class BooleanMetricRest extends AbstractMetricRest {
             @RequestParam(defaultValue = "Boolean trigger on %s") String triggerName,
             @RequestParam(defaultValue = "HIGH") TriggerPriority priority,
             @RequestParam(defaultValue = "true") Boolean value
-    ) {
+    ) throws JsonProcessingException {
         var organization = getOrganization(token);
         dataItemsService.putDataItem(DataItem.builder()
                 .organization(organization)

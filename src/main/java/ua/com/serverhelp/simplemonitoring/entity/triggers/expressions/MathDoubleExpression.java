@@ -30,8 +30,8 @@ public class MathDoubleExpression implements Expression<Double> {
             ObjectNode res = objectMapper.createObjectNode();
             ObjectNode params = objectMapper.createObjectNode();
 
-            params.put("arg1", arg1.getJSON());
-            params.put("arg2", arg2.getJSON());
+            params.set("arg1", objectMapper.readTree(arg1.getJSON()));
+            params.set("arg2", objectMapper.readTree(arg1.getJSON()));
             params.put("operation", operation);
 
             res.put("class", this.getClass().getName());
@@ -64,8 +64,8 @@ public class MathDoubleExpression implements Expression<Double> {
         try {
             var objectMapper = new ObjectMapper();
             JsonNode parameters = objectMapper.readTree(parametersJson);
-            JsonNode arg1Json = objectMapper.readTree(parameters.get("arg1").asText());
-            JsonNode arg2Json = objectMapper.readTree(parameters.get("arg2").asText());
+            JsonNode arg1Json = parameters.get("arg1");
+            JsonNode arg2Json = parameters.get("arg2");
             operation = parameters.get("operation").asText();
 
             Class<?> arg1Class = Class.forName(arg1Json.get("class").asText());

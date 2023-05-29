@@ -15,7 +15,7 @@ class CompareDoubleExpressionTest {
                 .operation("<")
                 .build();
         var json = compareExpression.getJSON();
-        Assertions.assertEquals("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression\",\"parameters\":{\"arg1\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":1.0}}\",\"arg2\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":2.0}}\",\"operation\":\"<\"}}", json);
+        Assertions.assertEquals("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression\",\"parameters\":{\"arg1\":{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\",\"parameters\":{\"value\":1.0}},\"arg2\":{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\",\"parameters\":{\"value\":2.0}},\"operation\":\"<\"}}", json);
     }
 
     @Test
@@ -23,7 +23,7 @@ class CompareDoubleExpressionTest {
         var compareExpression = new CompareDoubleExpression();
         Assertions.assertThrows(ExpressionException.class, compareExpression::getJSON);
         Assertions.assertThrows(ExpressionException.class, compareExpression::getValue);
-        compareExpression.initialize("{\"arg1\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":1.0}}\",\"arg2\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":2.0}}\",\"operation\":\"<\"}");
+        compareExpression.initialize("{\"arg1\":{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\",\"parameters\":{\"value\":1.0}},\"arg2\":{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\",\"parameters\":{\"value\":2.0}},\"operation\":\"<\"}");
         Assertions.assertTrue(compareExpression.getValue());
     }
 }
