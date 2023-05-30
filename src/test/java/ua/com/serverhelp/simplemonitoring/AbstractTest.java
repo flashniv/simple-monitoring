@@ -20,6 +20,7 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.entity.user.Role;
 import ua.com.serverhelp.simplemonitoring.repository.*;
 import ua.com.serverhelp.simplemonitoring.service.AuthenticationService;
+import ua.com.serverhelp.simplemonitoring.service.cache.CacheService;
 
 import java.io.File;
 import java.util.HashMap;
@@ -51,11 +52,15 @@ public abstract class AbstractTest {
     protected AccessTokenRepository accessTokenRepository;
     @Autowired
     protected TriggerRepository triggerRepository;
+    @Autowired
+    protected CacheService cacheService;
+
     protected AccessToken accessToken;
 
 
     @AfterEach
     void tearDown() {
+        cacheService.clear();
         accessTokenRepository.deleteAll();
         tokenRepository.deleteAll();
         parameterGroupRepository.deleteAll();

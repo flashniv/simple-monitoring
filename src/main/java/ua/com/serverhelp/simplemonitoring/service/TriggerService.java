@@ -10,6 +10,7 @@ import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerPriority;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerStatus;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.repository.TriggerRepository;
+import ua.com.serverhelp.simplemonitoring.service.cache.CacheService;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -21,6 +22,9 @@ public class TriggerService {
     private ParameterGroupRepository parameterGroupRepository;
     @Autowired
     private TriggerRepository triggerRepository;
+
+    @Autowired
+    private CacheService cacheService;
 
     /**
      * Create if not exist trigger with preconfigured typical conf
@@ -160,7 +164,14 @@ public class TriggerService {
     }
 
     private boolean checkNotExist(Organization organization, String triggerId) {
+        var cachedTrigger=cacheService.getItem("TriggerService::checkNotExist",organization.getId()+"."+triggerId);
+        if (cachedTrigger!=null){
+            return false;
+        }
         Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organization, triggerId);
+
+        optionalTrigger.ifPresent(trigger -> cacheService.setItem("TriggerService::checkNotExist", organization.getId() + "." + triggerId, trigger));
+
         return optionalTrigger.isEmpty();
     }
 
@@ -182,7 +193,8 @@ public class TriggerService {
                 .suppressedScore(0)
                 .lastStatusUpdate(Instant.now())
                 .build();
-        triggerRepository.save(trigger);
+        var persistentTrigger = triggerRepository.save(trigger);
+        cacheService.setItem("TriggerService::checkNotExist", organization.getId() + "." + triggerId, persistentTrigger);
     }
 
 }

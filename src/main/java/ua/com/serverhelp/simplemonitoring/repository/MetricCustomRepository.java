@@ -5,4 +5,6 @@ import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 
 public interface MetricCustomRepository {
     Metric getOrCreateMetric(Organization organization, String path);
+
+    //Metric saveWithClearCache(Metric metric);
 }

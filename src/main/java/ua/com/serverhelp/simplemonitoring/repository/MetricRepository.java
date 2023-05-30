@@ -11,5 +11,4 @@ public interface MetricRepository extends JpaRepository<Metric, Long>, MetricCus
 
     @Query("select m from Metric m join Organization o join o.users u where m.organization=o and u = :user")
     List<Metric> findAllByUser(User user);
-
 }
