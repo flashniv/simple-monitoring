@@ -15,6 +15,7 @@ import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.rest.exceptions.AccessDeniedError;
 import ua.com.serverhelp.simplemonitoring.service.DataItemsService;
 import ua.com.serverhelp.simplemonitoring.service.TriggerService;
+import ua.com.serverhelp.simplemonitoring.service.cache.CacheService;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector;
 
 import java.util.UUID;
@@ -35,9 +36,11 @@ public abstract class AbstractMetricRest {
     protected DataItemsService dataItemsService;
     @Autowired
     protected TriggerService triggerService;
+    @Autowired
+    protected CacheService cacheService;
 
     protected Organization getOrganization(UUID token) {
-        var accessToken = accessTokenRepository.findById(token).orElseThrow(() -> new AccessDeniedError("Token not valid"));
+        var accessToken = accessTokenRepository.findByIdCached(token).orElseThrow(() -> new AccessDeniedError("Token not valid"));
         return accessToken.getOrganization();
     }
 
