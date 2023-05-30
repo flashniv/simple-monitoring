@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
-import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ExpressionException;
@@ -42,9 +41,9 @@ class DailyBooleanMetricTest extends AbstractTest {
                 .thenThrow(new ExpressionException("Mock"))
                 .thenThrow(new ExpressionException("Mock"))
                 .thenReturn(Optional.of(0.0))
-                .thenReturn(Optional.of((double)Instant.now().minus(10, ChronoUnit.DAYS).getEpochSecond()))
+                .thenReturn(Optional.of((double) Instant.now().minus(10, ChronoUnit.DAYS).getEpochSecond()))
                 .thenReturn(Optional.of(1.0))
-                .thenReturn(Optional.of((double)Instant.now().minus(100, ChronoUnit.MINUTES).getEpochSecond()));
+                .thenReturn(Optional.of((double) Instant.now().minus(100, ChronoUnit.MINUTES).getEpochSecond()));
     }
 
     @Test
@@ -71,8 +70,8 @@ class DailyBooleanMetricTest extends AbstractTest {
         Assertions.assertTrue(optionalTrigger.isPresent());
         var dailyTrigger = optionalTrigger.get();
 
-        Assertions.assertThrows(ExpressionException.class,() -> booleanTrigger.checkTrigger());
-        Assertions.assertThrows(ExpressionException.class,() -> dailyTrigger.checkTrigger());
+        Assertions.assertThrows(ExpressionException.class, () -> booleanTrigger.checkTrigger());
+        Assertions.assertThrows(ExpressionException.class, () -> dailyTrigger.checkTrigger());
 
         Assertions.assertFalse(booleanTrigger.checkTrigger());
         Assertions.assertFalse(dailyTrigger.checkTrigger());

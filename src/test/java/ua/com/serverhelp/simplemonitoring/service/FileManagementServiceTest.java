@@ -3,11 +3,9 @@ package ua.com.serverhelp.simplemonitoring.service;
 import lombok.extern.slf4j.Slf4j;
 import org.instancio.Instancio;
 import org.instancio.Select;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.FileManagementService;
@@ -25,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 class FileManagementServiceTest extends AbstractTest {
     @Autowired
     private FileManagementService fileManagementService;
+
     @Test
     void writeDataItem() throws Exception {
         var uuid = UUID.randomUUID().toString();
@@ -155,7 +154,7 @@ class FileManagementServiceTest extends AbstractTest {
 
         var optionalMetric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.lastItemTimestampCollector());
         Assertions.assertTrue(optionalMetric.isPresent());
-        log.debug("got timestamp"+Instant.ofEpochSecond(Math.round(optionalMetric.get())));
+        log.debug("got timestamp" + Instant.ofEpochSecond(Math.round(optionalMetric.get())));
     }
 
     private String getPeriod() {

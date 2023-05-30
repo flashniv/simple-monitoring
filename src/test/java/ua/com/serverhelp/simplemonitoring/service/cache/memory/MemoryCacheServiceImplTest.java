@@ -2,12 +2,9 @@ package ua.com.serverhelp.simplemonitoring.service.cache.memory;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryCacheServiceImplTest {
-    private final MemoryCacheServiceImpl memoryCacheService=new MemoryCacheServiceImpl();
+    private final MemoryCacheServiceImpl memoryCacheService = new MemoryCacheServiceImpl();
 
     @Test
     void setItem() {

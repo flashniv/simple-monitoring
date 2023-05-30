@@ -5,14 +5,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.AuthenticationRequest;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.AuthenticationResponse;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.RegisterRequest;
 import ua.com.serverhelp.simplemonitoring.config.security.JwtService;
 import ua.com.serverhelp.simplemonitoring.entity.token.Token;
 import ua.com.serverhelp.simplemonitoring.entity.user.User;
 import ua.com.serverhelp.simplemonitoring.repository.TokenRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.AuthenticationRequest;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.AuthenticationResponse;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.RegisterRequest;
 
 @Service
 @RequiredArgsConstructor

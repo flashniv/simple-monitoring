@@ -21,8 +21,8 @@ public class AccessTokenCustomRepositoryImpl implements AccessTokenCustomReposit
             return Optional.of(cachedToken);
         }
         var foundToken = entityManager.find(AccessToken.class, token);
-        if(foundToken!=null){
-            cacheService.setItem("AccessTokenCustomRepositoryImpl::findByIdCached", token.toString(),foundToken);
+        if (foundToken != null) {
+            cacheService.setItem("AccessTokenCustomRepositoryImpl::findByIdCached", token.toString(), foundToken);
             return Optional.of(foundToken);
         }
         return Optional.empty();

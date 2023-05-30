@@ -31,9 +31,9 @@ class TriggerServiceTest extends AbstractTest {
                 10.0,
                 "<"
         );
-        Optional<Trigger> optionalTrigger=triggerRepository.findByOrganizationAndTriggerId(organizations.get(0),"triggerID1.boolean");
+        Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organizations.get(0), "triggerID1.boolean");
         Assertions.assertTrue(optionalTrigger.isPresent());
-        Trigger trigger=optionalTrigger.get();
+        Trigger trigger = optionalTrigger.get();
         Assertions.assertEquals("My trigger", trigger.getName());
     }
 
@@ -51,9 +51,9 @@ class TriggerServiceTest extends AbstractTest {
                 TriggerPriority.AVERAGE,
                 Duration.of(1, ChronoUnit.DAYS)
         );
-        Optional<Trigger> optionalTrigger=triggerRepository.findByOrganizationAndTriggerId(organizations.get(0),"triggerID1.boolean");
+        Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organizations.get(0), "triggerID1.boolean");
         Assertions.assertTrue(optionalTrigger.isPresent());
-        Trigger trigger=optionalTrigger.get();
+        Trigger trigger = optionalTrigger.get();
         Assertions.assertEquals("My trigger", trigger.getName());
     }
 

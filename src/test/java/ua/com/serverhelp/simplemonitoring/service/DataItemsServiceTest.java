@@ -2,17 +2,14 @@ package ua.com.serverhelp.simplemonitoring.service;
 
 import org.instancio.Instancio;
 import org.instancio.Select;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 
-import java.io.File;
 import java.util.List;
 
 class DataItemsServiceTest extends AbstractTest {

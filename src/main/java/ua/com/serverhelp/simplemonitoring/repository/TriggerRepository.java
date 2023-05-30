@@ -6,6 +6,6 @@ import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 
 import java.util.Optional;
 
-public interface TriggerRepository extends JpaRepository<Trigger,Long> {
+public interface TriggerRepository extends JpaRepository<Trigger, Long> {
     Optional<Trigger> findByOrganizationAndTriggerId(Organization organization, String triggerId);
 }

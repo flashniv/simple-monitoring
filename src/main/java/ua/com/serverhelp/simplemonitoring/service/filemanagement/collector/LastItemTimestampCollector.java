@@ -4,7 +4,7 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 
 import java.util.Optional;
 
-public class LastItemTimestampCollector  implements Collector<Double> {
+public class LastItemTimestampCollector implements Collector<Double> {
     private DataItem resDataItem;
 
     @Override
@@ -19,6 +19,6 @@ public class LastItemTimestampCollector  implements Collector<Double> {
         if (resDataItem == null) {
             return Optional.empty();
         }
-        return Optional.of((double)resDataItem.getTimestamp().getEpochSecond());
+        return Optional.of((double) resDataItem.getTimestamp().getEpochSecond());
     }
 }

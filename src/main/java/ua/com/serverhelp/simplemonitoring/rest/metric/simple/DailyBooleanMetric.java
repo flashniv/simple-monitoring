@@ -16,7 +16,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/metric/simple/dailyboolean")
-public class DailyBooleanMetric  extends AbstractMetricRest {
+public class DailyBooleanMetric extends AbstractMetricRest {
     @GetMapping("/")
     @ResponseBody
     public ResponseEntity<String> getAddEvent(
@@ -35,8 +35,8 @@ public class DailyBooleanMetric  extends AbstractMetricRest {
                 .value(value ? 1.0 : 0.0)
                 .build()
         );
-        triggerService.createTriggerIfNotExistCompareItemToConst(organization,path+"{}.boolean", path, "{}", triggerName, priority, 1.0,"==");
-        triggerService.createTriggerIfNotExistCheckLastTimeItems(organization,path+"{}.daily", path, "{}", triggerName, priority, Duration.of(25, ChronoUnit.HOURS));
+        triggerService.createTriggerIfNotExistCompareItemToConst(organization, path + "{}.boolean", path, "{}", triggerName, priority, 1.0, "==");
+        triggerService.createTriggerIfNotExistCheckLastTimeItems(organization, path + "{}.daily", path, "{}", triggerName, priority, Duration.of(25, ChronoUnit.HOURS));
         log.debug("DailyBooleanMetric::getAddEvent /api/v1/metric/dailyboolean Event add:" + value);
 
         return ResponseEntity.ok().body("Success");

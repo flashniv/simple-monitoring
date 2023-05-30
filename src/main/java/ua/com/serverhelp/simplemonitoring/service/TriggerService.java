@@ -70,11 +70,11 @@ public class TriggerService {
             constantDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression");
             constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
 
-            readValuesOfMetricExpressionParameters.put("parameterGroup","__parameterGroup__");
-            readValuesOfMetricExpressionParameters.put("collectorClass","ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector");
-            readValuesOfMetricExpressionParameters.put("organizationID","__organizationID__");
-            readValuesOfMetricExpressionParameters.put("beginDiff",2592000L);
-            readValuesOfMetricExpressionParameters.put("endDiff",0L);
+            readValuesOfMetricExpressionParameters.put("parameterGroup", "__parameterGroup__");
+            readValuesOfMetricExpressionParameters.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector");
+            readValuesOfMetricExpressionParameters.put("organizationID", "__organizationID__");
+            readValuesOfMetricExpressionParameters.put("beginDiff", 2592000L);
+            readValuesOfMetricExpressionParameters.put("endDiff", 0L);
 
             readValuesOfMetricExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ReadValuesOfMetricExpression");
             readValuesOfMetricExpression.set("parameters", readValuesOfMetricExpressionParameters);
@@ -130,11 +130,11 @@ public class TriggerService {
             constantDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression");
             constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
 
-            readValuesOfMetricExpressionParameters.put("parameterGroup","__parameterGroup__");
-            readValuesOfMetricExpressionParameters.put("collectorClass","ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
-            readValuesOfMetricExpressionParameters.put("organizationID","__organizationID__");
-            readValuesOfMetricExpressionParameters.put("beginDiff",2592000L);
-            readValuesOfMetricExpressionParameters.put("endDiff",0L);
+            readValuesOfMetricExpressionParameters.put("parameterGroup", "__parameterGroup__");
+            readValuesOfMetricExpressionParameters.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
+            readValuesOfMetricExpressionParameters.put("organizationID", "__organizationID__");
+            readValuesOfMetricExpressionParameters.put("beginDiff", 2592000L);
+            readValuesOfMetricExpressionParameters.put("endDiff", 0L);
 
             readValuesOfMetricExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ReadValuesOfMetricExpression");
             readValuesOfMetricExpression.set("parameters", readValuesOfMetricExpressionParameters);
@@ -164,8 +164,8 @@ public class TriggerService {
     }
 
     private boolean checkNotExist(Organization organization, String triggerId) {
-        var cachedTrigger=cacheService.getItem("TriggerService::checkNotExist",organization.getId()+"."+triggerId);
-        if (cachedTrigger!=null){
+        var cachedTrigger = cacheService.getItem("TriggerService::checkNotExist", organization.getId() + "." + triggerId);
+        if (cachedTrigger != null) {
             return false;
         }
         Optional<Trigger> optionalTrigger = triggerRepository.findByOrganizationAndTriggerId(organization, triggerId);

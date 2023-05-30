@@ -5,5 +5,5 @@ import ua.com.serverhelp.simplemonitoring.entity.accesstoken.AccessToken;
 
 import java.util.UUID;
 
-public interface AccessTokenRepository extends JpaRepository<AccessToken, UUID>,AccessTokenCustomRepository {
+public interface AccessTokenRepository extends JpaRepository<AccessToken, UUID>, AccessTokenCustomRepository {
 }

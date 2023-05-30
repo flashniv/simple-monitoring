@@ -1,4 +1,4 @@
-package ua.com.serverhelp.simplemonitoring.api.auth;
+package ua.com.serverhelp.simplemonitoring.rest.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.AuthenticationRequest;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.AuthenticationResponse;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.RegisterRequest;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.AuthenticationRequest;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.AuthenticationResponse;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.RegisterRequest;
 import ua.com.serverhelp.simplemonitoring.service.AuthenticationService;
 
 import java.io.IOException;

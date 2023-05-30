@@ -17,14 +17,14 @@ public class MemoryCacheServiceImpl implements CacheService {
         CacheNamespace<T> space = (CacheNamespace<T>) map.get(nameSpace);
         if (space != null) {
             var item = space.getItem(key);
-            if(item!=null){
-                log.debug("MemoryCacheServiceImpl::getItem HIT nameSpace="+nameSpace+" key="+key);
-            }else{
-                log.debug("MemoryCacheServiceImpl::getItem MISS nameSpace="+nameSpace+" key="+key);
+            if (item != null) {
+                log.debug("MemoryCacheServiceImpl::getItem HIT nameSpace=" + nameSpace + " key=" + key);
+            } else {
+                log.debug("MemoryCacheServiceImpl::getItem MISS nameSpace=" + nameSpace + " key=" + key);
             }
             return item;
         }
-        log.debug("MemoryCacheServiceImpl::getItem MISS nameSpace="+nameSpace+" key="+key);
+        log.debug("MemoryCacheServiceImpl::getItem MISS nameSpace=" + nameSpace + " key=" + key);
         return null;
     }
 
@@ -36,7 +36,7 @@ public class MemoryCacheServiceImpl implements CacheService {
             map.put(nameSpace, space);
         }
         space.setItem(key, object);
-        log.debug("MemoryCacheServiceImpl::setItem nameSpace="+nameSpace+" key="+key);
+        log.debug("MemoryCacheServiceImpl::setItem nameSpace=" + nameSpace + " key=" + key);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class MemoryCacheServiceImpl implements CacheService {
         if (space != null) {
             space.deleteItem(key);
         }
-        log.debug("MemoryCacheServiceImpl::delItem nameSpace="+nameSpace+" key="+key);
+        log.debug("MemoryCacheServiceImpl::delItem nameSpace=" + nameSpace + " key=" + key);
     }
 
     @Override
     public void clearNameSpace(String nameSpace) {
         map.remove(nameSpace);
-        log.debug("MemoryCacheServiceImpl::clearNameSpace nameSpace="+nameSpace);
+        log.debug("MemoryCacheServiceImpl::clearNameSpace nameSpace=" + nameSpace);
     }
 
     @Override

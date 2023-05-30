@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.authentication.BadCredentialsException;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.AuthenticationRequest;
-import ua.com.serverhelp.simplemonitoring.api.auth.type.RegisterRequest;
 import ua.com.serverhelp.simplemonitoring.entity.user.Role;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.AuthenticationRequest;
+import ua.com.serverhelp.simplemonitoring.rest.auth.type.RegisterRequest;
 
 @Slf4j
 class AuthenticationServiceTest extends AbstractTest {

@@ -1,4 +1,4 @@
-package ua.com.serverhelp.simplemonitoring.api.auth.type;
+package ua.com.serverhelp.simplemonitoring.rest.auth.type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
