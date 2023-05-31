@@ -53,6 +53,8 @@ public abstract class AbstractTest {
     @Autowired
     protected TriggerRepository triggerRepository;
     @Autowired
+    protected AlertRepository alertRepository;
+    @Autowired
     protected CacheService cacheService;
 
     protected AccessToken accessToken;
@@ -61,6 +63,8 @@ public abstract class AbstractTest {
     @AfterEach
     void tearDown() {
         cacheService.clear();
+        alertRepository.deleteAll();
+        triggerRepository.deleteAll();
         accessTokenRepository.deleteAll();
         tokenRepository.deleteAll();
         parameterGroupRepository.deleteAll();

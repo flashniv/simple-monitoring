@@ -2,14 +2,18 @@ package ua.com.serverhelp.simplemonitoring.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerPriority;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerStatus;
+import ua.com.serverhelp.simplemonitoring.repository.AlertRepository;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.repository.TriggerRepository;
+import ua.com.serverhelp.simplemonitoring.service.alert.AlertService;
 import ua.com.serverhelp.simplemonitoring.service.cache.CacheService;
 
 import java.time.Duration;
@@ -17,11 +21,16 @@ import java.time.Instant;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class TriggerService {
     @Autowired
     private ParameterGroupRepository parameterGroupRepository;
     @Autowired
     private TriggerRepository triggerRepository;
+    @Autowired
+    private AlertService alertService;
+    @Autowired
+    private AlertRepository alertRepository;
 
     @Autowired
     private CacheService cacheService;
@@ -195,6 +204,38 @@ public class TriggerService {
                 .build();
         var persistentTrigger = triggerRepository.save(trigger);
         cacheService.setItem("TriggerService::checkNotExist", organization.getId() + "." + triggerId, persistentTrigger);
+    }
+
+    public void cronCheckTriggers() {
+        var triggers = triggerRepository.findAll();
+        log.debug("TriggerService::cronCheckTriggers start. Found " + triggers.size() + " triggers");
+        triggers.stream()
+                .filter(Trigger::isEnabled)
+                .forEach(trigger -> {
+                    var curStatus = trigger.getLastStatus();
+                    var newStatus = TriggerStatus.FAILED;
+                    try {
+                        newStatus = trigger.checkTrigger() ? TriggerStatus.OK : TriggerStatus.ERROR;
+                    } catch (Exception e) {
+                        log.warn("TriggerService::cronCheckTriggers error trigger checking", e);
+                    }
+                    if (curStatus != newStatus) {
+                        if (newStatus == TriggerStatus.OK || newStatus == TriggerStatus.ERROR) {
+                            var alert = Alert.builder()
+                                    .triggerStatus(newStatus)
+                                    .alertTimestamp(Instant.now())
+                                    .trigger(trigger)
+                                    .organization(trigger.getOrganization())
+                                    .build();
+                            alertRepository.save(alert);
+                            alertService.sendAlert(alert);
+                        }
+                        trigger.setLastStatus(newStatus);
+                        trigger.setLastStatusUpdate(Instant.now());
+                        trigger.setSuppressedScore(trigger.getSuppressedScore() + 1);
+                        triggerRepository.save(trigger);
+                    }
+                });
     }
 
 }
