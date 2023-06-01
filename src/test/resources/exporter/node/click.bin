@@ -1,0 +1,2451 @@
+# HELP go_gc_duration_seconds A summary of the GC invocation durations.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 3.2674e-05
+go_gc_duration_seconds{quantile="0.25"} 9.1918e-05
+go_gc_duration_seconds{quantile="0.5"} 0.000130198
+go_gc_duration_seconds{quantile="0.75"} 0.000173799
+go_gc_duration_seconds{quantile="1"} 0.004190491
+go_gc_duration_seconds_sum 352.167424089
+go_gc_duration_seconds_count 1.538943e+06
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 11
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 4.225584e+06
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 2.530532340552e+12
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 2.02206e+06
+# HELP go_memstats_frees_total Total number of frees.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 3.0479386707e+10
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 2.428928e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 4.225584e+06
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 5.3870592e+07
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 7.307264e+06
+# HELP go_memstats_heap_objects Number of allocated objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 29204
+# HELP go_memstats_heap_released_bytes_total Total number of heap bytes released to OS.
+# TYPE go_memstats_heap_released_bytes_total counter
+go_memstats_heap_released_bytes_total 5.0487296e+07
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 6.1177856e+07
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.668505145743374e+09
+# HELP go_memstats_lookups_total Total number of pointer lookups.
+# TYPE go_memstats_lookups_total counter
+go_memstats_lookups_total 2.2581113e+08
+# HELP go_memstats_mallocs_total Total number of mallocs.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 3.0479415911e+10
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 13888
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 16384
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 134976
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 589824
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 6.632688e+06
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 1.228364e+06
+# HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 1.736704e+06
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 1.736704e+06
+# HELP go_memstats_sys_bytes Number of bytes obtained by system. Sum of all system allocations.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 6.920012e+07
+# HELP http_request_duration_microseconds The HTTP request latencies in microseconds.
+# TYPE http_request_duration_microseconds summary
+http_request_duration_microseconds{handler="prometheus",quantile="0.5"} 20043.214
+http_request_duration_microseconds{handler="prometheus",quantile="0.9"} 22107.922
+http_request_duration_microseconds{handler="prometheus",quantile="0.99"} 23611.357
+http_request_duration_microseconds_sum{handler="prometheus"} 7.678223879561536e+10
+http_request_duration_microseconds_count{handler="prometheus"} 813081
+# HELP http_request_size_bytes The HTTP request sizes in bytes.
+# TYPE http_request_size_bytes summary
+http_request_size_bytes{handler="prometheus",quantile="0.5"} 209
+http_request_size_bytes{handler="prometheus",quantile="0.9"} 209
+http_request_size_bytes{handler="prometheus",quantile="0.99"} 209
+http_request_size_bytes_sum{handler="prometheus"} 1.49990434e+08
+http_request_size_bytes_count{handler="prometheus"} 813081
+# HELP http_requests_total Total number of HTTP requests made.
+# TYPE http_requests_total counter
+http_requests_total{code="200",handler="prometheus",method="get"} 813081
+# HELP http_response_size_bytes The HTTP response sizes in bytes.
+# TYPE http_response_size_bytes summary
+http_response_size_bytes{handler="prometheus",quantile="0.5"} 18670
+http_response_size_bytes{handler="prometheus",quantile="0.9"} 127465
+http_response_size_bytes{handler="prometheus",quantile="0.99"} 127482
+http_response_size_bytes_sum{handler="prometheus"} 3.0585992986e+10
+http_response_size_bytes_count{handler="prometheus"} 813081
+# HELP node_arp_entries ARP entries by device
+# TYPE node_arp_entries gauge
+node_arp_entries{device="eno1"} 4
+# HELP node_boot_time Node boot time, in unixtime.
+# TYPE node_boot_time gauge
+node_boot_time 1.582214038e+09
+# HELP node_context_switches Total number of context switches.
+# TYPE node_context_switches counter
+node_context_switches 1.8331231386659e+13
+# HELP node_cpu Seconds the cpus spent in each mode.
+# TYPE node_cpu counter
+node_cpu{cpu="cpu0",mode="guest"} 0
+node_cpu{cpu="cpu0",mode="guest_nice"} 0
+node_cpu{cpu="cpu0",mode="idle"} 6.107575571e+07
+node_cpu{cpu="cpu0",mode="iowait"} 525506.49
+node_cpu{cpu="cpu0",mode="irq"} 0
+node_cpu{cpu="cpu0",mode="nice"} 1031.01
+node_cpu{cpu="cpu0",mode="softirq"} 475400.28
+node_cpu{cpu="cpu0",mode="steal"} 0
+node_cpu{cpu="cpu0",mode="system"} 8.5081711e+06
+node_cpu{cpu="cpu0",mode="user"} 1.431810399e+07
+node_cpu{cpu="cpu1",mode="guest"} 0
+node_cpu{cpu="cpu1",mode="guest_nice"} 0
+node_cpu{cpu="cpu1",mode="idle"} 6.104622736e+07
+node_cpu{cpu="cpu1",mode="iowait"} 456546.73
+node_cpu{cpu="cpu1",mode="irq"} 0
+node_cpu{cpu="cpu1",mode="nice"} 938.36
+node_cpu{cpu="cpu1",mode="softirq"} 351005.75
+node_cpu{cpu="cpu1",mode="steal"} 0
+node_cpu{cpu="cpu1",mode="system"} 8.58942942e+06
+node_cpu{cpu="cpu1",mode="user"} 1.433001792e+07
+node_cpu{cpu="cpu2",mode="guest"} 0
+node_cpu{cpu="cpu2",mode="guest_nice"} 0
+node_cpu{cpu="cpu2",mode="idle"} 5.740717068e+07
+node_cpu{cpu="cpu2",mode="iowait"} 556528.47
+node_cpu{cpu="cpu2",mode="irq"} 0
+node_cpu{cpu="cpu2",mode="nice"} 982.81
+node_cpu{cpu="cpu2",mode="softirq"} 875186.85
+node_cpu{cpu="cpu2",mode="steal"} 0
+node_cpu{cpu="cpu2",mode="system"} 8.74499074e+06
+node_cpu{cpu="cpu2",mode="user"} 1.675013954e+07
+node_cpu{cpu="cpu3",mode="guest"} 0
+node_cpu{cpu="cpu3",mode="guest_nice"} 0
+node_cpu{cpu="cpu3",mode="idle"} 6.145962405e+07
+node_cpu{cpu="cpu3",mode="iowait"} 641770.51
+node_cpu{cpu="cpu3",mode="irq"} 0
+node_cpu{cpu="cpu3",mode="nice"} 1023.69
+node_cpu{cpu="cpu3",mode="softirq"} 43284.95
+node_cpu{cpu="cpu3",mode="steal"} 0
+node_cpu{cpu="cpu3",mode="system"} 8.63606251e+06
+node_cpu{cpu="cpu3",mode="user"} 1.399316082e+07
+node_cpu{cpu="cpu4",mode="guest"} 0
+node_cpu{cpu="cpu4",mode="guest_nice"} 0
+node_cpu{cpu="cpu4",mode="idle"} 6.07099205e+07
+node_cpu{cpu="cpu4",mode="iowait"} 1.56103567e+06
+node_cpu{cpu="cpu4",mode="irq"} 0
+node_cpu{cpu="cpu4",mode="nice"} 2663.82
+node_cpu{cpu="cpu4",mode="softirq"} 125953.32
+node_cpu{cpu="cpu4",mode="steal"} 0
+node_cpu{cpu="cpu4",mode="system"} 8.59295773e+06
+node_cpu{cpu="cpu4",mode="user"} 1.37737868e+07
+node_cpu{cpu="cpu5",mode="guest"} 0
+node_cpu{cpu="cpu5",mode="guest_nice"} 0
+node_cpu{cpu="cpu5",mode="idle"} 6.15395763e+07
+node_cpu{cpu="cpu5",mode="iowait"} 897519.15
+node_cpu{cpu="cpu5",mode="irq"} 0
+node_cpu{cpu="cpu5",mode="nice"} 1435.88
+node_cpu{cpu="cpu5",mode="softirq"} 92723.86
+node_cpu{cpu="cpu5",mode="steal"} 0
+node_cpu{cpu="cpu5",mode="system"} 8.54891093e+06
+node_cpu{cpu="cpu5",mode="user"} 1.366924352e+07
+node_cpu{cpu="cpu6",mode="guest"} 0
+node_cpu{cpu="cpu6",mode="guest_nice"} 0
+node_cpu{cpu="cpu6",mode="idle"} 6.206044145e+07
+node_cpu{cpu="cpu6",mode="iowait"} 581037.19
+node_cpu{cpu="cpu6",mode="irq"} 0
+node_cpu{cpu="cpu6",mode="nice"} 1254.76
+node_cpu{cpu="cpu6",mode="softirq"} 45403.24
+node_cpu{cpu="cpu6",mode="steal"} 0
+node_cpu{cpu="cpu6",mode="system"} 8.65081224e+06
+node_cpu{cpu="cpu6",mode="user"} 1.332250128e+07
+node_cpu{cpu="cpu7",mode="guest"} 0
+node_cpu{cpu="cpu7",mode="guest_nice"} 0
+node_cpu{cpu="cpu7",mode="idle"} 6.152874719e+07
+node_cpu{cpu="cpu7",mode="iowait"} 546503.31
+node_cpu{cpu="cpu7",mode="irq"} 0
+node_cpu{cpu="cpu7",mode="nice"} 1005.63
+node_cpu{cpu="cpu7",mode="softirq"} 246123.65
+node_cpu{cpu="cpu7",mode="steal"} 0
+node_cpu{cpu="cpu7",mode="system"} 8.52661652e+06
+node_cpu{cpu="cpu7",mode="user"} 1.390907833e+07
+# HELP node_cpu_core_throttles_total Number of times this cpu core has been throttled.
+# TYPE node_cpu_core_throttles_total counter
+node_cpu_core_throttles_total{cpu="cpu0"} 1280
+node_cpu_core_throttles_total{cpu="cpu1"} 2263
+node_cpu_core_throttles_total{cpu="cpu2"} 408
+node_cpu_core_throttles_total{cpu="cpu3"} 3122
+node_cpu_core_throttles_total{cpu="cpu4"} 1280
+node_cpu_core_throttles_total{cpu="cpu5"} 2263
+node_cpu_core_throttles_total{cpu="cpu6"} 408
+node_cpu_core_throttles_total{cpu="cpu7"} 3122
+# HELP node_cpu_frequency_hertz Current cpu thread frequency in hertz.
+# TYPE node_cpu_frequency_hertz gauge
+node_cpu_frequency_hertz{cpu="cpu0"} 2.041392e+09
+node_cpu_frequency_hertz{cpu="cpu1"} 2.059483e+09
+node_cpu_frequency_hertz{cpu="cpu2"} 2.065118e+09
+node_cpu_frequency_hertz{cpu="cpu3"} 2.073782e+09
+node_cpu_frequency_hertz{cpu="cpu4"} 2.059755e+09
+node_cpu_frequency_hertz{cpu="cpu5"} 2.009578e+09
+node_cpu_frequency_hertz{cpu="cpu6"} 1.780824e+09
+node_cpu_frequency_hertz{cpu="cpu7"} 2.078424e+09
+# HELP node_cpu_frequency_max_hertz Maximum cpu thread frequency in hertz.
+# TYPE node_cpu_frequency_max_hertz gauge
+node_cpu_frequency_max_hertz{cpu="cpu0"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu1"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu2"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu3"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu4"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu5"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu6"} 4.2e+09
+node_cpu_frequency_max_hertz{cpu="cpu7"} 4.2e+09
+# HELP node_cpu_frequency_min_hertz Minimum cpu thread frequency in hertz.
+# TYPE node_cpu_frequency_min_hertz gauge
+node_cpu_frequency_min_hertz{cpu="cpu0"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu1"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu2"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu3"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu4"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu5"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu6"} 8e+08
+node_cpu_frequency_min_hertz{cpu="cpu7"} 8e+08
+# HELP node_cpu_package_throttles_total Number of times this cpu package has been throttled.
+# TYPE node_cpu_package_throttles_total counter
+node_cpu_package_throttles_total{node="0"} 4492
+# HELP node_disk_bytes_read The total number of bytes read successfully.
+# TYPE node_disk_bytes_read counter
+node_disk_bytes_read{device="loop0"} 43008
+node_disk_bytes_read{device="loop1"} 0
+node_disk_bytes_read{device="loop2"} 0
+node_disk_bytes_read{device="loop3"} 0
+node_disk_bytes_read{device="loop4"} 0
+node_disk_bytes_read{device="loop5"} 0
+node_disk_bytes_read{device="loop6"} 0
+node_disk_bytes_read{device="loop7"} 0
+node_disk_bytes_read{device="md2"} 3.21214464e+08
+node_disk_bytes_read{device="md3"} 3.35237386032128e+14
+node_disk_bytes_read{device="sda"} 2.55015780143616e+14
+node_disk_bytes_read{device="sda1"} 2.24432128e+08
+node_disk_bytes_read{device="sda2"} 1.883147776e+10
+node_disk_bytes_read{device="sda3"} 2.54996243686912e+14
+node_disk_bytes_read{device="sda4"} 2.13946368e+08
+node_disk_bytes_read{device="sdb"} 2.48260285278208e+14
+node_disk_bytes_read{device="sdb1"} 5.20646656e+08
+node_disk_bytes_read{device="sdb2"} 1.7921968128e+10
+node_disk_bytes_read{device="sdb3"} 2.48241328930816e+14
+node_disk_bytes_read{device="sdb4"} 2.28757504e+08
+node_disk_bytes_read{device="sdc"} 8.96233472e+08
+node_disk_bytes_read{device="sdc1"} 1.62873344e+08
+node_disk_bytes_read{device="sdc2"} 1.85090048e+08
+node_disk_bytes_read{device="sdc3"} 4.51518464e+08
+node_disk_bytes_read{device="sdc4"} 4.3106304e+07
+# HELP node_disk_bytes_written The total number of bytes written successfully.
+# TYPE node_disk_bytes_written counter
+node_disk_bytes_written{device="loop0"} 0
+node_disk_bytes_written{device="loop1"} 0
+node_disk_bytes_written{device="loop2"} 0
+node_disk_bytes_written{device="loop3"} 0
+node_disk_bytes_written{device="loop4"} 0
+node_disk_bytes_written{device="loop5"} 0
+node_disk_bytes_written{device="loop6"} 0
+node_disk_bytes_written{device="loop7"} 0
+node_disk_bytes_written{device="md2"} 5.518252032e+09
+node_disk_bytes_written{device="md3"} 1.206234012672e+14
+node_disk_bytes_written{device="sda"} 1.21152972216832e+14
+node_disk_bytes_written{device="sda1"} 2.64576e+07
+node_disk_bytes_written{device="sda2"} 5.5303424e+09
+node_disk_bytes_written{device="sda3"} 1.21147415416832e+14
+node_disk_bytes_written{device="sda4"} 0
+node_disk_bytes_written{device="sdb"} 1.21154690589696e+14
+node_disk_bytes_written{device="sdb1"} 0
+node_disk_bytes_written{device="sdb2"} 5.5303424e+09
+node_disk_bytes_written{device="sdb3"} 1.21149160247296e+14
+node_disk_bytes_written{device="sdb4"} 0
+node_disk_bytes_written{device="sdc"} 0
+node_disk_bytes_written{device="sdc1"} 0
+node_disk_bytes_written{device="sdc2"} 0
+node_disk_bytes_written{device="sdc3"} 0
+node_disk_bytes_written{device="sdc4"} 0
+# HELP node_disk_io_now The number of I/Os currently in progress.
+# TYPE node_disk_io_now gauge
+node_disk_io_now{device="loop0"} 0
+node_disk_io_now{device="loop1"} 0
+node_disk_io_now{device="loop2"} 0
+node_disk_io_now{device="loop3"} 0
+node_disk_io_now{device="loop4"} 0
+node_disk_io_now{device="loop5"} 0
+node_disk_io_now{device="loop6"} 0
+node_disk_io_now{device="loop7"} 0
+node_disk_io_now{device="md2"} 0
+node_disk_io_now{device="md3"} 0
+node_disk_io_now{device="sda"} 0
+node_disk_io_now{device="sda1"} 0
+node_disk_io_now{device="sda2"} 0
+node_disk_io_now{device="sda3"} 0
+node_disk_io_now{device="sda4"} 0
+node_disk_io_now{device="sdb"} 0
+node_disk_io_now{device="sdb1"} 0
+node_disk_io_now{device="sdb2"} 0
+node_disk_io_now{device="sdb3"} 0
+node_disk_io_now{device="sdb4"} 0
+node_disk_io_now{device="sdc"} 0
+node_disk_io_now{device="sdc1"} 0
+node_disk_io_now{device="sdc2"} 0
+node_disk_io_now{device="sdc3"} 0
+node_disk_io_now{device="sdc4"} 0
+# HELP node_disk_io_time_ms Total Milliseconds spent doing I/Os.
+# TYPE node_disk_io_time_ms counter
+node_disk_io_time_ms{device="loop0"} 0
+node_disk_io_time_ms{device="loop1"} 0
+node_disk_io_time_ms{device="loop2"} 0
+node_disk_io_time_ms{device="loop3"} 0
+node_disk_io_time_ms{device="loop4"} 0
+node_disk_io_time_ms{device="loop5"} 0
+node_disk_io_time_ms{device="loop6"} 0
+node_disk_io_time_ms{device="loop7"} 0
+node_disk_io_time_ms{device="md2"} 0
+node_disk_io_time_ms{device="md3"} 0
+node_disk_io_time_ms{device="sda"} 6.07380256e+08
+node_disk_io_time_ms{device="sda1"} 35520
+node_disk_io_time_ms{device="sda2"} 406140
+node_disk_io_time_ms{device="sda3"} 1.873886e+07
+node_disk_io_time_ms{device="sda4"} 11932
+node_disk_io_time_ms{device="sdb"} 8.9765796e+07
+node_disk_io_time_ms{device="sdb1"} 26512
+node_disk_io_time_ms{device="sdb2"} 311844
+node_disk_io_time_ms{device="sdb3"} 3.77922088e+09
+node_disk_io_time_ms{device="sdb4"} 11796
+node_disk_io_time_ms{device="sdc"} 115856
+node_disk_io_time_ms{device="sdc1"} 56568
+node_disk_io_time_ms{device="sdc2"} 5328
+node_disk_io_time_ms{device="sdc3"} 8792
+node_disk_io_time_ms{device="sdc4"} 2304
+# HELP node_disk_io_time_weighted The weighted # of milliseconds spent doing I/Os. See https://www.kernel.org/doc/Documentation/iostats.txt.
+# TYPE node_disk_io_time_weighted counter
+node_disk_io_time_weighted{device="loop0"} 0
+node_disk_io_time_weighted{device="loop1"} 0
+node_disk_io_time_weighted{device="loop2"} 0
+node_disk_io_time_weighted{device="loop3"} 0
+node_disk_io_time_weighted{device="loop4"} 0
+node_disk_io_time_weighted{device="loop5"} 0
+node_disk_io_time_weighted{device="loop6"} 0
+node_disk_io_time_weighted{device="loop7"} 0
+node_disk_io_time_weighted{device="md2"} 0
+node_disk_io_time_weighted{device="md3"} 0
+node_disk_io_time_weighted{device="sda"} 1.15387886e+09
+node_disk_io_time_weighted{device="sda1"} 60992
+node_disk_io_time_weighted{device="sda2"} 1.25946e+06
+node_disk_io_time_weighted{device="sda3"} 2.99892464e+08
+node_disk_io_time_weighted{device="sda4"} 12220
+node_disk_io_time_weighted{device="sdb"} 2.395738044e+09
+node_disk_io_time_weighted{device="sdb1"} 27632
+node_disk_io_time_weighted{device="sdb2"} 1.043276e+06
+node_disk_io_time_weighted{device="sdb3"} 1.53256032e+09
+node_disk_io_time_weighted{device="sdb4"} 11928
+node_disk_io_time_weighted{device="sdc"} 120384
+node_disk_io_time_weighted{device="sdc1"} 59616
+node_disk_io_time_weighted{device="sdc2"} 5420
+node_disk_io_time_weighted{device="sdc3"} 8928
+node_disk_io_time_weighted{device="sdc4"} 2452
+# HELP node_disk_read_time_ms The total number of milliseconds spent by all reads.
+# TYPE node_disk_read_time_ms counter
+node_disk_read_time_ms{device="loop0"} 0
+node_disk_read_time_ms{device="loop1"} 0
+node_disk_read_time_ms{device="loop2"} 0
+node_disk_read_time_ms{device="loop3"} 0
+node_disk_read_time_ms{device="loop4"} 0
+node_disk_read_time_ms{device="loop5"} 0
+node_disk_read_time_ms{device="loop6"} 0
+node_disk_read_time_ms{device="loop7"} 0
+node_disk_read_time_ms{device="md2"} 0
+node_disk_read_time_ms{device="md3"} 0
+node_disk_read_time_ms{device="sda"} 2.072332432e+09
+node_disk_read_time_ms{device="sda1"} 60296
+node_disk_read_time_ms{device="sda2"} 286136
+node_disk_read_time_ms{device="sda3"} 2.071946772e+09
+node_disk_read_time_ms{device="sda4"} 12220
+node_disk_read_time_ms{device="sdb"} 8.60474872e+08
+node_disk_read_time_ms{device="sdb1"} 27640
+node_disk_read_time_ms{device="sdb2"} 171820
+node_disk_read_time_ms{device="sdb3"} 8.60235728e+08
+node_disk_read_time_ms{device="sdb4"} 11928
+node_disk_read_time_ms{device="sdc"} 120396
+node_disk_read_time_ms{device="sdc1"} 59616
+node_disk_read_time_ms{device="sdc2"} 5420
+node_disk_read_time_ms{device="sdc3"} 8936
+node_disk_read_time_ms{device="sdc4"} 2452
+# HELP node_disk_reads_completed The total number of reads completed successfully.
+# TYPE node_disk_reads_completed counter
+node_disk_reads_completed{device="loop0"} 24
+node_disk_reads_completed{device="loop1"} 0
+node_disk_reads_completed{device="loop2"} 0
+node_disk_reads_completed{device="loop3"} 0
+node_disk_reads_completed{device="loop4"} 0
+node_disk_reads_completed{device="loop5"} 0
+node_disk_reads_completed{device="loop6"} 0
+node_disk_reads_completed{device="loop7"} 0
+node_disk_reads_completed{device="md2"} 12104
+node_disk_reads_completed{device="md3"} 2.854667071e+09
+node_disk_reads_completed{device="sda"} 1.646859128e+09
+node_disk_reads_completed{device="sda1"} 11772
+node_disk_reads_completed{device="sda2"} 82164
+node_disk_reads_completed{device="sda3"} 1.646746082e+09
+node_disk_reads_completed{device="sda4"} 5609
+node_disk_reads_completed{device="sdb"} 2.025437852e+09
+node_disk_reads_completed{device="sdb1"} 9456
+node_disk_reads_completed{device="sdb2"} 135186
+node_disk_reads_completed{device="sdb3"} 2.025272695e+09
+node_disk_reads_completed{device="sdb4"} 5948
+node_disk_reads_completed{device="sdc"} 18310
+node_disk_reads_completed{device="sdc1"} 3144
+node_disk_reads_completed{device="sdc2"} 3332
+node_disk_reads_completed{device="sdc3"} 6938
+node_disk_reads_completed{device="sdc4"} 1696
+# HELP node_disk_reads_merged The total number of reads merged. See https://www.kernel.org/doc/Documentation/iostats.txt.
+# TYPE node_disk_reads_merged counter
+node_disk_reads_merged{device="loop0"} 0
+node_disk_reads_merged{device="loop1"} 0
+node_disk_reads_merged{device="loop2"} 0
+node_disk_reads_merged{device="loop3"} 0
+node_disk_reads_merged{device="loop4"} 0
+node_disk_reads_merged{device="loop5"} 0
+node_disk_reads_merged{device="loop6"} 0
+node_disk_reads_merged{device="loop7"} 0
+node_disk_reads_merged{device="md2"} 0
+node_disk_reads_merged{device="md3"} 0
+node_disk_reads_merged{device="sda"} 1.471531686e+09
+node_disk_reads_merged{device="sda1"} 10122
+node_disk_reads_merged{device="sda2"} 216997
+node_disk_reads_merged{device="sda3"} 1.471304546e+09
+node_disk_reads_merged{device="sda4"} 0
+node_disk_reads_merged{device="sdb"} 9.85190946e+08
+node_disk_reads_merged{device="sdb1"} 11
+node_disk_reads_merged{device="sdb2"} 141991
+node_disk_reads_merged{device="sdb3"} 9.85048911e+08
+node_disk_reads_merged{device="sdb4"} 0
+node_disk_reads_merged{device="sdc"} 0
+node_disk_reads_merged{device="sdc1"} 0
+node_disk_reads_merged{device="sdc2"} 0
+node_disk_reads_merged{device="sdc3"} 0
+node_disk_reads_merged{device="sdc4"} 0
+# HELP node_disk_sectors_read The total number of sectors read successfully.
+# TYPE node_disk_sectors_read counter
+node_disk_sectors_read{device="loop0"} 84
+node_disk_sectors_read{device="loop1"} 0
+node_disk_sectors_read{device="loop2"} 0
+node_disk_sectors_read{device="loop3"} 0
+node_disk_sectors_read{device="loop4"} 0
+node_disk_sectors_read{device="loop5"} 0
+node_disk_sectors_read{device="loop6"} 0
+node_disk_sectors_read{device="loop7"} 0
+node_disk_sectors_read{device="md2"} 627372
+node_disk_sectors_read{device="md3"} 6.54760519594e+11
+node_disk_sectors_read{device="sda"} 4.98077695593e+11
+node_disk_sectors_read{device="sda1"} 438344
+node_disk_sectors_read{device="sda2"} 3.678023e+07
+node_disk_sectors_read{device="sda3"} 4.98039538451e+11
+node_disk_sectors_read{device="sda4"} 417864
+node_disk_sectors_read{device="sdb"} 4.84883369684e+11
+node_disk_sectors_read{device="sdb1"} 1.016888e+06
+node_disk_sectors_read{device="sdb2"} 3.5003844e+07
+node_disk_sectors_read{device="sdb3"} 4.84846345568e+11
+node_disk_sectors_read{device="sdb4"} 446792
+node_disk_sectors_read{device="sdc"} 1.750456e+06
+node_disk_sectors_read{device="sdc1"} 318112
+node_disk_sectors_read{device="sdc2"} 361504
+node_disk_sectors_read{device="sdc3"} 881872
+node_disk_sectors_read{device="sdc4"} 84192
+# HELP node_disk_sectors_written The total number of sectors written successfully.
+# TYPE node_disk_sectors_written counter
+node_disk_sectors_written{device="loop0"} 0
+node_disk_sectors_written{device="loop1"} 0
+node_disk_sectors_written{device="loop2"} 0
+node_disk_sectors_written{device="loop3"} 0
+node_disk_sectors_written{device="loop4"} 0
+node_disk_sectors_written{device="loop5"} 0
+node_disk_sectors_written{device="loop6"} 0
+node_disk_sectors_written{device="loop7"} 0
+node_disk_sectors_written{device="md2"} 1.0777836e+07
+node_disk_sectors_written{device="md3"} 2.355925806e+11
+node_disk_sectors_written{device="sda"} 2.36626898861e+11
+node_disk_sectors_written{device="sda1"} 51675
+node_disk_sectors_written{device="sda2"} 1.080145e+07
+node_disk_sectors_written{device="sda3"} 2.36616045736e+11
+node_disk_sectors_written{device="sda4"} 0
+node_disk_sectors_written{device="sdb"} 2.36630255058e+11
+node_disk_sectors_written{device="sdb1"} 0
+node_disk_sectors_written{device="sdb2"} 1.080145e+07
+node_disk_sectors_written{device="sdb3"} 2.36619453608e+11
+node_disk_sectors_written{device="sdb4"} 0
+node_disk_sectors_written{device="sdc"} 0
+node_disk_sectors_written{device="sdc1"} 0
+node_disk_sectors_written{device="sdc2"} 0
+node_disk_sectors_written{device="sdc3"} 0
+node_disk_sectors_written{device="sdc4"} 0
+# HELP node_disk_write_time_ms This is the total number of milliseconds spent by all writes.
+# TYPE node_disk_write_time_ms counter
+node_disk_write_time_ms{device="loop0"} 0
+node_disk_write_time_ms{device="loop1"} 0
+node_disk_write_time_ms{device="loop2"} 0
+node_disk_write_time_ms{device="loop3"} 0
+node_disk_write_time_ms{device="loop4"} 0
+node_disk_write_time_ms{device="loop5"} 0
+node_disk_write_time_ms{device="loop6"} 0
+node_disk_write_time_ms{device="loop7"} 0
+node_disk_write_time_ms{device="md2"} 0
+node_disk_write_time_ms{device="md3"} 0
+node_disk_write_time_ms{device="sda"} 3.304230196e+09
+node_disk_write_time_ms{device="sda1"} 700
+node_disk_write_time_ms{device="sda2"} 973436
+node_disk_write_time_ms{device="sda3"} 2.452031636e+09
+node_disk_write_time_ms{device="sda4"} 0
+node_disk_write_time_ms{device="sdb"} 1.470485128e+09
+node_disk_write_time_ms{device="sdb1"} 0
+node_disk_write_time_ms{device="sdb2"} 871484
+node_disk_write_time_ms{device="sdb3"} 6.0904796e+08
+node_disk_write_time_ms{device="sdb4"} 0
+node_disk_write_time_ms{device="sdc"} 0
+node_disk_write_time_ms{device="sdc1"} 0
+node_disk_write_time_ms{device="sdc2"} 0
+node_disk_write_time_ms{device="sdc3"} 0
+node_disk_write_time_ms{device="sdc4"} 0
+# HELP node_disk_writes_completed The total number of writes completed successfully.
+# TYPE node_disk_writes_completed counter
+node_disk_writes_completed{device="loop0"} 0
+node_disk_writes_completed{device="loop1"} 0
+node_disk_writes_completed{device="loop2"} 0
+node_disk_writes_completed{device="loop3"} 0
+node_disk_writes_completed{device="loop4"} 0
+node_disk_writes_completed{device="loop5"} 0
+node_disk_writes_completed{device="loop6"} 0
+node_disk_writes_completed{device="loop7"} 0
+node_disk_writes_completed{device="md2"} 29856
+node_disk_writes_completed{device="md3"} 9.095002425e+09
+node_disk_writes_completed{device="sda"} 2.641536233e+09
+node_disk_writes_completed{device="sda1"} 199
+node_disk_writes_completed{device="sda2"} 17552
+node_disk_writes_completed{device="sda3"} 2.618587152e+09
+node_disk_writes_completed{device="sda4"} 0
+node_disk_writes_completed{device="sdb"} 2.639585131e+09
+node_disk_writes_completed{device="sdb1"} 0
+node_disk_writes_completed{device="sdb2"} 17550
+node_disk_writes_completed{device="sdb3"} 2.616636279e+09
+node_disk_writes_completed{device="sdb4"} 0
+node_disk_writes_completed{device="sdc"} 0
+node_disk_writes_completed{device="sdc1"} 0
+node_disk_writes_completed{device="sdc2"} 0
+node_disk_writes_completed{device="sdc3"} 0
+node_disk_writes_completed{device="sdc4"} 0
+# HELP node_disk_writes_merged The number of writes merged. See https://www.kernel.org/doc/Documentation/iostats.txt.
+# TYPE node_disk_writes_merged counter
+node_disk_writes_merged{device="loop0"} 0
+node_disk_writes_merged{device="loop1"} 0
+node_disk_writes_merged{device="loop2"} 0
+node_disk_writes_merged{device="loop3"} 0
+node_disk_writes_merged{device="loop4"} 0
+node_disk_writes_merged{device="loop5"} 0
+node_disk_writes_merged{device="loop6"} 0
+node_disk_writes_merged{device="loop7"} 0
+node_disk_writes_merged{device="md2"} 0
+node_disk_writes_merged{device="md3"} 0
+node_disk_writes_merged{device="sda"} 6.575009658e+09
+node_disk_writes_merged{device="sda1"} 198
+node_disk_writes_merged{device="sda2"} 15200
+node_disk_writes_merged{device="sda3"} 6.57499426e+09
+node_disk_writes_merged{device="sda4"} 0
+node_disk_writes_merged{device="sdb"} 6.577159087e+09
+node_disk_writes_merged{device="sdb1"} 0
+node_disk_writes_merged{device="sdb2"} 15203
+node_disk_writes_merged{device="sdb3"} 6.577143884e+09
+node_disk_writes_merged{device="sdb4"} 0
+node_disk_writes_merged{device="sdc"} 0
+node_disk_writes_merged{device="sdc1"} 0
+node_disk_writes_merged{device="sdc2"} 0
+node_disk_writes_merged{device="sdc3"} 0
+node_disk_writes_merged{device="sdc4"} 0
+# HELP node_edac_correctable_errors_total Total correctable memory errors.
+# TYPE node_edac_correctable_errors_total counter
+node_edac_correctable_errors_total{controller="0"} 0
+# HELP node_edac_csrow_correctable_errors_total Total correctable memory errors for this csrow.
+# TYPE node_edac_csrow_correctable_errors_total counter
+node_edac_csrow_correctable_errors_total{controller="0",csrow="unknown"} 0
+# HELP node_edac_csrow_uncorrectable_errors_total Total uncorrectable memory errors for this csrow.
+# TYPE node_edac_csrow_uncorrectable_errors_total counter
+node_edac_csrow_uncorrectable_errors_total{controller="0",csrow="unknown"} 0
+# HELP node_edac_uncorrectable_errors_total Total uncorrectable memory errors.
+# TYPE node_edac_uncorrectable_errors_total counter
+node_edac_uncorrectable_errors_total{controller="0"} 0
+# HELP node_entropy_available_bits Bits of available entropy.
+# TYPE node_entropy_available_bits gauge
+node_entropy_available_bits 3788
+# HELP node_exporter_build_info A metric with a constant '1' value labeled by version, revision, branch, and goversion from which node_exporter was built.
+# TYPE node_exporter_build_info gauge
+node_exporter_build_info{branch="debian/sid",goversion="go1.9.2",revision="0.15.2+ds-1",version="0.15.2+ds"} 1
+# HELP node_filefd_allocated File descriptor statistics: allocated.
+# TYPE node_filefd_allocated gauge
+node_filefd_allocated 5792
+# HELP node_filefd_maximum File descriptor statistics: maximum.
+# TYPE node_filefd_maximum gauge
+node_filefd_maximum 6.534406e+06
+# HELP node_filesystem_avail Filesystem space available to non-root users in bytes.
+# TYPE node_filesystem_avail gauge
+node_filesystem_avail{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 2.49814016e+08
+node_filesystem_avail{device="/dev/md3",fstype="ext4",mountpoint="/"} 3.79401490432e+11
+node_filesystem_avail{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 5.27863808e+08
+node_filesystem_avail{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_device_error Whether an error occurred while getting statistics for the given device.
+# TYPE node_filesystem_device_error gauge
+node_filesystem_device_error{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 0
+node_filesystem_device_error{device="/dev/md3",fstype="ext4",mountpoint="/"} 0
+node_filesystem_device_error{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 0
+node_filesystem_device_error{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_files Filesystem total file nodes.
+# TYPE node_filesystem_files gauge
+node_filesystem_files{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 131072
+node_filesystem_files{device="/dev/md3",fstype="ext4",mountpoint="/"} 2.44097024e+08
+node_filesystem_files{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 0
+node_filesystem_files{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_files_free Filesystem total free file nodes.
+# TYPE node_filesystem_files_free gauge
+node_filesystem_files_free{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 130480
+node_filesystem_files_free{device="/dev/md3",fstype="ext4",mountpoint="/"} 2.40356181e+08
+node_filesystem_files_free{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 0
+node_filesystem_files_free{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_free Filesystem free space in bytes.
+# TYPE node_filesystem_free gauge
+node_filesystem_free{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 2.8079616e+08
+node_filesystem_free{device="/dev/md3",fstype="ext4",mountpoint="/"} 5.79376881664e+11
+node_filesystem_free{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 5.27863808e+08
+node_filesystem_free{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_readonly Filesystem read-only status.
+# TYPE node_filesystem_readonly gauge
+node_filesystem_readonly{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 0
+node_filesystem_readonly{device="/dev/md3",fstype="ext4",mountpoint="/"} 0
+node_filesystem_readonly{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 0
+node_filesystem_readonly{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_filesystem_size Filesystem size in bytes.
+# TYPE node_filesystem_size gauge
+node_filesystem_size{device="/dev/md2",fstype="ext4",mountpoint="/boot"} 5.10431232e+08
+node_filesystem_size{device="/dev/md3",fstype="ext4",mountpoint="/"} 3.936284090368e+12
+node_filesystem_size{device="/dev/sda1",fstype="vfat",mountpoint="/boot/efi"} 5.34761472e+08
+node_filesystem_size{device="lxcfs",fstype="fuse.lxcfs",mountpoint="/var/lib/lxcfs"} 0
+# HELP node_forks Total number of forks.
+# TYPE node_forks counter
+node_forks 2.7428401e+07
+# HELP node_hwmon_chip_names Annotation metric for human-readable chip names
+# TYPE node_hwmon_chip_names gauge
+node_hwmon_chip_names{chip="acpitz",chip_name="acpitz"} 1
+node_hwmon_chip_names{chip="pch_skylake",chip_name="pch_skylake"} 1
+node_hwmon_chip_names{chip="platform_coretemp_0",chip_name="coretemp"} 1
+# HELP node_hwmon_power_average_interval_max_seconds Hardware monitor power usage update interval (average_interval_max)
+# TYPE node_hwmon_power_average_interval_max_seconds gauge
+node_hwmon_power_average_interval_max_seconds{chip="lnxsybus:00_acpi000d:00",sensor="power1"} 3600
+# HELP node_hwmon_power_average_interval_min_seconds Hardware monitor power usage update interval (average_interval_min)
+# TYPE node_hwmon_power_average_interval_min_seconds gauge
+node_hwmon_power_average_interval_min_seconds{chip="lnxsybus:00_acpi000d:00",sensor="power1"} 1
+# HELP node_hwmon_power_average_interval_seconds Hardware monitor power usage update interval (average_interval)
+# TYPE node_hwmon_power_average_interval_seconds gauge
+node_hwmon_power_average_interval_seconds{chip="lnxsybus:00_acpi000d:00",sensor="power1"} 1
+# HELP node_hwmon_power_average_watt Hardware monitor for power usage in watts (average)
+# TYPE node_hwmon_power_average_watt gauge
+node_hwmon_power_average_watt{chip="lnxsybus:00_acpi000d:00",sensor="power1"} 4.294967295e+06
+# HELP node_hwmon_power_is_battery_watt Hardware monitor for power usage in watts (is_battery)
+# TYPE node_hwmon_power_is_battery_watt gauge
+node_hwmon_power_is_battery_watt{chip="lnxsybus:00_acpi000d:00",sensor="power1"} 0
+# HELP node_hwmon_sensor_label Label for given chip and sensor
+# TYPE node_hwmon_sensor_label gauge
+node_hwmon_sensor_label{chip="platform_coretemp_0",label="core_0",sensor="temp2"} 1
+node_hwmon_sensor_label{chip="platform_coretemp_0",label="core_1",sensor="temp3"} 1
+node_hwmon_sensor_label{chip="platform_coretemp_0",label="core_2",sensor="temp4"} 1
+node_hwmon_sensor_label{chip="platform_coretemp_0",label="core_3",sensor="temp5"} 1
+node_hwmon_sensor_label{chip="platform_coretemp_0",label="package_id_0",sensor="temp1"} 1
+# HELP node_hwmon_temp_celsius Hardware monitor for temperature (input)
+# TYPE node_hwmon_temp_celsius gauge
+node_hwmon_temp_celsius{chip="acpitz",sensor="temp1"} 27.8
+node_hwmon_temp_celsius{chip="acpitz",sensor="temp2"} 29.8
+node_hwmon_temp_celsius{chip="pch_skylake",sensor="temp1"} 37
+node_hwmon_temp_celsius{chip="platform_coretemp_0",sensor="temp1"} 32
+node_hwmon_temp_celsius{chip="platform_coretemp_0",sensor="temp2"} 32
+node_hwmon_temp_celsius{chip="platform_coretemp_0",sensor="temp3"} 31
+node_hwmon_temp_celsius{chip="platform_coretemp_0",sensor="temp4"} 32
+node_hwmon_temp_celsius{chip="platform_coretemp_0",sensor="temp5"} 31
+# HELP node_hwmon_temp_crit_alarm_celsius Hardware monitor for temperature (crit_alarm)
+# TYPE node_hwmon_temp_crit_alarm_celsius gauge
+node_hwmon_temp_crit_alarm_celsius{chip="platform_coretemp_0",sensor="temp1"} 0
+node_hwmon_temp_crit_alarm_celsius{chip="platform_coretemp_0",sensor="temp2"} 0
+node_hwmon_temp_crit_alarm_celsius{chip="platform_coretemp_0",sensor="temp3"} 0
+node_hwmon_temp_crit_alarm_celsius{chip="platform_coretemp_0",sensor="temp4"} 0
+node_hwmon_temp_crit_alarm_celsius{chip="platform_coretemp_0",sensor="temp5"} 0
+# HELP node_hwmon_temp_crit_celsius Hardware monitor for temperature (crit)
+# TYPE node_hwmon_temp_crit_celsius gauge
+node_hwmon_temp_crit_celsius{chip="acpitz",sensor="temp1"} 119
+node_hwmon_temp_crit_celsius{chip="acpitz",sensor="temp2"} 119
+node_hwmon_temp_crit_celsius{chip="platform_coretemp_0",sensor="temp1"} 100
+node_hwmon_temp_crit_celsius{chip="platform_coretemp_0",sensor="temp2"} 100
+node_hwmon_temp_crit_celsius{chip="platform_coretemp_0",sensor="temp3"} 100
+node_hwmon_temp_crit_celsius{chip="platform_coretemp_0",sensor="temp4"} 100
+node_hwmon_temp_crit_celsius{chip="platform_coretemp_0",sensor="temp5"} 100
+# HELP node_hwmon_temp_max_celsius Hardware monitor for temperature (max)
+# TYPE node_hwmon_temp_max_celsius gauge
+node_hwmon_temp_max_celsius{chip="platform_coretemp_0",sensor="temp1"} 80
+node_hwmon_temp_max_celsius{chip="platform_coretemp_0",sensor="temp2"} 80
+node_hwmon_temp_max_celsius{chip="platform_coretemp_0",sensor="temp3"} 80
+node_hwmon_temp_max_celsius{chip="platform_coretemp_0",sensor="temp4"} 80
+node_hwmon_temp_max_celsius{chip="platform_coretemp_0",sensor="temp5"} 80
+# HELP node_intr Total number of interrupts serviced.
+# TYPE node_intr counter
+node_intr 5.6820143555e+10
+# HELP node_load1 1m load average.
+# TYPE node_load1 gauge
+node_load1 0.63
+# HELP node_load15 15m load average.
+# TYPE node_load15 gauge
+node_load15 1.36
+# HELP node_load5 5m load average.
+# TYPE node_load5 gauge
+node_load5 1.07
+# HELP node_md_blocks Total number of blocks on device.
+# TYPE node_md_blocks gauge
+node_md_blocks{device="md2"} 523200
+node_md_blocks{device="md3"} 3.905441728e+09
+# HELP node_md_blocks_synced Number of blocks synced on device.
+# TYPE node_md_blocks_synced gauge
+node_md_blocks_synced{device="md2"} 523200
+node_md_blocks_synced{device="md3"} 3.905441728e+09
+# HELP node_md_disks Total number of disks of device.
+# TYPE node_md_disks gauge
+node_md_disks{device="md2"} 3
+node_md_disks{device="md3"} 3
+# HELP node_md_disks_active Number of active disks of device.
+# TYPE node_md_disks_active gauge
+node_md_disks_active{device="md2"} 2
+node_md_disks_active{device="md3"} 2
+# HELP node_md_is_active Indicator whether the md-device is active or not.
+# TYPE node_md_is_active gauge
+node_md_is_active{device="md2"} 1
+node_md_is_active{device="md3"} 1
+# HELP node_memory_Active Memory information field Active.
+# TYPE node_memory_Active gauge
+node_memory_Active 4.0201142272e+10
+# HELP node_memory_Active_anon Memory information field Active_anon.
+# TYPE node_memory_Active_anon gauge
+node_memory_Active_anon 1.3924950016e+10
+# HELP node_memory_Active_file Memory information field Active_file.
+# TYPE node_memory_Active_file gauge
+node_memory_Active_file 2.6276192256e+10
+# HELP node_memory_AnonHugePages Memory information field AnonHugePages.
+# TYPE node_memory_AnonHugePages gauge
+node_memory_AnonHugePages 2.13909504e+08
+# HELP node_memory_AnonPages Memory information field AnonPages.
+# TYPE node_memory_AnonPages gauge
+node_memory_AnonPages 1.4016933888e+10
+# HELP node_memory_Bounce Memory information field Bounce.
+# TYPE node_memory_Bounce gauge
+node_memory_Bounce 0
+# HELP node_memory_Buffers Memory information field Buffers.
+# TYPE node_memory_Buffers gauge
+node_memory_Buffers 4.343914496e+09
+# HELP node_memory_Cached Memory information field Cached.
+# TYPE node_memory_Cached gauge
+node_memory_Cached 4.0025870336e+10
+# HELP node_memory_CmaFree Memory information field CmaFree.
+# TYPE node_memory_CmaFree gauge
+node_memory_CmaFree 0
+# HELP node_memory_CmaTotal Memory information field CmaTotal.
+# TYPE node_memory_CmaTotal gauge
+node_memory_CmaTotal 0
+# HELP node_memory_CommitLimit Memory information field CommitLimit.
+# TYPE node_memory_CommitLimit gauge
+node_memory_CommitLimit 3.3612230656e+10
+# HELP node_memory_Committed_AS Memory information field Committed_AS.
+# TYPE node_memory_Committed_AS gauge
+node_memory_Committed_AS 2.0155940864e+10
+# HELP node_memory_DirectMap1G Memory information field DirectMap1G.
+# TYPE node_memory_DirectMap1G gauge
+node_memory_DirectMap1G 0
+# HELP node_memory_DirectMap2M Memory information field DirectMap2M.
+# TYPE node_memory_DirectMap2M gauge
+node_memory_DirectMap2M 4.97549312e+10
+# HELP node_memory_DirectMap4k Memory information field DirectMap4k.
+# TYPE node_memory_DirectMap4k gauge
+node_memory_DirectMap4k 1.863133184e+10
+# HELP node_memory_Dirty Memory information field Dirty.
+# TYPE node_memory_Dirty gauge
+node_memory_Dirty 1.3406208e+07
+# HELP node_memory_HardwareCorrupted Memory information field HardwareCorrupted.
+# TYPE node_memory_HardwareCorrupted gauge
+node_memory_HardwareCorrupted 0
+# HELP node_memory_HugePages_Free Memory information field HugePages_Free.
+# TYPE node_memory_HugePages_Free gauge
+node_memory_HugePages_Free 0
+# HELP node_memory_HugePages_Rsvd Memory information field HugePages_Rsvd.
+# TYPE node_memory_HugePages_Rsvd gauge
+node_memory_HugePages_Rsvd 0
+# HELP node_memory_HugePages_Surp Memory information field HugePages_Surp.
+# TYPE node_memory_HugePages_Surp gauge
+node_memory_HugePages_Surp 0
+# HELP node_memory_HugePages_Total Memory information field HugePages_Total.
+# TYPE node_memory_HugePages_Total gauge
+node_memory_HugePages_Total 0
+# HELP node_memory_Hugepagesize Memory information field Hugepagesize.
+# TYPE node_memory_Hugepagesize gauge
+node_memory_Hugepagesize 2.097152e+06
+# HELP node_memory_Inactive Memory information field Inactive.
+# TYPE node_memory_Inactive gauge
+node_memory_Inactive 1.7875898368e+10
+# HELP node_memory_Inactive_anon Memory information field Inactive_anon.
+# TYPE node_memory_Inactive_anon gauge
+node_memory_Inactive_anon 376832
+# HELP node_memory_Inactive_file Memory information field Inactive_file.
+# TYPE node_memory_Inactive_file gauge
+node_memory_Inactive_file 1.7875521536e+10
+# HELP node_memory_KernelStack Memory information field KernelStack.
+# TYPE node_memory_KernelStack gauge
+node_memory_KernelStack 1.7645568e+07
+# HELP node_memory_Mapped Memory information field Mapped.
+# TYPE node_memory_Mapped gauge
+node_memory_Mapped 5.99207936e+08
+# HELP node_memory_MemAvailable Memory information field MemAvailable.
+# TYPE node_memory_MemAvailable gauge
+node_memory_MemAvailable 5.1721560064e+10
+# HELP node_memory_MemFree Memory information field MemFree.
+# TYPE node_memory_MemFree gauge
+node_memory_MemFree 2.70262272e+09
+# HELP node_memory_MemTotal Memory information field MemTotal.
+# TYPE node_memory_MemTotal gauge
+node_memory_MemTotal 6.7224465408e+10
+# HELP node_memory_Mlocked Memory information field Mlocked.
+# TYPE node_memory_Mlocked gauge
+node_memory_Mlocked 3.15273216e+08
+# HELP node_memory_NFS_Unstable Memory information field NFS_Unstable.
+# TYPE node_memory_NFS_Unstable gauge
+node_memory_NFS_Unstable 0
+# HELP node_memory_PageTables Memory information field PageTables.
+# TYPE node_memory_PageTables gauge
+node_memory_PageTables 9.6403456e+07
+# HELP node_memory_SReclaimable Memory information field SReclaimable.
+# TYPE node_memory_SReclaimable gauge
+node_memory_SReclaimable 5.60887808e+09
+# HELP node_memory_SUnreclaim Memory information field SUnreclaim.
+# TYPE node_memory_SUnreclaim gauge
+node_memory_SUnreclaim 1.78991104e+08
+# HELP node_memory_Shmem Memory information field Shmem.
+# TYPE node_memory_Shmem gauge
+node_memory_Shmem 1.777664e+06
+# HELP node_memory_ShmemHugePages Memory information field ShmemHugePages.
+# TYPE node_memory_ShmemHugePages gauge
+node_memory_ShmemHugePages 0
+# HELP node_memory_ShmemPmdMapped Memory information field ShmemPmdMapped.
+# TYPE node_memory_ShmemPmdMapped gauge
+node_memory_ShmemPmdMapped 0
+# HELP node_memory_Slab Memory information field Slab.
+# TYPE node_memory_Slab gauge
+node_memory_Slab 5.787869184e+09
+# HELP node_memory_SwapCached Memory information field SwapCached.
+# TYPE node_memory_SwapCached gauge
+node_memory_SwapCached 0
+# HELP node_memory_SwapFree Memory information field SwapFree.
+# TYPE node_memory_SwapFree gauge
+node_memory_SwapFree 0
+# HELP node_memory_SwapTotal Memory information field SwapTotal.
+# TYPE node_memory_SwapTotal gauge
+node_memory_SwapTotal 0
+# HELP node_memory_Unevictable Memory information field Unevictable.
+# TYPE node_memory_Unevictable gauge
+node_memory_Unevictable 3.15244544e+08
+# HELP node_memory_VmallocChunk Memory information field VmallocChunk.
+# TYPE node_memory_VmallocChunk gauge
+node_memory_VmallocChunk 0
+# HELP node_memory_VmallocTotal Memory information field VmallocTotal.
+# TYPE node_memory_VmallocTotal gauge
+node_memory_VmallocTotal 3.5184372087808e+13
+# HELP node_memory_VmallocUsed Memory information field VmallocUsed.
+# TYPE node_memory_VmallocUsed gauge
+node_memory_VmallocUsed 0
+# HELP node_memory_Writeback Memory information field Writeback.
+# TYPE node_memory_Writeback gauge
+node_memory_Writeback 0
+# HELP node_memory_WritebackTmp Memory information field WritebackTmp.
+# TYPE node_memory_WritebackTmp gauge
+node_memory_WritebackTmp 0
+# HELP node_netstat_Icmp6_InCsumErrors Statistic Icmp6InCsumErrors.
+# TYPE node_netstat_Icmp6_InCsumErrors untyped
+node_netstat_Icmp6_InCsumErrors 0
+# HELP node_netstat_Icmp6_InDestUnreachs Statistic Icmp6InDestUnreachs.
+# TYPE node_netstat_Icmp6_InDestUnreachs untyped
+node_netstat_Icmp6_InDestUnreachs 377666
+# HELP node_netstat_Icmp6_InEchoReplies Statistic Icmp6InEchoReplies.
+# TYPE node_netstat_Icmp6_InEchoReplies untyped
+node_netstat_Icmp6_InEchoReplies 0
+# HELP node_netstat_Icmp6_InEchos Statistic Icmp6InEchos.
+# TYPE node_netstat_Icmp6_InEchos untyped
+node_netstat_Icmp6_InEchos 2489
+# HELP node_netstat_Icmp6_InErrors Statistic Icmp6InErrors.
+# TYPE node_netstat_Icmp6_InErrors untyped
+node_netstat_Icmp6_InErrors 1223
+# HELP node_netstat_Icmp6_InGroupMembQueries Statistic Icmp6InGroupMembQueries.
+# TYPE node_netstat_Icmp6_InGroupMembQueries untyped
+node_netstat_Icmp6_InGroupMembQueries 0
+# HELP node_netstat_Icmp6_InGroupMembReductions Statistic Icmp6InGroupMembReductions.
+# TYPE node_netstat_Icmp6_InGroupMembReductions untyped
+node_netstat_Icmp6_InGroupMembReductions 0
+# HELP node_netstat_Icmp6_InGroupMembResponses Statistic Icmp6InGroupMembResponses.
+# TYPE node_netstat_Icmp6_InGroupMembResponses untyped
+node_netstat_Icmp6_InGroupMembResponses 0
+# HELP node_netstat_Icmp6_InMLDv2Reports Statistic Icmp6InMLDv2Reports.
+# TYPE node_netstat_Icmp6_InMLDv2Reports untyped
+node_netstat_Icmp6_InMLDv2Reports 0
+# HELP node_netstat_Icmp6_InMsgs Statistic Icmp6InMsgs.
+# TYPE node_netstat_Icmp6_InMsgs untyped
+node_netstat_Icmp6_InMsgs 1.070047e+06
+# HELP node_netstat_Icmp6_InNeighborAdvertisements Statistic Icmp6InNeighborAdvertisements.
+# TYPE node_netstat_Icmp6_InNeighborAdvertisements untyped
+node_netstat_Icmp6_InNeighborAdvertisements 459472
+# HELP node_netstat_Icmp6_InNeighborSolicits Statistic Icmp6InNeighborSolicits.
+# TYPE node_netstat_Icmp6_InNeighborSolicits untyped
+node_netstat_Icmp6_InNeighborSolicits 218737
+# HELP node_netstat_Icmp6_InParmProblems Statistic Icmp6InParmProblems.
+# TYPE node_netstat_Icmp6_InParmProblems untyped
+node_netstat_Icmp6_InParmProblems 0
+# HELP node_netstat_Icmp6_InPktTooBigs Statistic Icmp6InPktTooBigs.
+# TYPE node_netstat_Icmp6_InPktTooBigs untyped
+node_netstat_Icmp6_InPktTooBigs 0
+# HELP node_netstat_Icmp6_InRedirects Statistic Icmp6InRedirects.
+# TYPE node_netstat_Icmp6_InRedirects untyped
+node_netstat_Icmp6_InRedirects 0
+# HELP node_netstat_Icmp6_InRouterAdvertisements Statistic Icmp6InRouterAdvertisements.
+# TYPE node_netstat_Icmp6_InRouterAdvertisements untyped
+node_netstat_Icmp6_InRouterAdvertisements 0
+# HELP node_netstat_Icmp6_InRouterSolicits Statistic Icmp6InRouterSolicits.
+# TYPE node_netstat_Icmp6_InRouterSolicits untyped
+node_netstat_Icmp6_InRouterSolicits 0
+# HELP node_netstat_Icmp6_InTimeExcds Statistic Icmp6InTimeExcds.
+# TYPE node_netstat_Icmp6_InTimeExcds untyped
+node_netstat_Icmp6_InTimeExcds 11683
+# HELP node_netstat_Icmp6_InType1 Statistic Icmp6InType1.
+# TYPE node_netstat_Icmp6_InType1 untyped
+node_netstat_Icmp6_InType1 377666
+# HELP node_netstat_Icmp6_InType128 Statistic Icmp6InType128.
+# TYPE node_netstat_Icmp6_InType128 untyped
+node_netstat_Icmp6_InType128 2489
+# HELP node_netstat_Icmp6_InType135 Statistic Icmp6InType135.
+# TYPE node_netstat_Icmp6_InType135 untyped
+node_netstat_Icmp6_InType135 218737
+# HELP node_netstat_Icmp6_InType136 Statistic Icmp6InType136.
+# TYPE node_netstat_Icmp6_InType136 untyped
+node_netstat_Icmp6_InType136 459472
+# HELP node_netstat_Icmp6_InType3 Statistic Icmp6InType3.
+# TYPE node_netstat_Icmp6_InType3 untyped
+node_netstat_Icmp6_InType3 11683
+# HELP node_netstat_Icmp6_OutDestUnreachs Statistic Icmp6OutDestUnreachs.
+# TYPE node_netstat_Icmp6_OutDestUnreachs untyped
+node_netstat_Icmp6_OutDestUnreachs 372327
+# HELP node_netstat_Icmp6_OutEchoReplies Statistic Icmp6OutEchoReplies.
+# TYPE node_netstat_Icmp6_OutEchoReplies untyped
+node_netstat_Icmp6_OutEchoReplies 2489
+# HELP node_netstat_Icmp6_OutEchos Statistic Icmp6OutEchos.
+# TYPE node_netstat_Icmp6_OutEchos untyped
+node_netstat_Icmp6_OutEchos 0
+# HELP node_netstat_Icmp6_OutErrors Statistic Icmp6OutErrors.
+# TYPE node_netstat_Icmp6_OutErrors untyped
+node_netstat_Icmp6_OutErrors 0
+# HELP node_netstat_Icmp6_OutGroupMembQueries Statistic Icmp6OutGroupMembQueries.
+# TYPE node_netstat_Icmp6_OutGroupMembQueries untyped
+node_netstat_Icmp6_OutGroupMembQueries 0
+# HELP node_netstat_Icmp6_OutGroupMembReductions Statistic Icmp6OutGroupMembReductions.
+# TYPE node_netstat_Icmp6_OutGroupMembReductions untyped
+node_netstat_Icmp6_OutGroupMembReductions 0
+# HELP node_netstat_Icmp6_OutGroupMembResponses Statistic Icmp6OutGroupMembResponses.
+# TYPE node_netstat_Icmp6_OutGroupMembResponses untyped
+node_netstat_Icmp6_OutGroupMembResponses 0
+# HELP node_netstat_Icmp6_OutMLDv2Reports Statistic Icmp6OutMLDv2Reports.
+# TYPE node_netstat_Icmp6_OutMLDv2Reports untyped
+node_netstat_Icmp6_OutMLDv2Reports 13
+# HELP node_netstat_Icmp6_OutMsgs Statistic Icmp6OutMsgs.
+# TYPE node_netstat_Icmp6_OutMsgs untyped
+node_netstat_Icmp6_OutMsgs 1.003058e+06
+# HELP node_netstat_Icmp6_OutNeighborAdvertisements Statistic Icmp6OutNeighborAdvertisements.
+# TYPE node_netstat_Icmp6_OutNeighborAdvertisements untyped
+node_netstat_Icmp6_OutNeighborAdvertisements 186774
+# HELP node_netstat_Icmp6_OutNeighborSolicits Statistic Icmp6OutNeighborSolicits.
+# TYPE node_netstat_Icmp6_OutNeighborSolicits untyped
+node_netstat_Icmp6_OutNeighborSolicits 441330
+# HELP node_netstat_Icmp6_OutParmProblems Statistic Icmp6OutParmProblems.
+# TYPE node_netstat_Icmp6_OutParmProblems untyped
+node_netstat_Icmp6_OutParmProblems 0
+# HELP node_netstat_Icmp6_OutPktTooBigs Statistic Icmp6OutPktTooBigs.
+# TYPE node_netstat_Icmp6_OutPktTooBigs untyped
+node_netstat_Icmp6_OutPktTooBigs 0
+# HELP node_netstat_Icmp6_OutRedirects Statistic Icmp6OutRedirects.
+# TYPE node_netstat_Icmp6_OutRedirects untyped
+node_netstat_Icmp6_OutRedirects 0
+# HELP node_netstat_Icmp6_OutRouterAdvertisements Statistic Icmp6OutRouterAdvertisements.
+# TYPE node_netstat_Icmp6_OutRouterAdvertisements untyped
+node_netstat_Icmp6_OutRouterAdvertisements 0
+# HELP node_netstat_Icmp6_OutRouterSolicits Statistic Icmp6OutRouterSolicits.
+# TYPE node_netstat_Icmp6_OutRouterSolicits untyped
+node_netstat_Icmp6_OutRouterSolicits 0
+# HELP node_netstat_Icmp6_OutTimeExcds Statistic Icmp6OutTimeExcds.
+# TYPE node_netstat_Icmp6_OutTimeExcds untyped
+node_netstat_Icmp6_OutTimeExcds 125
+# HELP node_netstat_Icmp6_OutType1 Statistic Icmp6OutType1.
+# TYPE node_netstat_Icmp6_OutType1 untyped
+node_netstat_Icmp6_OutType1 372327
+# HELP node_netstat_Icmp6_OutType129 Statistic Icmp6OutType129.
+# TYPE node_netstat_Icmp6_OutType129 untyped
+node_netstat_Icmp6_OutType129 2489
+# HELP node_netstat_Icmp6_OutType135 Statistic Icmp6OutType135.
+# TYPE node_netstat_Icmp6_OutType135 untyped
+node_netstat_Icmp6_OutType135 441330
+# HELP node_netstat_Icmp6_OutType136 Statistic Icmp6OutType136.
+# TYPE node_netstat_Icmp6_OutType136 untyped
+node_netstat_Icmp6_OutType136 186774
+# HELP node_netstat_Icmp6_OutType143 Statistic Icmp6OutType143.
+# TYPE node_netstat_Icmp6_OutType143 untyped
+node_netstat_Icmp6_OutType143 13
+# HELP node_netstat_Icmp6_OutType3 Statistic Icmp6OutType3.
+# TYPE node_netstat_Icmp6_OutType3 untyped
+node_netstat_Icmp6_OutType3 125
+# HELP node_netstat_IcmpMsg_OutType14 Statistic IcmpMsgOutType14.
+# TYPE node_netstat_IcmpMsg_OutType14 untyped
+node_netstat_IcmpMsg_OutType14 32
+# HELP node_netstat_Icmp_InAddrMaskReps Statistic IcmpInAddrMaskReps.
+# TYPE node_netstat_Icmp_InAddrMaskReps untyped
+node_netstat_Icmp_InAddrMaskReps 0
+# HELP node_netstat_Icmp_InAddrMasks Statistic IcmpInAddrMasks.
+# TYPE node_netstat_Icmp_InAddrMasks untyped
+node_netstat_Icmp_InAddrMasks 8
+# HELP node_netstat_Icmp_InCsumErrors Statistic IcmpInCsumErrors.
+# TYPE node_netstat_Icmp_InCsumErrors untyped
+node_netstat_Icmp_InCsumErrors 119
+# HELP node_netstat_Icmp_InDestUnreachs Statistic IcmpInDestUnreachs.
+# TYPE node_netstat_Icmp_InDestUnreachs untyped
+node_netstat_Icmp_InDestUnreachs 132055
+# HELP node_netstat_Icmp_InEchoReps Statistic IcmpInEchoReps.
+# TYPE node_netstat_Icmp_InEchoReps untyped
+node_netstat_Icmp_InEchoReps 459
+# HELP node_netstat_Icmp_InEchos Statistic IcmpInEchos.
+# TYPE node_netstat_Icmp_InEchos untyped
+node_netstat_Icmp_InEchos 2.4009577e+07
+# HELP node_netstat_Icmp_InErrors Statistic IcmpInErrors.
+# TYPE node_netstat_Icmp_InErrors untyped
+node_netstat_Icmp_InErrors 33010
+# HELP node_netstat_Icmp_InMsgs Statistic IcmpInMsgs.
+# TYPE node_netstat_Icmp_InMsgs untyped
+node_netstat_Icmp_InMsgs 2.4154643e+07
+# HELP node_netstat_Icmp_InParmProbs Statistic IcmpInParmProbs.
+# TYPE node_netstat_Icmp_InParmProbs untyped
+node_netstat_Icmp_InParmProbs 0
+# HELP node_netstat_Icmp_InRedirects Statistic IcmpInRedirects.
+# TYPE node_netstat_Icmp_InRedirects untyped
+node_netstat_Icmp_InRedirects 5543
+# HELP node_netstat_Icmp_InSrcQuenchs Statistic IcmpInSrcQuenchs.
+# TYPE node_netstat_Icmp_InSrcQuenchs untyped
+node_netstat_Icmp_InSrcQuenchs 2
+# HELP node_netstat_Icmp_InTimeExcds Statistic IcmpInTimeExcds.
+# TYPE node_netstat_Icmp_InTimeExcds untyped
+node_netstat_Icmp_InTimeExcds 6805
+# HELP node_netstat_Icmp_InTimestampReps Statistic IcmpInTimestampReps.
+# TYPE node_netstat_Icmp_InTimestampReps untyped
+node_netstat_Icmp_InTimestampReps 23
+# HELP node_netstat_Icmp_InTimestamps Statistic IcmpInTimestamps.
+# TYPE node_netstat_Icmp_InTimestamps untyped
+node_netstat_Icmp_InTimestamps 32
+# HELP node_netstat_Icmp_OutAddrMaskReps Statistic IcmpOutAddrMaskReps.
+# TYPE node_netstat_Icmp_OutAddrMaskReps untyped
+node_netstat_Icmp_OutAddrMaskReps 0
+# HELP node_netstat_Icmp_OutAddrMasks Statistic IcmpOutAddrMasks.
+# TYPE node_netstat_Icmp_OutAddrMasks untyped
+node_netstat_Icmp_OutAddrMasks 0
+# HELP node_netstat_Icmp_OutDestUnreachs Statistic IcmpOutDestUnreachs.
+# TYPE node_netstat_Icmp_OutDestUnreachs untyped
+node_netstat_Icmp_OutDestUnreachs 265210
+# HELP node_netstat_Icmp_OutEchoReps Statistic IcmpOutEchoReps.
+# TYPE node_netstat_Icmp_OutEchoReps untyped
+node_netstat_Icmp_OutEchoReps 2.4009577e+07
+# HELP node_netstat_Icmp_OutEchos Statistic IcmpOutEchos.
+# TYPE node_netstat_Icmp_OutEchos untyped
+node_netstat_Icmp_OutEchos 15
+# HELP node_netstat_Icmp_OutErrors Statistic IcmpOutErrors.
+# TYPE node_netstat_Icmp_OutErrors untyped
+node_netstat_Icmp_OutErrors 0
+# HELP node_netstat_Icmp_OutMsgs Statistic IcmpOutMsgs.
+# TYPE node_netstat_Icmp_OutMsgs untyped
+node_netstat_Icmp_OutMsgs 2.71142e+07
+# HELP node_netstat_Icmp_OutParmProbs Statistic IcmpOutParmProbs.
+# TYPE node_netstat_Icmp_OutParmProbs untyped
+node_netstat_Icmp_OutParmProbs 0
+# HELP node_netstat_Icmp_OutRedirects Statistic IcmpOutRedirects.
+# TYPE node_netstat_Icmp_OutRedirects untyped
+node_netstat_Icmp_OutRedirects 0
+# HELP node_netstat_Icmp_OutSrcQuenchs Statistic IcmpOutSrcQuenchs.
+# TYPE node_netstat_Icmp_OutSrcQuenchs untyped
+node_netstat_Icmp_OutSrcQuenchs 0
+# HELP node_netstat_Icmp_OutTimeExcds Statistic IcmpOutTimeExcds.
+# TYPE node_netstat_Icmp_OutTimeExcds untyped
+node_netstat_Icmp_OutTimeExcds 2.839366e+06
+# HELP node_netstat_Icmp_OutTimestampReps Statistic IcmpOutTimestampReps.
+# TYPE node_netstat_Icmp_OutTimestampReps untyped
+node_netstat_Icmp_OutTimestampReps 32
+# HELP node_netstat_Icmp_OutTimestamps Statistic IcmpOutTimestamps.
+# TYPE node_netstat_Icmp_OutTimestamps untyped
+node_netstat_Icmp_OutTimestamps 0
+# HELP node_netstat_Ip6_FragCreates Statistic Ip6FragCreates.
+# TYPE node_netstat_Ip6_FragCreates untyped
+node_netstat_Ip6_FragCreates 0
+# HELP node_netstat_Ip6_FragFails Statistic Ip6FragFails.
+# TYPE node_netstat_Ip6_FragFails untyped
+node_netstat_Ip6_FragFails 0
+# HELP node_netstat_Ip6_FragOKs Statistic Ip6FragOKs.
+# TYPE node_netstat_Ip6_FragOKs untyped
+node_netstat_Ip6_FragOKs 0
+# HELP node_netstat_Ip6_InAddrErrors Statistic Ip6InAddrErrors.
+# TYPE node_netstat_Ip6_InAddrErrors untyped
+node_netstat_Ip6_InAddrErrors 14341
+# HELP node_netstat_Ip6_InBcastOctets Statistic Ip6InBcastOctets.
+# TYPE node_netstat_Ip6_InBcastOctets untyped
+node_netstat_Ip6_InBcastOctets 0
+# HELP node_netstat_Ip6_InCEPkts Statistic Ip6InCEPkts.
+# TYPE node_netstat_Ip6_InCEPkts untyped
+node_netstat_Ip6_InCEPkts 9510
+# HELP node_netstat_Ip6_InDelivers Statistic Ip6InDelivers.
+# TYPE node_netstat_Ip6_InDelivers untyped
+node_netstat_Ip6_InDelivers 2.83051774e+08
+# HELP node_netstat_Ip6_InDiscards Statistic Ip6InDiscards.
+# TYPE node_netstat_Ip6_InDiscards untyped
+node_netstat_Ip6_InDiscards 5815
+# HELP node_netstat_Ip6_InECT0Pkts Statistic Ip6InECT0Pkts.
+# TYPE node_netstat_Ip6_InECT0Pkts untyped
+node_netstat_Ip6_InECT0Pkts 14156
+# HELP node_netstat_Ip6_InECT1Pkts Statistic Ip6InECT1Pkts.
+# TYPE node_netstat_Ip6_InECT1Pkts untyped
+node_netstat_Ip6_InECT1Pkts 11101
+# HELP node_netstat_Ip6_InHdrErrors Statistic Ip6InHdrErrors.
+# TYPE node_netstat_Ip6_InHdrErrors untyped
+node_netstat_Ip6_InHdrErrors 0
+# HELP node_netstat_Ip6_InMcastOctets Statistic Ip6InMcastOctets.
+# TYPE node_netstat_Ip6_InMcastOctets untyped
+node_netstat_Ip6_InMcastOctets 172064
+# HELP node_netstat_Ip6_InMcastPkts Statistic Ip6InMcastPkts.
+# TYPE node_netstat_Ip6_InMcastPkts untyped
+node_netstat_Ip6_InMcastPkts 1724
+# HELP node_netstat_Ip6_InNoECTPkts Statistic Ip6InNoECTPkts.
+# TYPE node_netstat_Ip6_InNoECTPkts untyped
+node_netstat_Ip6_InNoECTPkts 4.34877345e+08
+# HELP node_netstat_Ip6_InNoRoutes Statistic Ip6InNoRoutes.
+# TYPE node_netstat_Ip6_InNoRoutes untyped
+node_netstat_Ip6_InNoRoutes 0
+# HELP node_netstat_Ip6_InOctets Statistic Ip6InOctets.
+# TYPE node_netstat_Ip6_InOctets untyped
+node_netstat_Ip6_InOctets 4.59364765212e+11
+# HELP node_netstat_Ip6_InReceives Statistic Ip6InReceives.
+# TYPE node_netstat_Ip6_InReceives untyped
+node_netstat_Ip6_InReceives 2.83174575e+08
+# HELP node_netstat_Ip6_InTooBigErrors Statistic Ip6InTooBigErrors.
+# TYPE node_netstat_Ip6_InTooBigErrors untyped
+node_netstat_Ip6_InTooBigErrors 0
+# HELP node_netstat_Ip6_InTruncatedPkts Statistic Ip6InTruncatedPkts.
+# TYPE node_netstat_Ip6_InTruncatedPkts untyped
+node_netstat_Ip6_InTruncatedPkts 0
+# HELP node_netstat_Ip6_InUnknownProtos Statistic Ip6InUnknownProtos.
+# TYPE node_netstat_Ip6_InUnknownProtos untyped
+node_netstat_Ip6_InUnknownProtos 0
+# HELP node_netstat_Ip6_OutBcastOctets Statistic Ip6OutBcastOctets.
+# TYPE node_netstat_Ip6_OutBcastOctets untyped
+node_netstat_Ip6_OutBcastOctets 0
+# HELP node_netstat_Ip6_OutDiscards Statistic Ip6OutDiscards.
+# TYPE node_netstat_Ip6_OutDiscards untyped
+node_netstat_Ip6_OutDiscards 369881
+# HELP node_netstat_Ip6_OutForwDatagrams Statistic Ip6OutForwDatagrams.
+# TYPE node_netstat_Ip6_OutForwDatagrams untyped
+node_netstat_Ip6_OutForwDatagrams 0
+# HELP node_netstat_Ip6_OutMcastOctets Statistic Ip6OutMcastOctets.
+# TYPE node_netstat_Ip6_OutMcastOctets untyped
+node_netstat_Ip6_OutMcastOctets 1588
+# HELP node_netstat_Ip6_OutMcastPkts Statistic Ip6OutMcastPkts.
+# TYPE node_netstat_Ip6_OutMcastPkts untyped
+node_netstat_Ip6_OutMcastPkts 18
+# HELP node_netstat_Ip6_OutNoRoutes Statistic Ip6OutNoRoutes.
+# TYPE node_netstat_Ip6_OutNoRoutes untyped
+node_netstat_Ip6_OutNoRoutes 0
+# HELP node_netstat_Ip6_OutOctets Statistic Ip6OutOctets.
+# TYPE node_netstat_Ip6_OutOctets untyped
+node_netstat_Ip6_OutOctets 2.1004723213e+10
+# HELP node_netstat_Ip6_OutRequests Statistic Ip6OutRequests.
+# TYPE node_netstat_Ip6_OutRequests untyped
+node_netstat_Ip6_OutRequests 2.121013e+08
+# HELP node_netstat_Ip6_ReasmFails Statistic Ip6ReasmFails.
+# TYPE node_netstat_Ip6_ReasmFails untyped
+node_netstat_Ip6_ReasmFails 163
+# HELP node_netstat_Ip6_ReasmOKs Statistic Ip6ReasmOKs.
+# TYPE node_netstat_Ip6_ReasmOKs untyped
+node_netstat_Ip6_ReasmOKs 498
+# HELP node_netstat_Ip6_ReasmReqds Statistic Ip6ReasmReqds.
+# TYPE node_netstat_Ip6_ReasmReqds untyped
+node_netstat_Ip6_ReasmReqds 1010
+# HELP node_netstat_Ip6_ReasmTimeout Statistic Ip6ReasmTimeout.
+# TYPE node_netstat_Ip6_ReasmTimeout untyped
+node_netstat_Ip6_ReasmTimeout 163
+# HELP node_netstat_IpExt_InBcastOctets Statistic IpExtInBcastOctets.
+# TYPE node_netstat_IpExt_InBcastOctets untyped
+node_netstat_IpExt_InBcastOctets 0
+# HELP node_netstat_IpExt_InBcastPkts Statistic IpExtInBcastPkts.
+# TYPE node_netstat_IpExt_InBcastPkts untyped
+node_netstat_IpExt_InBcastPkts 0
+# HELP node_netstat_IpExt_InCEPkts Statistic IpExtInCEPkts.
+# TYPE node_netstat_IpExt_InCEPkts untyped
+node_netstat_IpExt_InCEPkts 20468
+# HELP node_netstat_IpExt_InCsumErrors Statistic IpExtInCsumErrors.
+# TYPE node_netstat_IpExt_InCsumErrors untyped
+node_netstat_IpExt_InCsumErrors 0
+# HELP node_netstat_IpExt_InECT0Pkts Statistic IpExtInECT0Pkts.
+# TYPE node_netstat_IpExt_InECT0Pkts untyped
+node_netstat_IpExt_InECT0Pkts 108716
+# HELP node_netstat_IpExt_InECT1Pkts Statistic IpExtInECT1Pkts.
+# TYPE node_netstat_IpExt_InECT1Pkts untyped
+node_netstat_IpExt_InECT1Pkts 115854
+# HELP node_netstat_IpExt_InMcastOctets Statistic IpExtInMcastOctets.
+# TYPE node_netstat_IpExt_InMcastOctets untyped
+node_netstat_IpExt_InMcastOctets 0
+# HELP node_netstat_IpExt_InMcastPkts Statistic IpExtInMcastPkts.
+# TYPE node_netstat_IpExt_InMcastPkts untyped
+node_netstat_IpExt_InMcastPkts 0
+# HELP node_netstat_IpExt_InNoECTPkts Statistic IpExtInNoECTPkts.
+# TYPE node_netstat_IpExt_InNoECTPkts untyped
+node_netstat_IpExt_InNoECTPkts 2.40352725327e+11
+# HELP node_netstat_IpExt_InNoRoutes Statistic IpExtInNoRoutes.
+# TYPE node_netstat_IpExt_InNoRoutes untyped
+node_netstat_IpExt_InNoRoutes 0
+# HELP node_netstat_IpExt_InOctets Statistic IpExtInOctets.
+# TYPE node_netstat_IpExt_InOctets untyped
+node_netstat_IpExt_InOctets 1.51676971015995e+14
+# HELP node_netstat_IpExt_InTruncatedPkts Statistic IpExtInTruncatedPkts.
+# TYPE node_netstat_IpExt_InTruncatedPkts untyped
+node_netstat_IpExt_InTruncatedPkts 0
+# HELP node_netstat_IpExt_OutBcastOctets Statistic IpExtOutBcastOctets.
+# TYPE node_netstat_IpExt_OutBcastOctets untyped
+node_netstat_IpExt_OutBcastOctets 0
+# HELP node_netstat_IpExt_OutBcastPkts Statistic IpExtOutBcastPkts.
+# TYPE node_netstat_IpExt_OutBcastPkts untyped
+node_netstat_IpExt_OutBcastPkts 0
+# HELP node_netstat_IpExt_OutMcastOctets Statistic IpExtOutMcastOctets.
+# TYPE node_netstat_IpExt_OutMcastOctets untyped
+node_netstat_IpExt_OutMcastOctets 0
+# HELP node_netstat_IpExt_OutMcastPkts Statistic IpExtOutMcastPkts.
+# TYPE node_netstat_IpExt_OutMcastPkts untyped
+node_netstat_IpExt_OutMcastPkts 0
+# HELP node_netstat_IpExt_OutOctets Statistic IpExtOutOctets.
+# TYPE node_netstat_IpExt_OutOctets untyped
+node_netstat_IpExt_OutOctets 1.9621854954221e+13
+# HELP node_netstat_IpExt_ReasmOverlaps Statistic IpExtReasmOverlaps.
+# TYPE node_netstat_IpExt_ReasmOverlaps untyped
+node_netstat_IpExt_ReasmOverlaps 12
+# HELP node_netstat_Ip_DefaultTTL Statistic IpDefaultTTL.
+# TYPE node_netstat_Ip_DefaultTTL untyped
+node_netstat_Ip_DefaultTTL 64
+# HELP node_netstat_Ip_ForwDatagrams Statistic IpForwDatagrams.
+# TYPE node_netstat_Ip_ForwDatagrams untyped
+node_netstat_Ip_ForwDatagrams 0
+# HELP node_netstat_Ip_Forwarding Statistic IpForwarding.
+# TYPE node_netstat_Ip_Forwarding untyped
+node_netstat_Ip_Forwarding 1
+# HELP node_netstat_Ip_FragCreates Statistic IpFragCreates.
+# TYPE node_netstat_Ip_FragCreates untyped
+node_netstat_Ip_FragCreates 0
+# HELP node_netstat_Ip_FragFails Statistic IpFragFails.
+# TYPE node_netstat_Ip_FragFails untyped
+node_netstat_Ip_FragFails 0
+# HELP node_netstat_Ip_FragOKs Statistic IpFragOKs.
+# TYPE node_netstat_Ip_FragOKs untyped
+node_netstat_Ip_FragOKs 0
+# HELP node_netstat_Ip_InAddrErrors Statistic IpInAddrErrors.
+# TYPE node_netstat_Ip_InAddrErrors untyped
+node_netstat_Ip_InAddrErrors 60
+# HELP node_netstat_Ip_InDelivers Statistic IpInDelivers.
+# TYPE node_netstat_Ip_InDelivers untyped
+node_netstat_Ip_InDelivers 2.10089585507e+11
+# HELP node_netstat_Ip_InDiscards Statistic IpInDiscards.
+# TYPE node_netstat_Ip_InDiscards untyped
+node_netstat_Ip_InDiscards 0
+# HELP node_netstat_Ip_InHdrErrors Statistic IpInHdrErrors.
+# TYPE node_netstat_Ip_InHdrErrors untyped
+node_netstat_Ip_InHdrErrors 0
+# HELP node_netstat_Ip_InReceives Statistic IpInReceives.
+# TYPE node_netstat_Ip_InReceives untyped
+node_netstat_Ip_InReceives 2.11533244932e+11
+# HELP node_netstat_Ip_InUnknownProtos Statistic IpInUnknownProtos.
+# TYPE node_netstat_Ip_InUnknownProtos untyped
+node_netstat_Ip_InUnknownProtos 89
+# HELP node_netstat_Ip_OutDiscards Statistic IpOutDiscards.
+# TYPE node_netstat_Ip_OutDiscards untyped
+node_netstat_Ip_OutDiscards 60
+# HELP node_netstat_Ip_OutNoRoutes Statistic IpOutNoRoutes.
+# TYPE node_netstat_Ip_OutNoRoutes untyped
+node_netstat_Ip_OutNoRoutes 40
+# HELP node_netstat_Ip_OutRequests Statistic IpOutRequests.
+# TYPE node_netstat_Ip_OutRequests untyped
+node_netstat_Ip_OutRequests 3.1458236557e+10
+# HELP node_netstat_Ip_ReasmFails Statistic IpReasmFails.
+# TYPE node_netstat_Ip_ReasmFails untyped
+node_netstat_Ip_ReasmFails 6.844962e+06
+# HELP node_netstat_Ip_ReasmOKs Statistic IpReasmOKs.
+# TYPE node_netstat_Ip_ReasmOKs untyped
+node_netstat_Ip_ReasmOKs 1.249569387e+09
+# HELP node_netstat_Ip_ReasmReqds Statistic IpReasmReqds.
+# TYPE node_netstat_Ip_ReasmReqds untyped
+node_netstat_Ip_ReasmReqds 2.582293417e+09
+# HELP node_netstat_Ip_ReasmTimeout Statistic IpReasmTimeout.
+# TYPE node_netstat_Ip_ReasmTimeout untyped
+node_netstat_Ip_ReasmTimeout 3.210422e+06
+# HELP node_netstat_TcpExt_ArpFilter Statistic TcpExtArpFilter.
+# TYPE node_netstat_TcpExt_ArpFilter untyped
+node_netstat_TcpExt_ArpFilter 0
+# HELP node_netstat_TcpExt_BusyPollRxPackets Statistic TcpExtBusyPollRxPackets.
+# TYPE node_netstat_TcpExt_BusyPollRxPackets untyped
+node_netstat_TcpExt_BusyPollRxPackets 0
+# HELP node_netstat_TcpExt_DelayedACKLocked Statistic TcpExtDelayedACKLocked.
+# TYPE node_netstat_TcpExt_DelayedACKLocked untyped
+node_netstat_TcpExt_DelayedACKLocked 23728
+# HELP node_netstat_TcpExt_DelayedACKLost Statistic TcpExtDelayedACKLost.
+# TYPE node_netstat_TcpExt_DelayedACKLost untyped
+node_netstat_TcpExt_DelayedACKLost 3.186034e+06
+# HELP node_netstat_TcpExt_DelayedACKs Statistic TcpExtDelayedACKs.
+# TYPE node_netstat_TcpExt_DelayedACKs untyped
+node_netstat_TcpExt_DelayedACKs 5.0734723e+07
+# HELP node_netstat_TcpExt_EmbryonicRsts Statistic TcpExtEmbryonicRsts.
+# TYPE node_netstat_TcpExt_EmbryonicRsts untyped
+node_netstat_TcpExt_EmbryonicRsts 47130
+# HELP node_netstat_TcpExt_IPReversePathFilter Statistic TcpExtIPReversePathFilter.
+# TYPE node_netstat_TcpExt_IPReversePathFilter untyped
+node_netstat_TcpExt_IPReversePathFilter 4354
+# HELP node_netstat_TcpExt_ListenDrops Statistic TcpExtListenDrops.
+# TYPE node_netstat_TcpExt_ListenDrops untyped
+node_netstat_TcpExt_ListenDrops 3266
+# HELP node_netstat_TcpExt_ListenOverflows Statistic TcpExtListenOverflows.
+# TYPE node_netstat_TcpExt_ListenOverflows untyped
+node_netstat_TcpExt_ListenOverflows 0
+# HELP node_netstat_TcpExt_LockDroppedIcmps Statistic TcpExtLockDroppedIcmps.
+# TYPE node_netstat_TcpExt_LockDroppedIcmps untyped
+node_netstat_TcpExt_LockDroppedIcmps 0
+# HELP node_netstat_TcpExt_OfoPruned Statistic TcpExtOfoPruned.
+# TYPE node_netstat_TcpExt_OfoPruned untyped
+node_netstat_TcpExt_OfoPruned 0
+# HELP node_netstat_TcpExt_OutOfWindowIcmps Statistic TcpExtOutOfWindowIcmps.
+# TYPE node_netstat_TcpExt_OutOfWindowIcmps untyped
+node_netstat_TcpExt_OutOfWindowIcmps 103
+# HELP node_netstat_TcpExt_PAWSActive Statistic TcpExtPAWSActive.
+# TYPE node_netstat_TcpExt_PAWSActive untyped
+node_netstat_TcpExt_PAWSActive 0
+# HELP node_netstat_TcpExt_PAWSEstab Statistic TcpExtPAWSEstab.
+# TYPE node_netstat_TcpExt_PAWSEstab untyped
+node_netstat_TcpExt_PAWSEstab 10672
+# HELP node_netstat_TcpExt_PFMemallocDrop Statistic TcpExtPFMemallocDrop.
+# TYPE node_netstat_TcpExt_PFMemallocDrop untyped
+node_netstat_TcpExt_PFMemallocDrop 0
+# HELP node_netstat_TcpExt_PruneCalled Statistic TcpExtPruneCalled.
+# TYPE node_netstat_TcpExt_PruneCalled untyped
+node_netstat_TcpExt_PruneCalled 202
+# HELP node_netstat_TcpExt_RcvPruned Statistic TcpExtRcvPruned.
+# TYPE node_netstat_TcpExt_RcvPruned untyped
+node_netstat_TcpExt_RcvPruned 0
+# HELP node_netstat_TcpExt_SyncookiesFailed Statistic TcpExtSyncookiesFailed.
+# TYPE node_netstat_TcpExt_SyncookiesFailed untyped
+node_netstat_TcpExt_SyncookiesFailed 33
+# HELP node_netstat_TcpExt_SyncookiesRecv Statistic TcpExtSyncookiesRecv.
+# TYPE node_netstat_TcpExt_SyncookiesRecv untyped
+node_netstat_TcpExt_SyncookiesRecv 0
+# HELP node_netstat_TcpExt_SyncookiesSent Statistic TcpExtSyncookiesSent.
+# TYPE node_netstat_TcpExt_SyncookiesSent untyped
+node_netstat_TcpExt_SyncookiesSent 0
+# HELP node_netstat_TcpExt_TCPACKSkippedChallenge Statistic TcpExtTCPACKSkippedChallenge.
+# TYPE node_netstat_TcpExt_TCPACKSkippedChallenge untyped
+node_netstat_TcpExt_TCPACKSkippedChallenge 16588
+# HELP node_netstat_TcpExt_TCPACKSkippedFinWait2 Statistic TcpExtTCPACKSkippedFinWait2.
+# TYPE node_netstat_TcpExt_TCPACKSkippedFinWait2 untyped
+node_netstat_TcpExt_TCPACKSkippedFinWait2 0
+# HELP node_netstat_TcpExt_TCPACKSkippedPAWS Statistic TcpExtTCPACKSkippedPAWS.
+# TYPE node_netstat_TcpExt_TCPACKSkippedPAWS untyped
+node_netstat_TcpExt_TCPACKSkippedPAWS 5694
+# HELP node_netstat_TcpExt_TCPACKSkippedSeq Statistic TcpExtTCPACKSkippedSeq.
+# TYPE node_netstat_TcpExt_TCPACKSkippedSeq untyped
+node_netstat_TcpExt_TCPACKSkippedSeq 250918
+# HELP node_netstat_TcpExt_TCPACKSkippedSynRecv Statistic TcpExtTCPACKSkippedSynRecv.
+# TYPE node_netstat_TcpExt_TCPACKSkippedSynRecv untyped
+node_netstat_TcpExt_TCPACKSkippedSynRecv 81
+# HELP node_netstat_TcpExt_TCPACKSkippedTimeWait Statistic TcpExtTCPACKSkippedTimeWait.
+# TYPE node_netstat_TcpExt_TCPACKSkippedTimeWait untyped
+node_netstat_TcpExt_TCPACKSkippedTimeWait 140
+# HELP node_netstat_TcpExt_TCPAbortFailed Statistic TcpExtTCPAbortFailed.
+# TYPE node_netstat_TcpExt_TCPAbortFailed untyped
+node_netstat_TcpExt_TCPAbortFailed 1
+# HELP node_netstat_TcpExt_TCPAbortOnClose Statistic TcpExtTCPAbortOnClose.
+# TYPE node_netstat_TcpExt_TCPAbortOnClose untyped
+node_netstat_TcpExt_TCPAbortOnClose 2.1671784e+07
+# HELP node_netstat_TcpExt_TCPAbortOnData Statistic TcpExtTCPAbortOnData.
+# TYPE node_netstat_TcpExt_TCPAbortOnData untyped
+node_netstat_TcpExt_TCPAbortOnData 2.9425874e+07
+# HELP node_netstat_TcpExt_TCPAbortOnLinger Statistic TcpExtTCPAbortOnLinger.
+# TYPE node_netstat_TcpExt_TCPAbortOnLinger untyped
+node_netstat_TcpExt_TCPAbortOnLinger 0
+# HELP node_netstat_TcpExt_TCPAbortOnMemory Statistic TcpExtTCPAbortOnMemory.
+# TYPE node_netstat_TcpExt_TCPAbortOnMemory untyped
+node_netstat_TcpExt_TCPAbortOnMemory 0
+# HELP node_netstat_TcpExt_TCPAbortOnTimeout Statistic TcpExtTCPAbortOnTimeout.
+# TYPE node_netstat_TcpExt_TCPAbortOnTimeout untyped
+node_netstat_TcpExt_TCPAbortOnTimeout 99131
+# HELP node_netstat_TcpExt_TCPAutoCorking Statistic TcpExtTCPAutoCorking.
+# TYPE node_netstat_TcpExt_TCPAutoCorking untyped
+node_netstat_TcpExt_TCPAutoCorking 1.067379971e+09
+# HELP node_netstat_TcpExt_TCPBacklogDrop Statistic TcpExtTCPBacklogDrop.
+# TYPE node_netstat_TcpExt_TCPBacklogDrop untyped
+node_netstat_TcpExt_TCPBacklogDrop 0
+# HELP node_netstat_TcpExt_TCPChallengeACK Statistic TcpExtTCPChallengeACK.
+# TYPE node_netstat_TcpExt_TCPChallengeACK untyped
+node_netstat_TcpExt_TCPChallengeACK 253954
+# HELP node_netstat_TcpExt_TCPDSACKIgnoredNoUndo Statistic TcpExtTCPDSACKIgnoredNoUndo.
+# TYPE node_netstat_TcpExt_TCPDSACKIgnoredNoUndo untyped
+node_netstat_TcpExt_TCPDSACKIgnoredNoUndo 1.449708e+06
+# HELP node_netstat_TcpExt_TCPDSACKIgnoredOld Statistic TcpExtTCPDSACKIgnoredOld.
+# TYPE node_netstat_TcpExt_TCPDSACKIgnoredOld untyped
+node_netstat_TcpExt_TCPDSACKIgnoredOld 3339
+# HELP node_netstat_TcpExt_TCPDSACKOfoRecv Statistic TcpExtTCPDSACKOfoRecv.
+# TYPE node_netstat_TcpExt_TCPDSACKOfoRecv untyped
+node_netstat_TcpExt_TCPDSACKOfoRecv 264
+# HELP node_netstat_TcpExt_TCPDSACKOfoSent Statistic TcpExtTCPDSACKOfoSent.
+# TYPE node_netstat_TcpExt_TCPDSACKOfoSent untyped
+node_netstat_TcpExt_TCPDSACKOfoSent 2676
+# HELP node_netstat_TcpExt_TCPDSACKOldSent Statistic TcpExtTCPDSACKOldSent.
+# TYPE node_netstat_TcpExt_TCPDSACKOldSent untyped
+node_netstat_TcpExt_TCPDSACKOldSent 3.179345e+06
+# HELP node_netstat_TcpExt_TCPDSACKRecv Statistic TcpExtTCPDSACKRecv.
+# TYPE node_netstat_TcpExt_TCPDSACKRecv untyped
+node_netstat_TcpExt_TCPDSACKRecv 2.556193e+06
+# HELP node_netstat_TcpExt_TCPDSACKUndo Statistic TcpExtTCPDSACKUndo.
+# TYPE node_netstat_TcpExt_TCPDSACKUndo untyped
+node_netstat_TcpExt_TCPDSACKUndo 515861
+# HELP node_netstat_TcpExt_TCPDeferAcceptDrop Statistic TcpExtTCPDeferAcceptDrop.
+# TYPE node_netstat_TcpExt_TCPDeferAcceptDrop untyped
+node_netstat_TcpExt_TCPDeferAcceptDrop 0
+# HELP node_netstat_TcpExt_TCPFastOpenActive Statistic TcpExtTCPFastOpenActive.
+# TYPE node_netstat_TcpExt_TCPFastOpenActive untyped
+node_netstat_TcpExt_TCPFastOpenActive 0
+# HELP node_netstat_TcpExt_TCPFastOpenActiveFail Statistic TcpExtTCPFastOpenActiveFail.
+# TYPE node_netstat_TcpExt_TCPFastOpenActiveFail untyped
+node_netstat_TcpExt_TCPFastOpenActiveFail 0
+# HELP node_netstat_TcpExt_TCPFastOpenBlackhole Statistic TcpExtTCPFastOpenBlackhole.
+# TYPE node_netstat_TcpExt_TCPFastOpenBlackhole untyped
+node_netstat_TcpExt_TCPFastOpenBlackhole 0
+# HELP node_netstat_TcpExt_TCPFastOpenCookieReqd Statistic TcpExtTCPFastOpenCookieReqd.
+# TYPE node_netstat_TcpExt_TCPFastOpenCookieReqd untyped
+node_netstat_TcpExt_TCPFastOpenCookieReqd 0
+# HELP node_netstat_TcpExt_TCPFastOpenListenOverflow Statistic TcpExtTCPFastOpenListenOverflow.
+# TYPE node_netstat_TcpExt_TCPFastOpenListenOverflow untyped
+node_netstat_TcpExt_TCPFastOpenListenOverflow 0
+# HELP node_netstat_TcpExt_TCPFastOpenPassive Statistic TcpExtTCPFastOpenPassive.
+# TYPE node_netstat_TcpExt_TCPFastOpenPassive untyped
+node_netstat_TcpExt_TCPFastOpenPassive 0
+# HELP node_netstat_TcpExt_TCPFastOpenPassiveFail Statistic TcpExtTCPFastOpenPassiveFail.
+# TYPE node_netstat_TcpExt_TCPFastOpenPassiveFail untyped
+node_netstat_TcpExt_TCPFastOpenPassiveFail 0
+# HELP node_netstat_TcpExt_TCPFastRetrans Statistic TcpExtTCPFastRetrans.
+# TYPE node_netstat_TcpExt_TCPFastRetrans untyped
+node_netstat_TcpExt_TCPFastRetrans 2.57772e+06
+# HELP node_netstat_TcpExt_TCPFromZeroWindowAdv Statistic TcpExtTCPFromZeroWindowAdv.
+# TYPE node_netstat_TcpExt_TCPFromZeroWindowAdv untyped
+node_netstat_TcpExt_TCPFromZeroWindowAdv 579441
+# HELP node_netstat_TcpExt_TCPFullUndo Statistic TcpExtTCPFullUndo.
+# TYPE node_netstat_TcpExt_TCPFullUndo untyped
+node_netstat_TcpExt_TCPFullUndo 271537
+# HELP node_netstat_TcpExt_TCPHPAcks Statistic TcpExtTCPHPAcks.
+# TYPE node_netstat_TcpExt_TCPHPAcks untyped
+node_netstat_TcpExt_TCPHPAcks 2.31348715e+09
+# HELP node_netstat_TcpExt_TCPHPHits Statistic TcpExtTCPHPHits.
+# TYPE node_netstat_TcpExt_TCPHPHits untyped
+node_netstat_TcpExt_TCPHPHits 6.187225431e+09
+# HELP node_netstat_TcpExt_TCPHystartDelayCwnd Statistic TcpExtTCPHystartDelayCwnd.
+# TYPE node_netstat_TcpExt_TCPHystartDelayCwnd untyped
+node_netstat_TcpExt_TCPHystartDelayCwnd 195188
+# HELP node_netstat_TcpExt_TCPHystartDelayDetect Statistic TcpExtTCPHystartDelayDetect.
+# TYPE node_netstat_TcpExt_TCPHystartDelayDetect untyped
+node_netstat_TcpExt_TCPHystartDelayDetect 2075
+# HELP node_netstat_TcpExt_TCPHystartTrainCwnd Statistic TcpExtTCPHystartTrainCwnd.
+# TYPE node_netstat_TcpExt_TCPHystartTrainCwnd untyped
+node_netstat_TcpExt_TCPHystartTrainCwnd 1.009762854e+09
+# HELP node_netstat_TcpExt_TCPHystartTrainDetect Statistic TcpExtTCPHystartTrainDetect.
+# TYPE node_netstat_TcpExt_TCPHystartTrainDetect untyped
+node_netstat_TcpExt_TCPHystartTrainDetect 3.8036674e+07
+# HELP node_netstat_TcpExt_TCPKeepAlive Statistic TcpExtTCPKeepAlive.
+# TYPE node_netstat_TcpExt_TCPKeepAlive untyped
+node_netstat_TcpExt_TCPKeepAlive 3.7350168e+07
+# HELP node_netstat_TcpExt_TCPLossFailures Statistic TcpExtTCPLossFailures.
+# TYPE node_netstat_TcpExt_TCPLossFailures untyped
+node_netstat_TcpExt_TCPLossFailures 274
+# HELP node_netstat_TcpExt_TCPLossProbeRecovery Statistic TcpExtTCPLossProbeRecovery.
+# TYPE node_netstat_TcpExt_TCPLossProbeRecovery untyped
+node_netstat_TcpExt_TCPLossProbeRecovery 308110
+# HELP node_netstat_TcpExt_TCPLossProbes Statistic TcpExtTCPLossProbes.
+# TYPE node_netstat_TcpExt_TCPLossProbes untyped
+node_netstat_TcpExt_TCPLossProbes 1.110895e+06
+# HELP node_netstat_TcpExt_TCPLossUndo Statistic TcpExtTCPLossUndo.
+# TYPE node_netstat_TcpExt_TCPLossUndo untyped
+node_netstat_TcpExt_TCPLossUndo 30036
+# HELP node_netstat_TcpExt_TCPLostRetransmit Statistic TcpExtTCPLostRetransmit.
+# TYPE node_netstat_TcpExt_TCPLostRetransmit untyped
+node_netstat_TcpExt_TCPLostRetransmit 2259
+# HELP node_netstat_TcpExt_TCPMD5Failure Statistic TcpExtTCPMD5Failure.
+# TYPE node_netstat_TcpExt_TCPMD5Failure untyped
+node_netstat_TcpExt_TCPMD5Failure 0
+# HELP node_netstat_TcpExt_TCPMD5NotFound Statistic TcpExtTCPMD5NotFound.
+# TYPE node_netstat_TcpExt_TCPMD5NotFound untyped
+node_netstat_TcpExt_TCPMD5NotFound 0
+# HELP node_netstat_TcpExt_TCPMD5Unexpected Statistic TcpExtTCPMD5Unexpected.
+# TYPE node_netstat_TcpExt_TCPMD5Unexpected untyped
+node_netstat_TcpExt_TCPMD5Unexpected 0
+# HELP node_netstat_TcpExt_TCPMTUPFail Statistic TcpExtTCPMTUPFail.
+# TYPE node_netstat_TcpExt_TCPMTUPFail untyped
+node_netstat_TcpExt_TCPMTUPFail 0
+# HELP node_netstat_TcpExt_TCPMTUPSuccess Statistic TcpExtTCPMTUPSuccess.
+# TYPE node_netstat_TcpExt_TCPMTUPSuccess untyped
+node_netstat_TcpExt_TCPMTUPSuccess 0
+# HELP node_netstat_TcpExt_TCPMemoryPressures Statistic TcpExtTCPMemoryPressures.
+# TYPE node_netstat_TcpExt_TCPMemoryPressures untyped
+node_netstat_TcpExt_TCPMemoryPressures 0
+# HELP node_netstat_TcpExt_TCPMemoryPressuresChrono Statistic TcpExtTCPMemoryPressuresChrono.
+# TYPE node_netstat_TcpExt_TCPMemoryPressuresChrono untyped
+node_netstat_TcpExt_TCPMemoryPressuresChrono 0
+# HELP node_netstat_TcpExt_TCPMinTTLDrop Statistic TcpExtTCPMinTTLDrop.
+# TYPE node_netstat_TcpExt_TCPMinTTLDrop untyped
+node_netstat_TcpExt_TCPMinTTLDrop 0
+# HELP node_netstat_TcpExt_TCPOFODrop Statistic TcpExtTCPOFODrop.
+# TYPE node_netstat_TcpExt_TCPOFODrop untyped
+node_netstat_TcpExt_TCPOFODrop 0
+# HELP node_netstat_TcpExt_TCPOFOMerge Statistic TcpExtTCPOFOMerge.
+# TYPE node_netstat_TcpExt_TCPOFOMerge untyped
+node_netstat_TcpExt_TCPOFOMerge 3607
+# HELP node_netstat_TcpExt_TCPOFOQueue Statistic TcpExtTCPOFOQueue.
+# TYPE node_netstat_TcpExt_TCPOFOQueue untyped
+node_netstat_TcpExt_TCPOFOQueue 3.05461856e+08
+# HELP node_netstat_TcpExt_TCPOrigDataSent Statistic TcpExtTCPOrigDataSent.
+# TYPE node_netstat_TcpExt_TCPOrigDataSent untyped
+node_netstat_TcpExt_TCPOrigDataSent 3.1105422334e+10
+# HELP node_netstat_TcpExt_TCPPartialUndo Statistic TcpExtTCPPartialUndo.
+# TYPE node_netstat_TcpExt_TCPPartialUndo untyped
+node_netstat_TcpExt_TCPPartialUndo 2.032892e+06
+# HELP node_netstat_TcpExt_TCPPureAcks Statistic TcpExtTCPPureAcks.
+# TYPE node_netstat_TcpExt_TCPPureAcks untyped
+node_netstat_TcpExt_TCPPureAcks 4.568474722e+09
+# HELP node_netstat_TcpExt_TCPRcvCoalesce Statistic TcpExtTCPRcvCoalesce.
+# TYPE node_netstat_TcpExt_TCPRcvCoalesce untyped
+node_netstat_TcpExt_TCPRcvCoalesce 1.508912365e+09
+# HELP node_netstat_TcpExt_TCPRcvCollapsed Statistic TcpExtTCPRcvCollapsed.
+# TYPE node_netstat_TcpExt_TCPRcvCollapsed untyped
+node_netstat_TcpExt_TCPRcvCollapsed 0
+# HELP node_netstat_TcpExt_TCPRenoFailures Statistic TcpExtTCPRenoFailures.
+# TYPE node_netstat_TcpExt_TCPRenoFailures untyped
+node_netstat_TcpExt_TCPRenoFailures 6
+# HELP node_netstat_TcpExt_TCPRenoRecovery Statistic TcpExtTCPRenoRecovery.
+# TYPE node_netstat_TcpExt_TCPRenoRecovery untyped
+node_netstat_TcpExt_TCPRenoRecovery 9
+# HELP node_netstat_TcpExt_TCPRenoRecoveryFail Statistic TcpExtTCPRenoRecoveryFail.
+# TYPE node_netstat_TcpExt_TCPRenoRecoveryFail untyped
+node_netstat_TcpExt_TCPRenoRecoveryFail 9
+# HELP node_netstat_TcpExt_TCPRenoReorder Statistic TcpExtTCPRenoReorder.
+# TYPE node_netstat_TcpExt_TCPRenoReorder untyped
+node_netstat_TcpExt_TCPRenoReorder 300
+# HELP node_netstat_TcpExt_TCPReqQFullDoCookies Statistic TcpExtTCPReqQFullDoCookies.
+# TYPE node_netstat_TcpExt_TCPReqQFullDoCookies untyped
+node_netstat_TcpExt_TCPReqQFullDoCookies 0
+# HELP node_netstat_TcpExt_TCPReqQFullDrop Statistic TcpExtTCPReqQFullDrop.
+# TYPE node_netstat_TcpExt_TCPReqQFullDrop untyped
+node_netstat_TcpExt_TCPReqQFullDrop 0
+# HELP node_netstat_TcpExt_TCPRetransFail Statistic TcpExtTCPRetransFail.
+# TYPE node_netstat_TcpExt_TCPRetransFail untyped
+node_netstat_TcpExt_TCPRetransFail 13
+# HELP node_netstat_TcpExt_TCPSACKDiscard Statistic TcpExtTCPSACKDiscard.
+# TYPE node_netstat_TcpExt_TCPSACKDiscard untyped
+node_netstat_TcpExt_TCPSACKDiscard 8
+# HELP node_netstat_TcpExt_TCPSACKReneging Statistic TcpExtTCPSACKReneging.
+# TYPE node_netstat_TcpExt_TCPSACKReneging untyped
+node_netstat_TcpExt_TCPSACKReneging 1
+# HELP node_netstat_TcpExt_TCPSACKReorder Statistic TcpExtTCPSACKReorder.
+# TYPE node_netstat_TcpExt_TCPSACKReorder untyped
+node_netstat_TcpExt_TCPSACKReorder 3.479262e+07
+# HELP node_netstat_TcpExt_TCPSYNChallenge Statistic TcpExtTCPSYNChallenge.
+# TYPE node_netstat_TcpExt_TCPSYNChallenge untyped
+node_netstat_TcpExt_TCPSYNChallenge 13583
+# HELP node_netstat_TcpExt_TCPSackFailures Statistic TcpExtTCPSackFailures.
+# TYPE node_netstat_TcpExt_TCPSackFailures untyped
+node_netstat_TcpExt_TCPSackFailures 709
+# HELP node_netstat_TcpExt_TCPSackMerged Statistic TcpExtTCPSackMerged.
+# TYPE node_netstat_TcpExt_TCPSackMerged untyped
+node_netstat_TcpExt_TCPSackMerged 2.92898e+06
+# HELP node_netstat_TcpExt_TCPSackRecovery Statistic TcpExtTCPSackRecovery.
+# TYPE node_netstat_TcpExt_TCPSackRecovery untyped
+node_netstat_TcpExt_TCPSackRecovery 2.951026e+06
+# HELP node_netstat_TcpExt_TCPSackRecoveryFail Statistic TcpExtTCPSackRecoveryFail.
+# TYPE node_netstat_TcpExt_TCPSackRecoveryFail untyped
+node_netstat_TcpExt_TCPSackRecoveryFail 15881
+# HELP node_netstat_TcpExt_TCPSackShiftFallback Statistic TcpExtTCPSackShiftFallback.
+# TYPE node_netstat_TcpExt_TCPSackShiftFallback untyped
+node_netstat_TcpExt_TCPSackShiftFallback 6.7588036e+07
+# HELP node_netstat_TcpExt_TCPSackShifted Statistic TcpExtTCPSackShifted.
+# TYPE node_netstat_TcpExt_TCPSackShifted untyped
+node_netstat_TcpExt_TCPSackShifted 1.973217e+07
+# HELP node_netstat_TcpExt_TCPSlowStartRetrans Statistic TcpExtTCPSlowStartRetrans.
+# TYPE node_netstat_TcpExt_TCPSlowStartRetrans untyped
+node_netstat_TcpExt_TCPSlowStartRetrans 192
+# HELP node_netstat_TcpExt_TCPSpuriousRTOs Statistic TcpExtTCPSpuriousRTOs.
+# TYPE node_netstat_TcpExt_TCPSpuriousRTOs untyped
+node_netstat_TcpExt_TCPSpuriousRTOs 1
+# HELP node_netstat_TcpExt_TCPSpuriousRtxHostQueues Statistic TcpExtTCPSpuriousRtxHostQueues.
+# TYPE node_netstat_TcpExt_TCPSpuriousRtxHostQueues untyped
+node_netstat_TcpExt_TCPSpuriousRtxHostQueues 811216
+# HELP node_netstat_TcpExt_TCPSynRetrans Statistic TcpExtTCPSynRetrans.
+# TYPE node_netstat_TcpExt_TCPSynRetrans untyped
+node_netstat_TcpExt_TCPSynRetrans 1.292556e+06
+# HELP node_netstat_TcpExt_TCPTSReorder Statistic TcpExtTCPTSReorder.
+# TYPE node_netstat_TcpExt_TCPTSReorder untyped
+node_netstat_TcpExt_TCPTSReorder 2.044488e+06
+# HELP node_netstat_TcpExt_TCPTimeWaitOverflow Statistic TcpExtTCPTimeWaitOverflow.
+# TYPE node_netstat_TcpExt_TCPTimeWaitOverflow untyped
+node_netstat_TcpExt_TCPTimeWaitOverflow 0
+# HELP node_netstat_TcpExt_TCPTimeouts Statistic TcpExtTCPTimeouts.
+# TYPE node_netstat_TcpExt_TCPTimeouts untyped
+node_netstat_TcpExt_TCPTimeouts 2.725672e+06
+# HELP node_netstat_TcpExt_TCPToZeroWindowAdv Statistic TcpExtTCPToZeroWindowAdv.
+# TYPE node_netstat_TcpExt_TCPToZeroWindowAdv untyped
+node_netstat_TcpExt_TCPToZeroWindowAdv 579442
+# HELP node_netstat_TcpExt_TCPWantZeroWindowAdv Statistic TcpExtTCPWantZeroWindowAdv.
+# TYPE node_netstat_TcpExt_TCPWantZeroWindowAdv untyped
+node_netstat_TcpExt_TCPWantZeroWindowAdv 701160
+# HELP node_netstat_TcpExt_TCPWinProbe Statistic TcpExtTCPWinProbe.
+# TYPE node_netstat_TcpExt_TCPWinProbe untyped
+node_netstat_TcpExt_TCPWinProbe 6370
+# HELP node_netstat_TcpExt_TCPWqueueTooBig Statistic TcpExtTCPWqueueTooBig.
+# TYPE node_netstat_TcpExt_TCPWqueueTooBig untyped
+node_netstat_TcpExt_TCPWqueueTooBig 0
+# HELP node_netstat_TcpExt_TW Statistic TcpExtTW.
+# TYPE node_netstat_TcpExt_TW untyped
+node_netstat_TcpExt_TW 4.0087908e+07
+# HELP node_netstat_TcpExt_TWKilled Statistic TcpExtTWKilled.
+# TYPE node_netstat_TcpExt_TWKilled untyped
+node_netstat_TcpExt_TWKilled 0
+# HELP node_netstat_TcpExt_TWRecycled Statistic TcpExtTWRecycled.
+# TYPE node_netstat_TcpExt_TWRecycled untyped
+node_netstat_TcpExt_TWRecycled 0
+# HELP node_netstat_Tcp_ActiveOpens Statistic TcpActiveOpens.
+# TYPE node_netstat_Tcp_ActiveOpens untyped
+node_netstat_Tcp_ActiveOpens 1.01475608e+08
+# HELP node_netstat_Tcp_AttemptFails Statistic TcpAttemptFails.
+# TYPE node_netstat_Tcp_AttemptFails untyped
+node_netstat_Tcp_AttemptFails 2.408794e+06
+# HELP node_netstat_Tcp_CurrEstab Statistic TcpCurrEstab.
+# TYPE node_netstat_Tcp_CurrEstab untyped
+node_netstat_Tcp_CurrEstab 92
+# HELP node_netstat_Tcp_EstabResets Statistic TcpEstabResets.
+# TYPE node_netstat_Tcp_EstabResets untyped
+node_netstat_Tcp_EstabResets 4.3261878e+07
+# HELP node_netstat_Tcp_InCsumErrors Statistic TcpInCsumErrors.
+# TYPE node_netstat_Tcp_InCsumErrors untyped
+node_netstat_Tcp_InCsumErrors 1.068151e+06
+# HELP node_netstat_Tcp_InErrs Statistic TcpInErrs.
+# TYPE node_netstat_Tcp_InErrs untyped
+node_netstat_Tcp_InErrs 1.07955e+06
+# HELP node_netstat_Tcp_InSegs Statistic TcpInSegs.
+# TYPE node_netstat_Tcp_InSegs untyped
+node_netstat_Tcp_InSegs 3.4209347814e+10
+# HELP node_netstat_Tcp_MaxConn Statistic TcpMaxConn.
+# TYPE node_netstat_Tcp_MaxConn untyped
+node_netstat_Tcp_MaxConn -1
+# HELP node_netstat_Tcp_OutRsts Statistic TcpOutRsts.
+# TYPE node_netstat_Tcp_OutRsts untyped
+node_netstat_Tcp_OutRsts 5.9974699e+07
+# HELP node_netstat_Tcp_OutSegs Statistic TcpOutSegs.
+# TYPE node_netstat_Tcp_OutSegs untyped
+node_netstat_Tcp_OutSegs 3.9865092616e+10
+# HELP node_netstat_Tcp_PassiveOpens Statistic TcpPassiveOpens.
+# TYPE node_netstat_Tcp_PassiveOpens untyped
+node_netstat_Tcp_PassiveOpens 6.14508149e+08
+# HELP node_netstat_Tcp_RetransSegs Statistic TcpRetransSegs.
+# TYPE node_netstat_Tcp_RetransSegs untyped
+node_netstat_Tcp_RetransSegs 6.159488e+06
+# HELP node_netstat_Tcp_RtoAlgorithm Statistic TcpRtoAlgorithm.
+# TYPE node_netstat_Tcp_RtoAlgorithm untyped
+node_netstat_Tcp_RtoAlgorithm 1
+# HELP node_netstat_Tcp_RtoMax Statistic TcpRtoMax.
+# TYPE node_netstat_Tcp_RtoMax untyped
+node_netstat_Tcp_RtoMax 120000
+# HELP node_netstat_Tcp_RtoMin Statistic TcpRtoMin.
+# TYPE node_netstat_Tcp_RtoMin untyped
+node_netstat_Tcp_RtoMin 200
+# HELP node_netstat_Udp6_IgnoredMulti Statistic Udp6IgnoredMulti.
+# TYPE node_netstat_Udp6_IgnoredMulti untyped
+node_netstat_Udp6_IgnoredMulti 0
+# HELP node_netstat_Udp6_InCsumErrors Statistic Udp6InCsumErrors.
+# TYPE node_netstat_Udp6_InCsumErrors untyped
+node_netstat_Udp6_InCsumErrors 0
+# HELP node_netstat_Udp6_InDatagrams Statistic Udp6InDatagrams.
+# TYPE node_netstat_Udp6_InDatagrams untyped
+node_netstat_Udp6_InDatagrams 6.244317e+06
+# HELP node_netstat_Udp6_InErrors Statistic Udp6InErrors.
+# TYPE node_netstat_Udp6_InErrors untyped
+node_netstat_Udp6_InErrors 0
+# HELP node_netstat_Udp6_NoPorts Statistic Udp6NoPorts.
+# TYPE node_netstat_Udp6_NoPorts untyped
+node_netstat_Udp6_NoPorts 2502
+# HELP node_netstat_Udp6_OutDatagrams Statistic Udp6OutDatagrams.
+# TYPE node_netstat_Udp6_OutDatagrams untyped
+node_netstat_Udp6_OutDatagrams 6.424892e+06
+# HELP node_netstat_Udp6_RcvbufErrors Statistic Udp6RcvbufErrors.
+# TYPE node_netstat_Udp6_RcvbufErrors untyped
+node_netstat_Udp6_RcvbufErrors 0
+# HELP node_netstat_Udp6_SndbufErrors Statistic Udp6SndbufErrors.
+# TYPE node_netstat_Udp6_SndbufErrors untyped
+node_netstat_Udp6_SndbufErrors 0
+# HELP node_netstat_UdpLite6_InCsumErrors Statistic UdpLite6InCsumErrors.
+# TYPE node_netstat_UdpLite6_InCsumErrors untyped
+node_netstat_UdpLite6_InCsumErrors 0
+# HELP node_netstat_UdpLite6_InDatagrams Statistic UdpLite6InDatagrams.
+# TYPE node_netstat_UdpLite6_InDatagrams untyped
+node_netstat_UdpLite6_InDatagrams 0
+# HELP node_netstat_UdpLite6_InErrors Statistic UdpLite6InErrors.
+# TYPE node_netstat_UdpLite6_InErrors untyped
+node_netstat_UdpLite6_InErrors 0
+# HELP node_netstat_UdpLite6_NoPorts Statistic UdpLite6NoPorts.
+# TYPE node_netstat_UdpLite6_NoPorts untyped
+node_netstat_UdpLite6_NoPorts 0
+# HELP node_netstat_UdpLite6_OutDatagrams Statistic UdpLite6OutDatagrams.
+# TYPE node_netstat_UdpLite6_OutDatagrams untyped
+node_netstat_UdpLite6_OutDatagrams 0
+# HELP node_netstat_UdpLite6_RcvbufErrors Statistic UdpLite6RcvbufErrors.
+# TYPE node_netstat_UdpLite6_RcvbufErrors untyped
+node_netstat_UdpLite6_RcvbufErrors 0
+# HELP node_netstat_UdpLite6_SndbufErrors Statistic UdpLite6SndbufErrors.
+# TYPE node_netstat_UdpLite6_SndbufErrors untyped
+node_netstat_UdpLite6_SndbufErrors 0
+# HELP node_netstat_UdpLite_IgnoredMulti Statistic UdpLiteIgnoredMulti.
+# TYPE node_netstat_UdpLite_IgnoredMulti untyped
+node_netstat_UdpLite_IgnoredMulti 0
+# HELP node_netstat_UdpLite_InCsumErrors Statistic UdpLiteInCsumErrors.
+# TYPE node_netstat_UdpLite_InCsumErrors untyped
+node_netstat_UdpLite_InCsumErrors 0
+# HELP node_netstat_UdpLite_InDatagrams Statistic UdpLiteInDatagrams.
+# TYPE node_netstat_UdpLite_InDatagrams untyped
+node_netstat_UdpLite_InDatagrams 0
+# HELP node_netstat_UdpLite_InErrors Statistic UdpLiteInErrors.
+# TYPE node_netstat_UdpLite_InErrors untyped
+node_netstat_UdpLite_InErrors 0
+# HELP node_netstat_UdpLite_NoPorts Statistic UdpLiteNoPorts.
+# TYPE node_netstat_UdpLite_NoPorts untyped
+node_netstat_UdpLite_NoPorts 0
+# HELP node_netstat_UdpLite_OutDatagrams Statistic UdpLiteOutDatagrams.
+# TYPE node_netstat_UdpLite_OutDatagrams untyped
+node_netstat_UdpLite_OutDatagrams 0
+# HELP node_netstat_UdpLite_RcvbufErrors Statistic UdpLiteRcvbufErrors.
+# TYPE node_netstat_UdpLite_RcvbufErrors untyped
+node_netstat_UdpLite_RcvbufErrors 0
+# HELP node_netstat_UdpLite_SndbufErrors Statistic UdpLiteSndbufErrors.
+# TYPE node_netstat_UdpLite_SndbufErrors untyped
+node_netstat_UdpLite_SndbufErrors 0
+# HELP node_netstat_Udp_IgnoredMulti Statistic UdpIgnoredMulti.
+# TYPE node_netstat_Udp_IgnoredMulti untyped
+node_netstat_Udp_IgnoredMulti 0
+# HELP node_netstat_Udp_InCsumErrors Statistic UdpInCsumErrors.
+# TYPE node_netstat_Udp_InCsumErrors untyped
+node_netstat_Udp_InCsumErrors 334
+# HELP node_netstat_Udp_InDatagrams Statistic UdpInDatagrams.
+# TYPE node_netstat_Udp_InDatagrams untyped
+node_netstat_Udp_InDatagrams 1.75720567871e+11
+# HELP node_netstat_Udp_InErrors Statistic UdpInErrors.
+# TYPE node_netstat_Udp_InErrors untyped
+node_netstat_Udp_InErrors 4.08819798e+08
+# HELP node_netstat_Udp_NoPorts Statistic UdpNoPorts.
+# TYPE node_netstat_Udp_NoPorts untyped
+node_netstat_Udp_NoPorts 2.429856e+06
+# HELP node_netstat_Udp_OutDatagrams Statistic UdpOutDatagrams.
+# TYPE node_netstat_Udp_OutDatagrams untyped
+node_netstat_Udp_OutDatagrams 2.3061302e+07
+# HELP node_netstat_Udp_RcvbufErrors Statistic UdpRcvbufErrors.
+# TYPE node_netstat_Udp_RcvbufErrors untyped
+node_netstat_Udp_RcvbufErrors 4.08819461e+08
+# HELP node_netstat_Udp_SndbufErrors Statistic UdpSndbufErrors.
+# TYPE node_netstat_Udp_SndbufErrors untyped
+node_netstat_Udp_SndbufErrors 0
+# HELP node_network_receive_bytes Network device statistic receive_bytes.
+# TYPE node_network_receive_bytes gauge
+node_network_receive_bytes{device="eno1"} 1.52772926379419e+14
+node_network_receive_bytes{device="eno2"} 0
+# HELP node_network_receive_compressed Network device statistic receive_compressed.
+# TYPE node_network_receive_compressed gauge
+node_network_receive_compressed{device="eno1"} 0
+node_network_receive_compressed{device="eno2"} 0
+# HELP node_network_receive_drop Network device statistic receive_drop.
+# TYPE node_network_receive_drop gauge
+node_network_receive_drop{device="eno1"} 0
+node_network_receive_drop{device="eno2"} 0
+# HELP node_network_receive_errs Network device statistic receive_errs.
+# TYPE node_network_receive_errs gauge
+node_network_receive_errs{device="eno1"} 0
+node_network_receive_errs{device="eno2"} 0
+# HELP node_network_receive_fifo Network device statistic receive_fifo.
+# TYPE node_network_receive_fifo gauge
+node_network_receive_fifo{device="eno1"} 228275
+node_network_receive_fifo{device="eno2"} 0
+# HELP node_network_receive_frame Network device statistic receive_frame.
+# TYPE node_network_receive_frame gauge
+node_network_receive_frame{device="eno1"} 0
+node_network_receive_frame{device="eno2"} 0
+# HELP node_network_receive_multicast Network device statistic receive_multicast.
+# TYPE node_network_receive_multicast gauge
+node_network_receive_multicast{device="eno1"} 1.85516332e+08
+node_network_receive_multicast{device="eno2"} 0
+# HELP node_network_receive_packets Network device statistic receive_packets.
+# TYPE node_network_receive_packets gauge
+node_network_receive_packets{device="eno1"} 2.39559298572e+11
+node_network_receive_packets{device="eno2"} 0
+# HELP node_network_transmit_bytes Network device statistic transmit_bytes.
+# TYPE node_network_transmit_bytes gauge
+node_network_transmit_bytes{device="eno1"} 1.6387910739153e+13
+node_network_transmit_bytes{device="eno2"} 0
+# HELP node_network_transmit_compressed Network device statistic transmit_compressed.
+# TYPE node_network_transmit_compressed gauge
+node_network_transmit_compressed{device="eno1"} 0
+node_network_transmit_compressed{device="eno2"} 0
+# HELP node_network_transmit_drop Network device statistic transmit_drop.
+# TYPE node_network_transmit_drop gauge
+node_network_transmit_drop{device="eno1"} 0
+node_network_transmit_drop{device="eno2"} 0
+# HELP node_network_transmit_errs Network device statistic transmit_errs.
+# TYPE node_network_transmit_errs gauge
+node_network_transmit_errs{device="eno1"} 0
+node_network_transmit_errs{device="eno2"} 0
+# HELP node_network_transmit_fifo Network device statistic transmit_fifo.
+# TYPE node_network_transmit_fifo gauge
+node_network_transmit_fifo{device="eno1"} 0
+node_network_transmit_fifo{device="eno2"} 0
+# HELP node_network_transmit_frame Network device statistic transmit_frame.
+# TYPE node_network_transmit_frame gauge
+node_network_transmit_frame{device="eno1"} 0
+node_network_transmit_frame{device="eno2"} 0
+# HELP node_network_transmit_multicast Network device statistic transmit_multicast.
+# TYPE node_network_transmit_multicast gauge
+node_network_transmit_multicast{device="eno1"} 0
+node_network_transmit_multicast{device="eno2"} 0
+# HELP node_network_transmit_packets Network device statistic transmit_packets.
+# TYPE node_network_transmit_packets gauge
+node_network_transmit_packets{device="eno1"} 3.8698985104e+10
+node_network_transmit_packets{device="eno2"} 0
+# HELP node_nf_conntrack_entries Number of currently allocated flow entries for connection tracking.
+# TYPE node_nf_conntrack_entries gauge
+node_nf_conntrack_entries 9860
+# HELP node_nf_conntrack_entries_limit Maximum size of connection tracking table.
+# TYPE node_nf_conntrack_entries_limit gauge
+node_nf_conntrack_entries_limit 262144
+# HELP node_procs_blocked Number of processes blocked waiting for I/O to complete.
+# TYPE node_procs_blocked gauge
+node_procs_blocked 0
+# HELP node_procs_running Number of processes in runnable state.
+# TYPE node_procs_running gauge
+node_procs_running 12
+# HELP node_scrape_collector_duration_seconds node_exporter: Duration of a collector scrape.
+# TYPE node_scrape_collector_duration_seconds gauge
+node_scrape_collector_duration_seconds{collector="arp"} 8.3201e-05
+node_scrape_collector_duration_seconds{collector="bcache"} 2.6718e-05
+node_scrape_collector_duration_seconds{collector="conntrack"} 0.000135661
+node_scrape_collector_duration_seconds{collector="cpu"} 0.00318246
+node_scrape_collector_duration_seconds{collector="diskstats"} 0.000989887
+node_scrape_collector_duration_seconds{collector="edac"} 0.000221174
+node_scrape_collector_duration_seconds{collector="entropy"} 5.4935e-05
+node_scrape_collector_duration_seconds{collector="filefd"} 5.5105e-05
+node_scrape_collector_duration_seconds{collector="filesystem"} 0.000801402
+node_scrape_collector_duration_seconds{collector="hwmon"} 0.005000749
+node_scrape_collector_duration_seconds{collector="infiniband"} 5.5087e-05
+node_scrape_collector_duration_seconds{collector="ipvs"} 3.4608e-05
+node_scrape_collector_duration_seconds{collector="loadavg"} 5.0968e-05
+node_scrape_collector_duration_seconds{collector="mdadm"} 0.000116397
+node_scrape_collector_duration_seconds{collector="meminfo"} 0.000528454
+node_scrape_collector_duration_seconds{collector="netdev"} 0.00036631
+node_scrape_collector_duration_seconds{collector="netstat"} 0.003387122
+node_scrape_collector_duration_seconds{collector="sockstat"} 0.000183148
+node_scrape_collector_duration_seconds{collector="stat"} 0.000466595
+node_scrape_collector_duration_seconds{collector="textfile"} 4.67e-07
+node_scrape_collector_duration_seconds{collector="time"} 1.6823e-05
+node_scrape_collector_duration_seconds{collector="timex"} 1.1125e-05
+node_scrape_collector_duration_seconds{collector="uname"} 3.2652e-05
+node_scrape_collector_duration_seconds{collector="vmstat"} 0.001257837
+node_scrape_collector_duration_seconds{collector="wifi"} 0.000249617
+node_scrape_collector_duration_seconds{collector="xfs"} 8.8613e-05
+node_scrape_collector_duration_seconds{collector="zfs"} 3.4065e-05
+# HELP node_scrape_collector_success node_exporter: Whether a collector succeeded.
+# TYPE node_scrape_collector_success gauge
+node_scrape_collector_success{collector="arp"} 1
+node_scrape_collector_success{collector="bcache"} 1
+node_scrape_collector_success{collector="conntrack"} 1
+node_scrape_collector_success{collector="cpu"} 1
+node_scrape_collector_success{collector="diskstats"} 1
+node_scrape_collector_success{collector="edac"} 1
+node_scrape_collector_success{collector="entropy"} 1
+node_scrape_collector_success{collector="filefd"} 1
+node_scrape_collector_success{collector="filesystem"} 1
+node_scrape_collector_success{collector="hwmon"} 1
+node_scrape_collector_success{collector="infiniband"} 1
+node_scrape_collector_success{collector="ipvs"} 1
+node_scrape_collector_success{collector="loadavg"} 1
+node_scrape_collector_success{collector="mdadm"} 1
+node_scrape_collector_success{collector="meminfo"} 1
+node_scrape_collector_success{collector="netdev"} 1
+node_scrape_collector_success{collector="netstat"} 1
+node_scrape_collector_success{collector="sockstat"} 1
+node_scrape_collector_success{collector="stat"} 1
+node_scrape_collector_success{collector="textfile"} 1
+node_scrape_collector_success{collector="time"} 1
+node_scrape_collector_success{collector="timex"} 1
+node_scrape_collector_success{collector="uname"} 1
+node_scrape_collector_success{collector="vmstat"} 1
+node_scrape_collector_success{collector="wifi"} 1
+node_scrape_collector_success{collector="xfs"} 1
+node_scrape_collector_success{collector="zfs"} 1
+# HELP node_sockstat_FRAG_inuse Number of FRAG sockets in state inuse.
+# TYPE node_sockstat_FRAG_inuse gauge
+node_sockstat_FRAG_inuse 0
+# HELP node_sockstat_FRAG_memory Number of FRAG sockets in state memory.
+# TYPE node_sockstat_FRAG_memory gauge
+node_sockstat_FRAG_memory 0
+# HELP node_sockstat_RAW_inuse Number of RAW sockets in state inuse.
+# TYPE node_sockstat_RAW_inuse gauge
+node_sockstat_RAW_inuse 1
+# HELP node_sockstat_TCP_alloc Number of TCP sockets in state alloc.
+# TYPE node_sockstat_TCP_alloc gauge
+node_sockstat_TCP_alloc 127
+# HELP node_sockstat_TCP_inuse Number of TCP sockets in state inuse.
+# TYPE node_sockstat_TCP_inuse gauge
+node_sockstat_TCP_inuse 106
+# HELP node_sockstat_TCP_mem Number of TCP sockets in state mem.
+# TYPE node_sockstat_TCP_mem gauge
+node_sockstat_TCP_mem 44
+# HELP node_sockstat_TCP_mem_bytes Number of TCP sockets in state mem_bytes.
+# TYPE node_sockstat_TCP_mem_bytes gauge
+node_sockstat_TCP_mem_bytes 180224
+# HELP node_sockstat_TCP_orphan Number of TCP sockets in state orphan.
+# TYPE node_sockstat_TCP_orphan gauge
+node_sockstat_TCP_orphan 0
+# HELP node_sockstat_TCP_tw Number of TCP sockets in state tw.
+# TYPE node_sockstat_TCP_tw gauge
+node_sockstat_TCP_tw 20
+# HELP node_sockstat_UDPLITE_inuse Number of UDPLITE sockets in state inuse.
+# TYPE node_sockstat_UDPLITE_inuse gauge
+node_sockstat_UDPLITE_inuse 0
+# HELP node_sockstat_UDP_inuse Number of UDP sockets in state inuse.
+# TYPE node_sockstat_UDP_inuse gauge
+node_sockstat_UDP_inuse 2
+# HELP node_sockstat_UDP_mem Number of UDP sockets in state mem.
+# TYPE node_sockstat_UDP_mem gauge
+node_sockstat_UDP_mem 25
+# HELP node_sockstat_UDP_mem_bytes Number of UDP sockets in state mem_bytes.
+# TYPE node_sockstat_UDP_mem_bytes gauge
+node_sockstat_UDP_mem_bytes 102400
+# HELP node_sockstat_sockets_used Number of sockets sockets in state used.
+# TYPE node_sockstat_sockets_used gauge
+node_sockstat_sockets_used 1182
+# HELP node_textfile_scrape_error 1 if there was an error opening or reading a file, 0 otherwise
+# TYPE node_textfile_scrape_error gauge
+node_textfile_scrape_error 0
+# HELP node_time System time in seconds since epoch (1970).
+# TYPE node_time gauge
+node_time 1.6685051550879066e+09
+# HELP node_timex_estimated_error_seconds Estimated error in seconds.
+# TYPE node_timex_estimated_error_seconds gauge
+node_timex_estimated_error_seconds 0
+# HELP node_timex_frequency_adjustment Local clock frequency adjustment.
+# TYPE node_timex_frequency_adjustment gauge
+node_timex_frequency_adjustment -326595
+# HELP node_timex_loop_time_constant Phase-locked loop time constant.
+# TYPE node_timex_loop_time_constant gauge
+node_timex_loop_time_constant 7
+# HELP node_timex_maxerror_seconds Maximum error in seconds.
+# TYPE node_timex_maxerror_seconds gauge
+node_timex_maxerror_seconds 0.2265
+# HELP node_timex_offset_seconds Time offset in between local system and reference clock.
+# TYPE node_timex_offset_seconds gauge
+node_timex_offset_seconds 7.5325e-05
+# HELP node_timex_pps_calibration_count Pulse per second count of calibration intervals.
+# TYPE node_timex_pps_calibration_count counter
+node_timex_pps_calibration_count 0
+# HELP node_timex_pps_error_count Pulse per second count of calibration errors.
+# TYPE node_timex_pps_error_count counter
+node_timex_pps_error_count 0
+# HELP node_timex_pps_frequency Pulse per second frequency.
+# TYPE node_timex_pps_frequency gauge
+node_timex_pps_frequency 0
+# HELP node_timex_pps_jitter_count Pulse per second count of jitter limit exceeded events.
+# TYPE node_timex_pps_jitter_count counter
+node_timex_pps_jitter_count 0
+# HELP node_timex_pps_jitter_seconds Pulse per second jitter.
+# TYPE node_timex_pps_jitter_seconds gauge
+node_timex_pps_jitter_seconds 0
+# HELP node_timex_pps_shift_seconds Pulse per second interval duration.
+# TYPE node_timex_pps_shift_seconds gauge
+node_timex_pps_shift_seconds 0
+# HELP node_timex_pps_stability Pulse per second stability.
+# TYPE node_timex_pps_stability counter
+node_timex_pps_stability 0
+# HELP node_timex_pps_stability_exceeded_count Pulse per second count of stability limit exceeded events.
+# TYPE node_timex_pps_stability_exceeded_count gauge
+node_timex_pps_stability_exceeded_count 0
+# HELP node_timex_status Value of the status array bits.
+# TYPE node_timex_status gauge
+node_timex_status 8193
+# HELP node_timex_sync_status Is clock synchronized to a reliable server (1 = yes, 0 = no).
+# TYPE node_timex_sync_status gauge
+node_timex_sync_status 1
+# HELP node_timex_tai_offset International Atomic Time (TAI) offset.
+# TYPE node_timex_tai_offset gauge
+node_timex_tai_offset 0
+# HELP node_timex_tick_seconds Seconds between clock ticks.
+# TYPE node_timex_tick_seconds gauge
+node_timex_tick_seconds 0.01
+# HELP node_uname_info Labeled system information as provided by the uname system call.
+# TYPE node_uname_info gauge
+node_uname_info{domainname="(none)",machine="x86_64",nodename="click2",release="4.15.0-88-generic",sysname="Linux",version="#88-Ubuntu SMP Tue Feb 11 20:11:34 UTC 2020"} 1
+# HELP node_vmstat_allocstall_dma /proc/vmstat information field allocstall_dma.
+# TYPE node_vmstat_allocstall_dma untyped
+node_vmstat_allocstall_dma 0
+# HELP node_vmstat_allocstall_dma32 /proc/vmstat information field allocstall_dma32.
+# TYPE node_vmstat_allocstall_dma32 untyped
+node_vmstat_allocstall_dma32 0
+# HELP node_vmstat_allocstall_movable /proc/vmstat information field allocstall_movable.
+# TYPE node_vmstat_allocstall_movable untyped
+node_vmstat_allocstall_movable 465503
+# HELP node_vmstat_allocstall_normal /proc/vmstat information field allocstall_normal.
+# TYPE node_vmstat_allocstall_normal untyped
+node_vmstat_allocstall_normal 10069
+# HELP node_vmstat_balloon_deflate /proc/vmstat information field balloon_deflate.
+# TYPE node_vmstat_balloon_deflate untyped
+node_vmstat_balloon_deflate 0
+# HELP node_vmstat_balloon_inflate /proc/vmstat information field balloon_inflate.
+# TYPE node_vmstat_balloon_inflate untyped
+node_vmstat_balloon_inflate 0
+# HELP node_vmstat_balloon_migrate /proc/vmstat information field balloon_migrate.
+# TYPE node_vmstat_balloon_migrate untyped
+node_vmstat_balloon_migrate 0
+# HELP node_vmstat_compact_daemon_free_scanned /proc/vmstat information field compact_daemon_free_scanned.
+# TYPE node_vmstat_compact_daemon_free_scanned untyped
+node_vmstat_compact_daemon_free_scanned 4.092654323e+09
+# HELP node_vmstat_compact_daemon_migrate_scanned /proc/vmstat information field compact_daemon_migrate_scanned.
+# TYPE node_vmstat_compact_daemon_migrate_scanned untyped
+node_vmstat_compact_daemon_migrate_scanned 6.5338321e+07
+# HELP node_vmstat_compact_daemon_wake /proc/vmstat information field compact_daemon_wake.
+# TYPE node_vmstat_compact_daemon_wake untyped
+node_vmstat_compact_daemon_wake 39867
+# HELP node_vmstat_compact_fail /proc/vmstat information field compact_fail.
+# TYPE node_vmstat_compact_fail untyped
+node_vmstat_compact_fail 55428
+# HELP node_vmstat_compact_free_scanned /proc/vmstat information field compact_free_scanned.
+# TYPE node_vmstat_compact_free_scanned untyped
+node_vmstat_compact_free_scanned 2.60470528723e+11
+# HELP node_vmstat_compact_isolated /proc/vmstat information field compact_isolated.
+# TYPE node_vmstat_compact_isolated untyped
+node_vmstat_compact_isolated 2.128021111e+09
+# HELP node_vmstat_compact_migrate_scanned /proc/vmstat information field compact_migrate_scanned.
+# TYPE node_vmstat_compact_migrate_scanned untyped
+node_vmstat_compact_migrate_scanned 1.765811654e+09
+# HELP node_vmstat_compact_stall /proc/vmstat information field compact_stall.
+# TYPE node_vmstat_compact_stall untyped
+node_vmstat_compact_stall 835488
+# HELP node_vmstat_compact_success /proc/vmstat information field compact_success.
+# TYPE node_vmstat_compact_success untyped
+node_vmstat_compact_success 780060
+# HELP node_vmstat_drop_pagecache /proc/vmstat information field drop_pagecache.
+# TYPE node_vmstat_drop_pagecache untyped
+node_vmstat_drop_pagecache 0
+# HELP node_vmstat_drop_slab /proc/vmstat information field drop_slab.
+# TYPE node_vmstat_drop_slab untyped
+node_vmstat_drop_slab 0
+# HELP node_vmstat_htlb_buddy_alloc_fail /proc/vmstat information field htlb_buddy_alloc_fail.
+# TYPE node_vmstat_htlb_buddy_alloc_fail untyped
+node_vmstat_htlb_buddy_alloc_fail 0
+# HELP node_vmstat_htlb_buddy_alloc_success /proc/vmstat information field htlb_buddy_alloc_success.
+# TYPE node_vmstat_htlb_buddy_alloc_success untyped
+node_vmstat_htlb_buddy_alloc_success 0
+# HELP node_vmstat_kswapd_high_wmark_hit_quickly /proc/vmstat information field kswapd_high_wmark_hit_quickly.
+# TYPE node_vmstat_kswapd_high_wmark_hit_quickly untyped
+node_vmstat_kswapd_high_wmark_hit_quickly 3.348255e+06
+# HELP node_vmstat_kswapd_inodesteal /proc/vmstat information field kswapd_inodesteal.
+# TYPE node_vmstat_kswapd_inodesteal untyped
+node_vmstat_kswapd_inodesteal 5.2524233219e+10
+# HELP node_vmstat_kswapd_low_wmark_hit_quickly /proc/vmstat information field kswapd_low_wmark_hit_quickly.
+# TYPE node_vmstat_kswapd_low_wmark_hit_quickly untyped
+node_vmstat_kswapd_low_wmark_hit_quickly 370495
+# HELP node_vmstat_nr_active_anon /proc/vmstat information field nr_active_anon.
+# TYPE node_vmstat_nr_active_anon untyped
+node_vmstat_nr_active_anon 3.399646e+06
+# HELP node_vmstat_nr_active_file /proc/vmstat information field nr_active_file.
+# TYPE node_vmstat_nr_active_file untyped
+node_vmstat_nr_active_file 6.415086e+06
+# HELP node_vmstat_nr_anon_pages /proc/vmstat information field nr_anon_pages.
+# TYPE node_vmstat_nr_anon_pages untyped
+node_vmstat_nr_anon_pages 3.422103e+06
+# HELP node_vmstat_nr_anon_transparent_hugepages /proc/vmstat information field nr_anon_transparent_hugepages.
+# TYPE node_vmstat_nr_anon_transparent_hugepages untyped
+node_vmstat_nr_anon_transparent_hugepages 102
+# HELP node_vmstat_nr_bounce /proc/vmstat information field nr_bounce.
+# TYPE node_vmstat_nr_bounce untyped
+node_vmstat_nr_bounce 0
+# HELP node_vmstat_nr_dirtied /proc/vmstat information field nr_dirtied.
+# TYPE node_vmstat_nr_dirtied untyped
+node_vmstat_nr_dirtied 3.7316232817e+10
+# HELP node_vmstat_nr_dirty /proc/vmstat information field nr_dirty.
+# TYPE node_vmstat_nr_dirty untyped
+node_vmstat_nr_dirty 3273
+# HELP node_vmstat_nr_dirty_background_threshold /proc/vmstat information field nr_dirty_background_threshold.
+# TYPE node_vmstat_nr_dirty_background_threshold untyped
+node_vmstat_nr_dirty_background_threshold 1.130689e+06
+# HELP node_vmstat_nr_dirty_threshold /proc/vmstat information field nr_dirty_threshold.
+# TYPE node_vmstat_nr_dirty_threshold untyped
+node_vmstat_nr_dirty_threshold 2.264143e+06
+# HELP node_vmstat_nr_file_pages /proc/vmstat information field nr_file_pages.
+# TYPE node_vmstat_nr_file_pages untyped
+node_vmstat_nr_file_pages 1.0832467e+07
+# HELP node_vmstat_nr_free_cma /proc/vmstat information field nr_free_cma.
+# TYPE node_vmstat_nr_free_cma untyped
+node_vmstat_nr_free_cma 0
+# HELP node_vmstat_nr_free_pages /proc/vmstat information field nr_free_pages.
+# TYPE node_vmstat_nr_free_pages untyped
+node_vmstat_nr_free_pages 659820
+# HELP node_vmstat_nr_inactive_anon /proc/vmstat information field nr_inactive_anon.
+# TYPE node_vmstat_nr_inactive_anon untyped
+node_vmstat_nr_inactive_anon 92
+# HELP node_vmstat_nr_inactive_file /proc/vmstat information field nr_inactive_file.
+# TYPE node_vmstat_nr_inactive_file untyped
+node_vmstat_nr_inactive_file 4.364141e+06
+# HELP node_vmstat_nr_isolated_anon /proc/vmstat information field nr_isolated_anon.
+# TYPE node_vmstat_nr_isolated_anon untyped
+node_vmstat_nr_isolated_anon 0
+# HELP node_vmstat_nr_isolated_file /proc/vmstat information field nr_isolated_file.
+# TYPE node_vmstat_nr_isolated_file untyped
+node_vmstat_nr_isolated_file 0
+# HELP node_vmstat_nr_kernel_stack /proc/vmstat information field nr_kernel_stack.
+# TYPE node_vmstat_nr_kernel_stack untyped
+node_vmstat_nr_kernel_stack 17232
+# HELP node_vmstat_nr_mapped /proc/vmstat information field nr_mapped.
+# TYPE node_vmstat_nr_mapped untyped
+node_vmstat_nr_mapped 146291
+# HELP node_vmstat_nr_mlock /proc/vmstat information field nr_mlock.
+# TYPE node_vmstat_nr_mlock untyped
+node_vmstat_nr_mlock 76971
+# HELP node_vmstat_nr_page_table_pages /proc/vmstat information field nr_page_table_pages.
+# TYPE node_vmstat_nr_page_table_pages untyped
+node_vmstat_nr_page_table_pages 23536
+# HELP node_vmstat_nr_shmem /proc/vmstat information field nr_shmem.
+# TYPE node_vmstat_nr_shmem untyped
+node_vmstat_nr_shmem 434
+# HELP node_vmstat_nr_shmem_hugepages /proc/vmstat information field nr_shmem_hugepages.
+# TYPE node_vmstat_nr_shmem_hugepages untyped
+node_vmstat_nr_shmem_hugepages 0
+# HELP node_vmstat_nr_shmem_pmdmapped /proc/vmstat information field nr_shmem_pmdmapped.
+# TYPE node_vmstat_nr_shmem_pmdmapped untyped
+node_vmstat_nr_shmem_pmdmapped 0
+# HELP node_vmstat_nr_slab_reclaimable /proc/vmstat information field nr_slab_reclaimable.
+# TYPE node_vmstat_nr_slab_reclaimable untyped
+node_vmstat_nr_slab_reclaimable 1.369355e+06
+# HELP node_vmstat_nr_slab_unreclaimable /proc/vmstat information field nr_slab_unreclaimable.
+# TYPE node_vmstat_nr_slab_unreclaimable untyped
+node_vmstat_nr_slab_unreclaimable 43699
+# HELP node_vmstat_nr_unevictable /proc/vmstat information field nr_unevictable.
+# TYPE node_vmstat_nr_unevictable untyped
+node_vmstat_nr_unevictable 76964
+# HELP node_vmstat_nr_unstable /proc/vmstat information field nr_unstable.
+# TYPE node_vmstat_nr_unstable untyped
+node_vmstat_nr_unstable 0
+# HELP node_vmstat_nr_vmscan_immediate_reclaim /proc/vmstat information field nr_vmscan_immediate_reclaim.
+# TYPE node_vmstat_nr_vmscan_immediate_reclaim untyped
+node_vmstat_nr_vmscan_immediate_reclaim 3.492182e+06
+# HELP node_vmstat_nr_vmscan_write /proc/vmstat information field nr_vmscan_write.
+# TYPE node_vmstat_nr_vmscan_write untyped
+node_vmstat_nr_vmscan_write 256923
+# HELP node_vmstat_nr_writeback /proc/vmstat information field nr_writeback.
+# TYPE node_vmstat_nr_writeback untyped
+node_vmstat_nr_writeback 0
+# HELP node_vmstat_nr_writeback_temp /proc/vmstat information field nr_writeback_temp.
+# TYPE node_vmstat_nr_writeback_temp untyped
+node_vmstat_nr_writeback_temp 0
+# HELP node_vmstat_nr_written /proc/vmstat information field nr_written.
+# TYPE node_vmstat_nr_written untyped
+node_vmstat_nr_written 2.632395498e+10
+# HELP node_vmstat_nr_zone_active_anon /proc/vmstat information field nr_zone_active_anon.
+# TYPE node_vmstat_nr_zone_active_anon untyped
+node_vmstat_nr_zone_active_anon 3.399646e+06
+# HELP node_vmstat_nr_zone_active_file /proc/vmstat information field nr_zone_active_file.
+# TYPE node_vmstat_nr_zone_active_file untyped
+node_vmstat_nr_zone_active_file 6.415086e+06
+# HELP node_vmstat_nr_zone_inactive_anon /proc/vmstat information field nr_zone_inactive_anon.
+# TYPE node_vmstat_nr_zone_inactive_anon untyped
+node_vmstat_nr_zone_inactive_anon 92
+# HELP node_vmstat_nr_zone_inactive_file /proc/vmstat information field nr_zone_inactive_file.
+# TYPE node_vmstat_nr_zone_inactive_file untyped
+node_vmstat_nr_zone_inactive_file 4.364141e+06
+# HELP node_vmstat_nr_zone_unevictable /proc/vmstat information field nr_zone_unevictable.
+# TYPE node_vmstat_nr_zone_unevictable untyped
+node_vmstat_nr_zone_unevictable 76964
+# HELP node_vmstat_nr_zone_write_pending /proc/vmstat information field nr_zone_write_pending.
+# TYPE node_vmstat_nr_zone_write_pending untyped
+node_vmstat_nr_zone_write_pending 3312
+# HELP node_vmstat_nr_zspages /proc/vmstat information field nr_zspages.
+# TYPE node_vmstat_nr_zspages untyped
+node_vmstat_nr_zspages 0
+# HELP node_vmstat_numa_foreign /proc/vmstat information field numa_foreign.
+# TYPE node_vmstat_numa_foreign untyped
+node_vmstat_numa_foreign 0
+# HELP node_vmstat_numa_hint_faults /proc/vmstat information field numa_hint_faults.
+# TYPE node_vmstat_numa_hint_faults untyped
+node_vmstat_numa_hint_faults 0
+# HELP node_vmstat_numa_hint_faults_local /proc/vmstat information field numa_hint_faults_local.
+# TYPE node_vmstat_numa_hint_faults_local untyped
+node_vmstat_numa_hint_faults_local 0
+# HELP node_vmstat_numa_hit /proc/vmstat information field numa_hit.
+# TYPE node_vmstat_numa_hit untyped
+node_vmstat_numa_hit 7.64120770657e+11
+# HELP node_vmstat_numa_huge_pte_updates /proc/vmstat information field numa_huge_pte_updates.
+# TYPE node_vmstat_numa_huge_pte_updates untyped
+node_vmstat_numa_huge_pte_updates 0
+# HELP node_vmstat_numa_interleave /proc/vmstat information field numa_interleave.
+# TYPE node_vmstat_numa_interleave untyped
+node_vmstat_numa_interleave 69038
+# HELP node_vmstat_numa_local /proc/vmstat information field numa_local.
+# TYPE node_vmstat_numa_local untyped
+node_vmstat_numa_local 7.64120770657e+11
+# HELP node_vmstat_numa_miss /proc/vmstat information field numa_miss.
+# TYPE node_vmstat_numa_miss untyped
+node_vmstat_numa_miss 0
+# HELP node_vmstat_numa_other /proc/vmstat information field numa_other.
+# TYPE node_vmstat_numa_other untyped
+node_vmstat_numa_other 0
+# HELP node_vmstat_numa_pages_migrated /proc/vmstat information field numa_pages_migrated.
+# TYPE node_vmstat_numa_pages_migrated untyped
+node_vmstat_numa_pages_migrated 0
+# HELP node_vmstat_numa_pte_updates /proc/vmstat information field numa_pte_updates.
+# TYPE node_vmstat_numa_pte_updates untyped
+node_vmstat_numa_pte_updates 0
+# HELP node_vmstat_oom_kill /proc/vmstat information field oom_kill.
+# TYPE node_vmstat_oom_kill untyped
+node_vmstat_oom_kill 31
+# HELP node_vmstat_pageoutrun /proc/vmstat information field pageoutrun.
+# TYPE node_vmstat_pageoutrun untyped
+node_vmstat_pageoutrun 4.503327e+06
+# HELP node_vmstat_pgactivate /proc/vmstat information field pgactivate.
+# TYPE node_vmstat_pgactivate untyped
+node_vmstat_pgactivate 1.7156104802e+10
+# HELP node_vmstat_pgalloc_dma /proc/vmstat information field pgalloc_dma.
+# TYPE node_vmstat_pgalloc_dma untyped
+node_vmstat_pgalloc_dma 0
+# HELP node_vmstat_pgalloc_dma32 /proc/vmstat information field pgalloc_dma32.
+# TYPE node_vmstat_pgalloc_dma32 untyped
+node_vmstat_pgalloc_dma32 1.2192425806e+10
+# HELP node_vmstat_pgalloc_movable /proc/vmstat information field pgalloc_movable.
+# TYPE node_vmstat_pgalloc_movable untyped
+node_vmstat_pgalloc_movable 0
+# HELP node_vmstat_pgalloc_normal /proc/vmstat information field pgalloc_normal.
+# TYPE node_vmstat_pgalloc_normal untyped
+node_vmstat_pgalloc_normal 7.69510252009e+11
+# HELP node_vmstat_pgdeactivate /proc/vmstat information field pgdeactivate.
+# TYPE node_vmstat_pgdeactivate untyped
+node_vmstat_pgdeactivate 9.918443646e+09
+# HELP node_vmstat_pgfault /proc/vmstat information field pgfault.
+# TYPE node_vmstat_pgfault untyped
+node_vmstat_pgfault 3.31771578819e+11
+# HELP node_vmstat_pgfree /proc/vmstat information field pgfree.
+# TYPE node_vmstat_pgfree untyped
+node_vmstat_pgfree 7.82772206323e+11
+# HELP node_vmstat_pginodesteal /proc/vmstat information field pginodesteal.
+# TYPE node_vmstat_pginodesteal untyped
+node_vmstat_pginodesteal 3.757391642e+09
+# HELP node_vmstat_pglazyfree /proc/vmstat information field pglazyfree.
+# TYPE node_vmstat_pglazyfree untyped
+node_vmstat_pglazyfree 1.2602229624e+11
+# HELP node_vmstat_pglazyfreed /proc/vmstat information field pglazyfreed.
+# TYPE node_vmstat_pglazyfreed untyped
+node_vmstat_pglazyfreed 2.5833715e+07
+# HELP node_vmstat_pgmajfault /proc/vmstat information field pgmajfault.
+# TYPE node_vmstat_pgmajfault untyped
+node_vmstat_pgmajfault 1.90766083e+08
+# HELP node_vmstat_pgmigrate_fail /proc/vmstat information field pgmigrate_fail.
+# TYPE node_vmstat_pgmigrate_fail untyped
+node_vmstat_pgmigrate_fail 195528
+# HELP node_vmstat_pgmigrate_success /proc/vmstat information field pgmigrate_success.
+# TYPE node_vmstat_pgmigrate_success untyped
+node_vmstat_pgmigrate_success 1.056861911e+09
+# HELP node_vmstat_pgpgin /proc/vmstat information field pgpgin.
+# TYPE node_vmstat_pgpgin untyped
+node_vmstat_pgpgin 3.27347549916e+11
+# HELP node_vmstat_pgpgout /proc/vmstat information field pgpgout.
+# TYPE node_vmstat_pgpgout untyped
+node_vmstat_pgpgout 1.19251535434e+11
+# HELP node_vmstat_pgrefill /proc/vmstat information field pgrefill.
+# TYPE node_vmstat_pgrefill untyped
+node_vmstat_pgrefill 9.945699692e+09
+# HELP node_vmstat_pgrotated /proc/vmstat information field pgrotated.
+# TYPE node_vmstat_pgrotated untyped
+node_vmstat_pgrotated 4.135383e+06
+# HELP node_vmstat_pgscan_direct /proc/vmstat information field pgscan_direct.
+# TYPE node_vmstat_pgscan_direct untyped
+node_vmstat_pgscan_direct 5.26719985e+08
+# HELP node_vmstat_pgscan_direct_throttle /proc/vmstat information field pgscan_direct_throttle.
+# TYPE node_vmstat_pgscan_direct_throttle untyped
+node_vmstat_pgscan_direct_throttle 0
+# HELP node_vmstat_pgscan_kswapd /proc/vmstat information field pgscan_kswapd.
+# TYPE node_vmstat_pgscan_kswapd untyped
+node_vmstat_pgscan_kswapd 3.1075205069e+10
+# HELP node_vmstat_pgskip_dma /proc/vmstat information field pgskip_dma.
+# TYPE node_vmstat_pgskip_dma untyped
+node_vmstat_pgskip_dma 0
+# HELP node_vmstat_pgskip_dma32 /proc/vmstat information field pgskip_dma32.
+# TYPE node_vmstat_pgskip_dma32 untyped
+node_vmstat_pgskip_dma32 0
+# HELP node_vmstat_pgskip_movable /proc/vmstat information field pgskip_movable.
+# TYPE node_vmstat_pgskip_movable untyped
+node_vmstat_pgskip_movable 0
+# HELP node_vmstat_pgskip_normal /proc/vmstat information field pgskip_normal.
+# TYPE node_vmstat_pgskip_normal untyped
+node_vmstat_pgskip_normal 0
+# HELP node_vmstat_pgsteal_direct /proc/vmstat information field pgsteal_direct.
+# TYPE node_vmstat_pgsteal_direct untyped
+node_vmstat_pgsteal_direct 2.65035353e+08
+# HELP node_vmstat_pgsteal_kswapd /proc/vmstat information field pgsteal_kswapd.
+# TYPE node_vmstat_pgsteal_kswapd untyped
+node_vmstat_pgsteal_kswapd 2.8364064528e+10
+# HELP node_vmstat_pswpin /proc/vmstat information field pswpin.
+# TYPE node_vmstat_pswpin untyped
+node_vmstat_pswpin 0
+# HELP node_vmstat_pswpout /proc/vmstat information field pswpout.
+# TYPE node_vmstat_pswpout untyped
+node_vmstat_pswpout 0
+# HELP node_vmstat_slabs_scanned /proc/vmstat information field slabs_scanned.
+# TYPE node_vmstat_slabs_scanned untyped
+node_vmstat_slabs_scanned 3.455427107e+09
+# HELP node_vmstat_swap_ra /proc/vmstat information field swap_ra.
+# TYPE node_vmstat_swap_ra untyped
+node_vmstat_swap_ra 0
+# HELP node_vmstat_swap_ra_hit /proc/vmstat information field swap_ra_hit.
+# TYPE node_vmstat_swap_ra_hit untyped
+node_vmstat_swap_ra_hit 0
+# HELP node_vmstat_thp_collapse_alloc /proc/vmstat information field thp_collapse_alloc.
+# TYPE node_vmstat_thp_collapse_alloc untyped
+node_vmstat_thp_collapse_alloc 4.836761e+06
+# HELP node_vmstat_thp_collapse_alloc_failed /proc/vmstat information field thp_collapse_alloc_failed.
+# TYPE node_vmstat_thp_collapse_alloc_failed untyped
+node_vmstat_thp_collapse_alloc_failed 69049
+# HELP node_vmstat_thp_deferred_split_page /proc/vmstat information field thp_deferred_split_page.
+# TYPE node_vmstat_thp_deferred_split_page untyped
+node_vmstat_thp_deferred_split_page 1.4044726e+07
+# HELP node_vmstat_thp_fault_alloc /proc/vmstat information field thp_fault_alloc.
+# TYPE node_vmstat_thp_fault_alloc untyped
+node_vmstat_thp_fault_alloc 9.583925e+06
+# HELP node_vmstat_thp_fault_fallback /proc/vmstat information field thp_fault_fallback.
+# TYPE node_vmstat_thp_fault_fallback untyped
+node_vmstat_thp_fault_fallback 7716
+# HELP node_vmstat_thp_file_alloc /proc/vmstat information field thp_file_alloc.
+# TYPE node_vmstat_thp_file_alloc untyped
+node_vmstat_thp_file_alloc 0
+# HELP node_vmstat_thp_file_mapped /proc/vmstat information field thp_file_mapped.
+# TYPE node_vmstat_thp_file_mapped untyped
+node_vmstat_thp_file_mapped 0
+# HELP node_vmstat_thp_split_page /proc/vmstat information field thp_split_page.
+# TYPE node_vmstat_thp_split_page untyped
+node_vmstat_thp_split_page 2.809637e+06
+# HELP node_vmstat_thp_split_page_failed /proc/vmstat information field thp_split_page_failed.
+# TYPE node_vmstat_thp_split_page_failed untyped
+node_vmstat_thp_split_page_failed 1133
+# HELP node_vmstat_thp_split_pmd /proc/vmstat information field thp_split_pmd.
+# TYPE node_vmstat_thp_split_pmd untyped
+node_vmstat_thp_split_pmd 4.463212e+06
+# HELP node_vmstat_thp_split_pud /proc/vmstat information field thp_split_pud.
+# TYPE node_vmstat_thp_split_pud untyped
+node_vmstat_thp_split_pud 0
+# HELP node_vmstat_thp_swpout /proc/vmstat information field thp_swpout.
+# TYPE node_vmstat_thp_swpout untyped
+node_vmstat_thp_swpout 0
+# HELP node_vmstat_thp_swpout_fallback /proc/vmstat information field thp_swpout_fallback.
+# TYPE node_vmstat_thp_swpout_fallback untyped
+node_vmstat_thp_swpout_fallback 0
+# HELP node_vmstat_thp_zero_page_alloc /proc/vmstat information field thp_zero_page_alloc.
+# TYPE node_vmstat_thp_zero_page_alloc untyped
+node_vmstat_thp_zero_page_alloc 1
+# HELP node_vmstat_thp_zero_page_alloc_failed /proc/vmstat information field thp_zero_page_alloc_failed.
+# TYPE node_vmstat_thp_zero_page_alloc_failed untyped
+node_vmstat_thp_zero_page_alloc_failed 0
+# HELP node_vmstat_unevictable_pgs_cleared /proc/vmstat information field unevictable_pgs_cleared.
+# TYPE node_vmstat_unevictable_pgs_cleared untyped
+node_vmstat_unevictable_pgs_cleared 159364
+# HELP node_vmstat_unevictable_pgs_culled /proc/vmstat information field unevictable_pgs_culled.
+# TYPE node_vmstat_unevictable_pgs_culled untyped
+node_vmstat_unevictable_pgs_culled 7.16141e+06
+# HELP node_vmstat_unevictable_pgs_mlocked /proc/vmstat information field unevictable_pgs_mlocked.
+# TYPE node_vmstat_unevictable_pgs_mlocked untyped
+node_vmstat_unevictable_pgs_mlocked 2.2107632e+07
+# HELP node_vmstat_unevictable_pgs_munlocked /proc/vmstat information field unevictable_pgs_munlocked.
+# TYPE node_vmstat_unevictable_pgs_munlocked untyped
+node_vmstat_unevictable_pgs_munlocked 2.1867904e+07
+# HELP node_vmstat_unevictable_pgs_rescued /proc/vmstat information field unevictable_pgs_rescued.
+# TYPE node_vmstat_unevictable_pgs_rescued untyped
+node_vmstat_unevictable_pgs_rescued 2.186562e+07
+# HELP node_vmstat_unevictable_pgs_scanned /proc/vmstat information field unevictable_pgs_scanned.
+# TYPE node_vmstat_unevictable_pgs_scanned untyped
+node_vmstat_unevictable_pgs_scanned 0
+# HELP node_vmstat_unevictable_pgs_stranded /proc/vmstat information field unevictable_pgs_stranded.
+# TYPE node_vmstat_unevictable_pgs_stranded untyped
+node_vmstat_unevictable_pgs_stranded 159343
+# HELP node_vmstat_workingset_activate /proc/vmstat information field workingset_activate.
+# TYPE node_vmstat_workingset_activate untyped
+node_vmstat_workingset_activate 4.990246936e+09
+# HELP node_vmstat_workingset_nodereclaim /proc/vmstat information field workingset_nodereclaim.
+# TYPE node_vmstat_workingset_nodereclaim untyped
+node_vmstat_workingset_nodereclaim 6.589897e+06
+# HELP node_vmstat_workingset_refault /proc/vmstat information field workingset_refault.
+# TYPE node_vmstat_workingset_refault untyped
+node_vmstat_workingset_refault 7.035813189e+09
+# HELP node_vmstat_zone_reclaim_failed /proc/vmstat information field zone_reclaim_failed.
+# TYPE node_vmstat_zone_reclaim_failed untyped
+node_vmstat_zone_reclaim_failed 0
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 35069.35
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1024
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 12
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 2.013184e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.65839978164e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 3.181043712e+09
