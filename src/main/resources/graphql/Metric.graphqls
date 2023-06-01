@@ -2,5 +2,5 @@ type Metric {
     id: ID!
     name:String!
     organization:Organization!
-    parameterGroups:[ParameterGroup!]!
+    parameterGroups(page:Int = 0,size:Int = 50):[ParameterGroup!]!
 }

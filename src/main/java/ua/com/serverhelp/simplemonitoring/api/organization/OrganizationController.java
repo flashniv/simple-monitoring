@@ -1,6 +1,8 @@
 package ua.com.serverhelp.simplemonitoring.api.organization;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.user.User;
+import ua.com.serverhelp.simplemonitoring.repository.MetricRepository;
 import ua.com.serverhelp.simplemonitoring.repository.OrganizationRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
 
@@ -22,6 +25,7 @@ import java.util.UUID;
 public class OrganizationController {
     private final UserRepository userRepository;
     private final OrganizationRepository organizationRepository;
+    private final MetricRepository metricRepository;
 
     @MutationMapping
     public Organization createOrganization(@Argument String name, Authentication authentication) {
@@ -57,8 +61,9 @@ public class OrganizationController {
     }
 
     @SchemaMapping(typeName = "Organization", field = "metrics")
-    public List<Metric> metrics(Organization organization) {
-        var persistentOrg = organizationRepository.findByIdWithMetrics(organization.getId()).orElseThrow();
-        return persistentOrg.getMetrics();
+    public Page<Metric> metrics(@Argument Integer page, @Argument Integer size, Organization organization) {
+//        var persistentOrg = organizationRepository.findByIdWithMetrics(organization.getId()).orElseThrow();
+//        return persistentOrg.getMetrics();
+        return metricRepository.findAllByOrganization(organization, PageRequest.of(page, size));
     }
 }

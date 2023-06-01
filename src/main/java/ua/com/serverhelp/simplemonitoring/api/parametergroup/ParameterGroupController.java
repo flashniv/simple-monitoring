@@ -2,6 +2,7 @@ package ua.com.serverhelp.simplemonitoring.api.parametergroup;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
@@ -23,12 +24,12 @@ public class ParameterGroupController {
     private final FileManagementService fileManagementService;
 
     @SchemaMapping(typeName = "ParameterGroup", field = "dataItems")
-    public List<DataItem> dataItems(ParameterGroup parameterGroup) throws Exception {
+    public List<DataItem> dataItems(@Argument Integer beginDiff, @Argument Integer endDiff, ParameterGroup parameterGroup) throws Exception {
         Optional<List<DataItem>> optionalDataItems = fileManagementService.readMetric(
                 parameterGroup.getMetric().getOrganization().getId().toString(),
                 parameterGroup.getId(),
-                Instant.now().minus(1, ChronoUnit.DAYS),
-                Instant.now(),
+                Instant.now().minus(beginDiff, ChronoUnit.SECONDS),
+                Instant.now().minus(endDiff, ChronoUnit.SECONDS),
                 Collector.allItemsCollector()
         );
         return optionalDataItems.orElse(List.of());

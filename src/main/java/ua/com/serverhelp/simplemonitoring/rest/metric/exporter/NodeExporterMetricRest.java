@@ -92,7 +92,7 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
                     .value(Double.parseDouble(parts[2]))
                     .build();
 
-            log.debug("Add item "+dataItem.getTimestamp()+" "+dataItem.getPath()+"  "+dataItem.getParameters()+"  "+dataItem.getValue());
+            log.debug("Add item " + dataItem.getTimestamp() + " " + dataItem.getPath() + "  " + dataItem.getParameters() + "  " + dataItem.getValue());
 
             dataItemsService.putDataItem(dataItem);
         } catch (JsonProcessingException e) {

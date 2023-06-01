@@ -2,5 +2,5 @@ type ParameterGroup {
     id: ID!
     parameters:String!
     metric:Metric!
-    dataItems:[DataItem]!
+    dataItems(beginDiff:Int = 3600,endDiff:Int = 0):[DataItem]!
 }

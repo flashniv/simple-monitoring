@@ -1,6 +1,9 @@
 package ua.com.serverhelp.simplemonitoring.api.metric;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.security.core.Authentication;
@@ -30,7 +33,7 @@ public class MetricController {
     }
 
     @SchemaMapping(typeName = "Metric", field = "parameterGroups")
-    public List<ParameterGroup> parameterGroups(Metric metric) {
-        return parameterGroupRepository.findAllByMetric(metric);
+    public Page<ParameterGroup> parameterGroups(@Argument Integer page, @Argument Integer size, Metric metric) {
+        return parameterGroupRepository.findAllByMetric(metric, PageRequest.of(page, size));
     }
 }
