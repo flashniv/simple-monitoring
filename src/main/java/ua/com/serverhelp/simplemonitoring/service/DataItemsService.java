@@ -27,4 +27,8 @@ public class DataItemsService {
             fileManagementService.writeDataItem(orgId.toString(), parameterGroupId, dataItem);
         }
     }
+
+    public void clear() {
+        queue.clear();
+    }
 }

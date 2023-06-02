@@ -2,16 +2,21 @@ package ua.com.serverhelp.simplemonitoring.rest.metric.exporter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
+import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerPriority;
 import ua.com.serverhelp.simplemonitoring.rest.metric.AbstractMetricRest;
+import ua.com.serverhelp.simplemonitoring.service.TriggerService;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -20,9 +25,11 @@ import java.util.regex.Pattern;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/metric/exporter/node")
+@RequiredArgsConstructor
 public class NodeExporterMetricRest extends AbstractMetricRest {
     private final Pattern replaceE = Pattern.compile("(.*[0-9]e) ([0-9]+)$");
     private final Pattern parametersSplitToGroup = Pattern.compile("(.*)=\"(.*)\"");
+    private final TriggerService triggerService;
 
     @PostMapping("/")
     public ResponseEntity<String> receiveData(
@@ -84,6 +91,8 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
             String[] parts = input.split(";");
             String parameterGroup = parseParameterGroup(parts[1]);
 
+            checkIfNotExistTrigger(organization, parts[0], parameterGroup);
+
             var dataItem = DataItem.builder()
                     .organization(organization)
                     .path(parts[0])
@@ -112,5 +121,31 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
             }
         }
         return objectMapper.writeValueAsString(jsonNode);
+    }
+
+    private void checkIfNotExistTrigger(Organization organization, String path, String parameters) throws JsonProcessingException {
+        if (path.matches("exporter.*node.load15")) {
+            triggerService.createTriggerIfNotExistCompareItemToConst(
+                    organization,
+                    path + "." + parameters + ".load-avg",
+                    path,
+                    parameters,
+                    "Load average too high on %s",
+                    TriggerPriority.HIGH,
+                    8.0,
+                    ">"
+            );
+            triggerService.createTriggerIfNotExistCheckLastTimeItems(
+                    organization,
+                    path + "." + parameters + ".down",
+                    path,
+                    parameters,
+                    "Server was down %s",
+                    TriggerPriority.HIGH,
+                    Duration.of(15, ChronoUnit.MINUTES)
+            );
+        }
+        if (path.matches("exporter.*.node.filesystem_size_bytes")) {
+        }
     }
 }

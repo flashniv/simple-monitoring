@@ -51,6 +51,7 @@ public class FileManagementService {
     }
 
     public <R> Optional<R> readMetric(String orgId, Long parameterGroupId, Instant begin, Instant end, Collector<R> collector) throws Exception {
+        log.debug("FileManagementService::readMetric path=" + orgId + " params=" + parameterGroupId);
         readMetricWithHook(orgId, parameterGroupId, dataElement -> {
             if (dataElement.getTimestamp().isAfter(begin) && dataElement.getTimestamp().isBefore(end)) {
                 collector.processItem(dataElement);
@@ -61,10 +62,13 @@ public class FileManagementService {
 
     public void readMetricWithHook(String orgId, Long parameterGroupId, Consumer<DataItem> consumer) throws Exception {
         String path = getPath(orgId, parameterGroupId);
+        log.debug("FileManagementService::readMetricWithHook path=" + path);
 
         File[] files = Objects.requireNonNull(new File(path).listFiles());
 
         for (File file : files) {
+            log.debug("FileManagementService::readMetricWithHook file=" + file.getAbsolutePath());
+
             DataInputStream dis = new DataInputStream(new FileInputStream(file));
 
             while (dis.available() > 0) {

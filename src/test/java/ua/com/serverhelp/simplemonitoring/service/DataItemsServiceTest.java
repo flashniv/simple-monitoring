@@ -5,7 +5,6 @@ import org.instancio.Select;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
@@ -13,11 +12,8 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import java.util.List;
 
 class DataItemsServiceTest extends AbstractTest {
-    @Autowired
-    private DataItemsService dataItemsService;
-
     @BeforeEach
-    void setUp() {
+    void setUp2() {
         registerTestUsers();
         createOrganization();
         List<Organization> organizations = organizationRepository.findAll();

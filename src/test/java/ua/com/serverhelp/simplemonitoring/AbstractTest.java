@@ -7,6 +7,7 @@ import org.instancio.Instancio;
 import org.instancio.generator.Generator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,6 +21,7 @@ import ua.com.serverhelp.simplemonitoring.entity.user.Role;
 import ua.com.serverhelp.simplemonitoring.repository.*;
 import ua.com.serverhelp.simplemonitoring.rest.auth.type.RegisterRequest;
 import ua.com.serverhelp.simplemonitoring.service.AuthenticationService;
+import ua.com.serverhelp.simplemonitoring.service.DataItemsService;
 import ua.com.serverhelp.simplemonitoring.service.cache.CacheService;
 
 import java.io.File;
@@ -56,9 +58,15 @@ public abstract class AbstractTest {
     protected AlertRepository alertRepository;
     @Autowired
     protected CacheService cacheService;
+    @Autowired
+    protected DataItemsService dataItemsService;
 
     protected AccessToken accessToken;
 
+    @BeforeEach
+    void setUp() {
+        dataItemsService.clear();
+    }
 
     @AfterEach
     void tearDown() {

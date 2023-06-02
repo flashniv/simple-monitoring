@@ -30,7 +30,7 @@ class ParameterGroupControllerTest extends AbstractTest {
 
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp2() throws Exception {
         registerTestUsers();
         createOrganization();
         List<DataItem> dataItems = new ArrayList<>();

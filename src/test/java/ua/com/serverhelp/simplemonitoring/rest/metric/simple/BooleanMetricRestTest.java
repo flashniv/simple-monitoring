@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,15 +14,12 @@ import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
-import ua.com.serverhelp.simplemonitoring.service.DataItemsService;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class BooleanMetricRestTest extends AbstractTest {
-    @Autowired
-    private DataItemsService dataItemsService;
     @MockBean
     private ParameterGroupRepository parameterGroupRepository;
 

@@ -192,7 +192,7 @@ public class TriggerService {
         var trigger = Trigger.builder()
                 .triggerId(triggerId)
                 .organization(organization)
-                .name(triggerName.formatted(path))
+                .name(triggerName.formatted(path + (parameters.equals("{}") ? "" : " " + parameters)))
                 .priority(priority)
                 .conf(resConf)
                 .muted(false)

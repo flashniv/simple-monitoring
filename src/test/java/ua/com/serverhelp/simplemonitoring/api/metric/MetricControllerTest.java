@@ -18,7 +18,7 @@ class MetricControllerTest extends AbstractTest {
     private GraphQlTester tester;
 
     @BeforeEach
-    void setUp() {
+    void setUp2() {
         registerTestUsers();
         createOrganization();
     }
