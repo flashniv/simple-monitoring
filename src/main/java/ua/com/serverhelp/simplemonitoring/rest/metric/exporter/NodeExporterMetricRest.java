@@ -146,6 +146,32 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
             );
         }
         if (path.matches("exporter.*.node.filesystem_size_bytes")) {
+            triggerService.createTriggerIfNotExistCheckMetricsRatio(
+                    organization,
+                    path + "." + parameters + ".disk-free",
+                    "Disk free space less than 15%% on " + path.replace(".node.filesystem_size_bytes", "") + parameters,
+                    path.replace("filesystem_size_bytes", "filesystem_free_bytes"),
+                    parameters,
+                    path,
+                    parameters,
+                    TriggerPriority.HIGH,
+                    0.15
+            );
+
+        }
+        if (path.matches("exporter.*.node.filesystem_files")) {
+            triggerService.createTriggerIfNotExistCheckMetricsRatio(
+                    organization,
+                    path + "." + parameters + ".inodes-free",
+                    "Disk free Inodes less than 15%% on " + path.replace(".node.filesystem_files", "") + parameters,
+                    path.replace("filesystem_files", "filesystem_files_free"),
+                    parameters,
+                    path,
+                    parameters,
+                    TriggerPriority.HIGH,
+                    0.15
+            );
+
         }
     }
 }

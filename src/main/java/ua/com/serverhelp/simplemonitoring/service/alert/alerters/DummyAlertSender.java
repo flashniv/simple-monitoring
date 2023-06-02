@@ -15,6 +15,6 @@ public class DummyAlertSender implements AlertSender {
         String errorText = alert.getTriggerStatus().name() + ": " +
                 alert.getTrigger().getName() + "\n" +
                 "time " + alert.getAlertTimestamp();
-        log.debug(errorText);
+        log.warn(errorText);
     }
 }

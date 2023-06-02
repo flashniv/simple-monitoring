@@ -58,15 +58,7 @@ public class TriggerService {
     ) throws JsonProcessingException {
         if (checkNotExist(organization, triggerId)) {
             var objectMapper = new ObjectMapper();
-
-//            var conf = ("{\"class\":\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression\"," +
-//                    "\"parameters\":{" +
-//                    "\"arg1\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression\\\",\\\"parameters\\\":{\\\"value\\\":__const__}}\"," +
-//                    "\"arg2\":\"{\\\"class\\\":\\\"ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ReadValuesOfMetricExpression\\\",\\\"parameters\\\":{\\\"parameterGroup\\\":__parameterGroup__,\\\"collectorClass\\\":\\\"ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector\\\",\\\"organizationID\\\":\\\"__organizationID__\\\",\\\"beginDiff\\\":2592000,\\\"endDiff\\\":0}}\"," +
-//                    "\"operation\":\"__operation__\"" +
-//                    "}}")
-//                    .replace("__const__", String.valueOf(constant))
-//                    .replace("__operation__", operation);
+            var parameterGroup = parameterGroupRepository.getOrCreateParameterGroup(organization, path, parameters);
 
             var compareDoubleExpression = objectMapper.createObjectNode();
             var compareDoubleExpressionParameters = objectMapper.createObjectNode();
@@ -79,7 +71,7 @@ public class TriggerService {
             constantDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression");
             constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
 
-            readValuesOfMetricExpressionParameters.put("parameterGroup", "__parameterGroup__");
+            readValuesOfMetricExpressionParameters.put("parameterGroup", String.valueOf(parameterGroup.getId()));
             readValuesOfMetricExpressionParameters.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector");
             readValuesOfMetricExpressionParameters.put("organizationID", "__organizationID__");
             readValuesOfMetricExpressionParameters.put("beginDiff", 2592000L);
@@ -121,6 +113,7 @@ public class TriggerService {
     ) throws JsonProcessingException {
         if (checkNotExist(organization, triggerId)) {
             var objectMapper = new ObjectMapper();
+            var parameterGroup = parameterGroupRepository.getOrCreateParameterGroup(organization, path, parameters);
 
             var compareDoubleExpression = objectMapper.createObjectNode();
             var compareDoubleExpressionParameters = objectMapper.createObjectNode();
@@ -139,7 +132,7 @@ public class TriggerService {
             constantDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression");
             constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
 
-            readValuesOfMetricExpressionParameters.put("parameterGroup", "__parameterGroup__");
+            readValuesOfMetricExpressionParameters.put("parameterGroup", String.valueOf(parameterGroup.getId()));
             readValuesOfMetricExpressionParameters.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
             readValuesOfMetricExpressionParameters.put("organizationID", "__organizationID__");
             readValuesOfMetricExpressionParameters.put("beginDiff", 2592000L);
@@ -185,10 +178,8 @@ public class TriggerService {
     }
 
     private void createTrigger(Organization organization, String triggerId, String path, String parameters, String triggerName, TriggerPriority priority, String conf) {
-        var parameterGroup = parameterGroupRepository.getOrCreateParameterGroup(organization, path, parameters);
         var resConf = conf
-                .replace("__organizationID__", organization.getId().toString())
-                .replace("__parameterGroup__", String.valueOf(parameterGroup.getId()));
+                .replace("__organizationID__", organization.getId().toString());
         var trigger = Trigger.builder()
                 .triggerId(triggerId)
                 .organization(organization)
@@ -238,4 +229,76 @@ public class TriggerService {
                 });
     }
 
+    public void createTriggerIfNotExistCheckMetricsRatio(
+            Organization organization,
+            String triggerId,
+            String triggerName,
+            String metric1,
+            String parameters1,
+            String metric2,
+            String parameters2,
+            TriggerPriority triggerPriority,
+            double coefficient
+    ) throws JsonProcessingException {
+        if (checkNotExist(organization, triggerId)) {
+            var objectMapper = new ObjectMapper();
+
+            var parameterGroup1 = parameterGroupRepository.getOrCreateParameterGroup(organization, metric1, parameters1);
+            var parameterGroup2 = parameterGroupRepository.getOrCreateParameterGroup(organization, metric2, parameters2);
+
+            var compareDoubleExpression = objectMapper.createObjectNode();
+            var compareDoubleExpressionParameters = objectMapper.createObjectNode();
+
+            var constantDoubleExpression = objectMapper.createObjectNode();
+            var constantDoubleExpressionParameters = objectMapper.createObjectNode();
+
+            var readValuesOfMetricExpressionParameters1 = objectMapper.createObjectNode();
+            var readValuesOfMetricExpression1 = objectMapper.createObjectNode();
+
+            var readValuesOfMetricExpressionParameters2 = objectMapper.createObjectNode();
+            var readValuesOfMetricExpression2 = objectMapper.createObjectNode();
+
+            var mathDoubleExpressionParameters = objectMapper.createObjectNode();
+            var mathDoubleExpression = objectMapper.createObjectNode();
+
+            constantDoubleExpressionParameters.put("value", coefficient);
+            constantDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ConstantDoubleExpression");
+            constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
+
+            readValuesOfMetricExpressionParameters1.put("parameterGroup",  String.valueOf(parameterGroup1.getId()));
+            readValuesOfMetricExpressionParameters1.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
+            readValuesOfMetricExpressionParameters1.put("organizationID", "__organizationID__");
+            readValuesOfMetricExpressionParameters1.put("beginDiff", 2592000L);
+            readValuesOfMetricExpressionParameters1.put("endDiff", 0L);
+
+            readValuesOfMetricExpression1.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ReadValuesOfMetricExpression");
+            readValuesOfMetricExpression1.set("parameters", readValuesOfMetricExpressionParameters1);
+
+            readValuesOfMetricExpressionParameters2.put("parameterGroup",  String.valueOf(parameterGroup2.getId()));
+            readValuesOfMetricExpressionParameters2.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
+            readValuesOfMetricExpressionParameters2.put("organizationID", "__organizationID__");
+            readValuesOfMetricExpressionParameters2.put("beginDiff", 2592000L);
+            readValuesOfMetricExpressionParameters2.put("endDiff", 0L);
+
+            readValuesOfMetricExpression2.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ReadValuesOfMetricExpression");
+            readValuesOfMetricExpression2.set("parameters", readValuesOfMetricExpressionParameters2);
+
+            mathDoubleExpressionParameters.put("operation", "/");
+            mathDoubleExpressionParameters.set("arg1", readValuesOfMetricExpression1);
+            mathDoubleExpressionParameters.set("arg2", readValuesOfMetricExpression2);
+
+            mathDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.MathDoubleExpression");
+            mathDoubleExpression.set("parameters", mathDoubleExpressionParameters);
+
+            compareDoubleExpressionParameters.put("operation", "<");
+            compareDoubleExpressionParameters.set("arg1", constantDoubleExpression);
+            compareDoubleExpressionParameters.set("arg2", mathDoubleExpression);
+
+            compareDoubleExpression.put("class", "ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.CompareDoubleExpression");
+            compareDoubleExpression.set("parameters", compareDoubleExpressionParameters);
+
+            createTrigger(organization, triggerId, metric1, parameters1, triggerName, triggerPriority, objectMapper.writeValueAsString(compareDoubleExpression));
+        }
+
+    }
 }
