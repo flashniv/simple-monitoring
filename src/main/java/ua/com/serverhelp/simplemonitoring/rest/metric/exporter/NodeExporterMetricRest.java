@@ -63,6 +63,7 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
                 ".*node_memory_Mem.*",
                 ".*node_cpu_seconds_total.*",
                 ".*node_filesystem_avail.*ext[3|4].*",
+                ".*node_filesystem_free.*ext[3|4].*",
                 ".*node_filesystem_size.*ext[3|4].*",
                 ".*node_filesystem_files.*ext[3|4].*",
                 ".*node_vmstat_pswp.*",
@@ -150,7 +151,21 @@ public class NodeExporterMetricRest extends AbstractMetricRest {
                     organization,
                     path + "." + parameters + ".disk-free",
                     "Disk free space less than 15%% on " + path.replace(".node.filesystem_size_bytes", "") + parameters,
-                    path.replace("filesystem_size_bytes", "filesystem_free_bytes"),
+                    path.replace("filesystem_size_bytes", "filesystem_avail_bytes"),
+                    parameters,
+                    path,
+                    parameters,
+                    TriggerPriority.HIGH,
+                    0.15
+            );
+
+        }
+        if (path.matches("exporter.*.node.filesystem_size")) {
+            triggerService.createTriggerIfNotExistCheckMetricsRatio(
+                    organization,
+                    path + "." + parameters + ".disk-free",
+                    "Disk free space less than 15%% on " + path.replace(".node.filesystem_size", "") + parameters,
+                    path.replace("filesystem_size", "filesystem_free"),
                     parameters,
                     path,
                     parameters,
