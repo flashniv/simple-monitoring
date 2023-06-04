@@ -14,9 +14,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import ua.com.serverhelp.simplemonitoring.entity.accesstoken.AccessToken;
+import ua.com.serverhelp.simplemonitoring.entity.alert.Alerter;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
+import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerPriority;
 import ua.com.serverhelp.simplemonitoring.entity.user.Role;
 import ua.com.serverhelp.simplemonitoring.repository.*;
 import ua.com.serverhelp.simplemonitoring.rest.auth.type.RegisterRequest;
@@ -57,6 +59,8 @@ public abstract class AbstractTest {
     @Autowired
     protected AlertRepository alertRepository;
     @Autowired
+    protected AlerterRepository alerterRepository;
+    @Autowired
     protected CacheService cacheService;
     @Autowired
     protected DataItemsService dataItemsService;
@@ -71,6 +75,7 @@ public abstract class AbstractTest {
     @AfterEach
     void tearDown() {
         cacheService.clear();
+        alerterRepository.deleteAll();
         alertRepository.deleteAll();
         triggerRepository.deleteAll();
         accessTokenRepository.deleteAll();
@@ -115,6 +120,7 @@ public abstract class AbstractTest {
         var org1 = organizationRepository.save(organization);
 
         accessToken = createAccessToken(org1);
+        createAlerter(org1);
 
         createMetrics(org1);
 
@@ -124,6 +130,7 @@ public abstract class AbstractTest {
                 .build();
         var org2 = organizationRepository.save(organization1);
 
+        createAlerter(org2);
         createMetrics(org2);
 
         return List.of(org1, org2);
@@ -168,6 +175,17 @@ public abstract class AbstractTest {
     private AccessToken createAccessToken(Organization organization) {
         return accessTokenRepository.save(AccessToken.builder()
                 .organization(organization)
+                .build());
+    }
+
+    @Transactional
+    private void createAlerter(Organization organization) {
+        alerterRepository.save(Alerter.builder()
+                .organization(organization)
+                .className("ua.com.serverhelp.simplemonitoring.service.alert.alerters.DummyAlertSender")
+                .description("")
+                .minPriority(TriggerPriority.INFO)
+                .properties("{}")
                 .build());
     }
 

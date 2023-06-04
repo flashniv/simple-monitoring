@@ -1,5 +1,17 @@
 type Mutation {
     createOrganization(name:String!):Organization!
     createOrganizationAccessToken(orgId:ID!):String!
-    createAlerter(orgId:ID!,minPriority:String! = "HIGH",className:String! = "ua.com.serverhelp.simplemonitoring.service.alert.alerters.DummyAlertSender",properties:String! = "{}",description:String! = ""):Alerter!
+    createAlerter(inputAlerter:IAlerter!):Alerter!
+    updateAlerter(alerterId:ID!,inputAlerter:IAlerter!):Alerter!
+    deleteAlerter(alerterId:ID!):String!
+}
+enum TriggerPriority {
+    DEBUG,NOT_CLASSIFIED,INFO,AVERAGE,WARNING,HIGH,DISASTER
+}
+input IAlerter{
+    organizationId:ID!
+    minPriority:TriggerPriority!
+    description:String
+    className:String!
+    properties:String!
 }

@@ -33,7 +33,7 @@ class ParameterGroupControllerTest extends AbstractTest {
     @BeforeEach
     void setUp2() throws Exception {
         registerTestUsers();
-        organization=createOrganization().get(0);
+        organization = createOrganization().get(0);
         List<DataItem> dataItems = new ArrayList<>();
         dataItems.add(DataItem.builder()
                 .timestamp(Instant.now())

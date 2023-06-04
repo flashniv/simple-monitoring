@@ -1,4 +1,5 @@
 type Alerter{
+    id:ID!
     organization:Organization!
     minPriority:String!
     description:String

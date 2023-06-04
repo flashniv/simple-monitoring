@@ -16,7 +16,6 @@ import ua.com.serverhelp.simplemonitoring.repository.OrganizationRepository;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -28,12 +27,12 @@ public class MetricController {
     private final OrganizationRepository organizationRepository;
 
     @QueryMapping
-    public Page<Metric> metrics(@Argument UUID orgId,@Argument Integer page, @Argument Integer size,Authentication authentication) {
+    public Page<Metric> metrics(@Argument UUID orgId, @Argument Integer page, @Argument Integer size, Authentication authentication) {
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
         var org = organizationRepository.findByIdAndUsers(orgId, user).orElseThrow();
 
-        return metricRepository.findAllByOrganization(org,PageRequest.of(page, size));
+        return metricRepository.findAllByOrganization(org, PageRequest.of(page, size));
     }
 
     @SchemaMapping(typeName = "Metric", field = "parameterGroups")

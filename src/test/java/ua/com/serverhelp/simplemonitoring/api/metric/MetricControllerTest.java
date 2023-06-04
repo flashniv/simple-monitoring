@@ -22,7 +22,7 @@ class MetricControllerTest extends AbstractTest {
     @BeforeEach
     void setUp2() {
         registerTestUsers();
-        organization=createOrganization().get(0);
+        organization = createOrganization().get(0);
     }
 
     @Test
