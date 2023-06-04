@@ -1,0 +1,7 @@
+type Alerter{
+    organization:Organization!
+    minPriority:String!
+    description:String
+    className:String!
+    properties:String!
+}

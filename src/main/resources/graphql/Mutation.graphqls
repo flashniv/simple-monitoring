@@ -1,4 +1,5 @@
 type Mutation {
-    createOrganization(name:String!):Organization
+    createOrganization(name:String!):Organization!
     createOrganizationAccessToken(orgId:ID!):String!
+    createAlerter(orgId:ID!,minPriority:String! = "HIGH",className:String! = "ua.com.serverhelp.simplemonitoring.service.alert.alerters.DummyAlertSender",properties:String! = "{}",description:String! = ""):Alerter!
 }

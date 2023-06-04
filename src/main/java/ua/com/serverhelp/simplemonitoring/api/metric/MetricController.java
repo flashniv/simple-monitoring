@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
 import ua.com.serverhelp.simplemonitoring.repository.MetricRepository;
+import ua.com.serverhelp.simplemonitoring.repository.OrganizationRepository;
 import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,13 +25,15 @@ public class MetricController {
     private final UserRepository userRepository;
     private final MetricRepository metricRepository;
     private final ParameterGroupRepository parameterGroupRepository;
+    private final OrganizationRepository organizationRepository;
 
     @QueryMapping
-    public List<Metric> metrics(Authentication authentication) {
+    public Page<Metric> metrics(@Argument UUID orgId,@Argument Integer page, @Argument Integer size,Authentication authentication) {
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
+        var org = organizationRepository.findByIdAndUsers(orgId, user).orElseThrow();
 
-        return metricRepository.findAllByUser(user);
+        return metricRepository.findAllByOrganization(org,PageRequest.of(page, size));
     }
 
     @SchemaMapping(typeName = "Metric", field = "parameterGroups")

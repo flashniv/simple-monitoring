@@ -10,17 +10,19 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.security.test.context.support.WithMockUser;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
+import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 
 @Slf4j
 @AutoConfigureGraphQlTester
 class MetricControllerTest extends AbstractTest {
     @Autowired
     private GraphQlTester tester;
+    private Organization organization;
 
     @BeforeEach
     void setUp2() {
         registerTestUsers();
-        createOrganization();
+        organization=createOrganization().get(0);
     }
 
     @Test
@@ -28,19 +30,19 @@ class MetricControllerTest extends AbstractTest {
     void metricsByAdmin() {
         var document = """
                 {
-                    metrics{
+                    metrics(orgId:"__orgId__"){
                         id
                         name
                     }
                 }
-                """;
+                """.replace("__orgId__", organization.getId().toString());
         var metrics = tester
                 .document(document)
                 .execute()
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(20, metrics.size());
+        Assertions.assertEquals(10, metrics.size());
     }
 
     @Test
@@ -48,12 +50,12 @@ class MetricControllerTest extends AbstractTest {
     void metricsByManager() {
         var document = """
                 {
-                    metrics{
+                    metrics(orgId:"__orgId__"){
                         id
                         name
                     }
                 }
-                """;
+                """.replace("__orgId__", organization.getId().toString());
         var metrics = tester
                 .document(document)
                 .execute()
@@ -68,7 +70,7 @@ class MetricControllerTest extends AbstractTest {
     void parameterGroups() {
         var document = """
                 {
-                    metrics{
+                    metrics(orgId:"__orgId__"){
                         id
                         name
                         parameterGroups{
@@ -76,13 +78,13 @@ class MetricControllerTest extends AbstractTest {
                         }
                     }
                 }
-                """;
+                """.replace("__orgId__", organization.getId().toString());
         var metrics = tester
                 .document(document)
                 .execute()
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(20, metrics.size());
+        Assertions.assertEquals(10, metrics.size());
     }
 }

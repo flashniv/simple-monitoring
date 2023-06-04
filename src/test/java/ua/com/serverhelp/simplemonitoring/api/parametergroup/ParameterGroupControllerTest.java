@@ -12,6 +12,7 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.security.test.context.support.WithMockUser;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
 import ua.com.serverhelp.simplemonitoring.entity.metric.Metric;
+import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.FileManagementService;
 
@@ -27,12 +28,12 @@ class ParameterGroupControllerTest extends AbstractTest {
     private GraphQlTester tester;
     @MockBean
     private FileManagementService fileManagementService;
-
+    private Organization organization;
 
     @BeforeEach
     void setUp2() throws Exception {
         registerTestUsers();
-        createOrganization();
+        organization=createOrganization().get(0);
         List<DataItem> dataItems = new ArrayList<>();
         dataItems.add(DataItem.builder()
                 .timestamp(Instant.now())
@@ -55,7 +56,7 @@ class ParameterGroupControllerTest extends AbstractTest {
     void parameters() {
         var document = """
                 {
-                    metrics{
+                    metrics(orgId:"__orgId__"){
                         id
                         name
                         parameterGroups{
@@ -68,14 +69,14 @@ class ParameterGroupControllerTest extends AbstractTest {
                         }
                     }
                 }
-                """;
+                """.replace("__orgId__", organization.getId().toString());
         var metrics = tester
                 .document(document)
                 .execute()
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(20, metrics.size());
+        Assertions.assertEquals(10, metrics.size());
         var parameterGroups = metrics.get(0).getParameterGroups();
 
         Assertions.assertEquals(15, parameterGroups.size());
@@ -89,7 +90,7 @@ class ParameterGroupControllerTest extends AbstractTest {
     void dataItems() {
         var document = """
                 {
-                    metrics{
+                    metrics(orgId:"__orgId__"){
                         id
                         name
                         parameterGroups{
@@ -102,14 +103,14 @@ class ParameterGroupControllerTest extends AbstractTest {
                         }
                     }
                 }
-                """;
+                """.replace("__orgId__", organization.getId().toString());
         var metrics = tester
                 .document(document)
                 .execute()
                 .path("metrics")
                 .entityList(Metric.class)
                 .get();
-        Assertions.assertEquals(20, metrics.size());
+        Assertions.assertEquals(10, metrics.size());
         var parameterGroups = metrics.get(0).getParameterGroups();
 
         Assertions.assertEquals(15, parameterGroups.size());
