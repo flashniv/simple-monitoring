@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureG
 import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.security.test.context.support.WithMockUser;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
+import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerPriority;
@@ -61,6 +62,15 @@ class TriggerControllerTest extends AbstractTest {
                 .conf(conf)
                 .build();
         this.trigger = triggerRepository.save(trigger);
+
+        var alert = Alert.builder()
+                .organization(organization)
+                .alertTimestamp(Instant.now())
+                .trigger(this.trigger)
+                .triggerStatus(TriggerStatus.OK)
+                .operationData("")
+                .build();
+        alertRepository.save(alert);
     }
 
     @Test
@@ -93,6 +103,40 @@ class TriggerControllerTest extends AbstractTest {
                 .entityList(Trigger.class)
                 .get();
         Assertions.assertEquals(1, result.size());
+    }
+
+    @Test
+    @WithMockUser("admin@mail.com")
+    void alerts() {
+        var document = """
+                {
+                    triggers(orgId:"__orgId__"){
+                        id
+                        name
+                        description
+                        triggerId
+                        lastStatus
+                        priority
+                        lastStatusUpdate
+                        enabled
+                        suppressedScore
+                        muted
+                        conf
+                        alerts{
+                            id
+                        }
+                    }
+                }
+                """.replace("__orgId__", organization.getId().toString());
+        var result = tester
+                .document(document)
+                .execute()
+                .path("triggers")
+                .entityList(Trigger.class)
+                .get();
+        Assertions.assertEquals(1, result.size());
+        var trigger=result.get(0);
+        Assertions.assertEquals(1, trigger.getAlerts().size());
     }
 
     @Test
@@ -137,6 +181,7 @@ class TriggerControllerTest extends AbstractTest {
                 .get();
         Assertions.assertEquals("desc1", result.getDescription());
     }
+
     @Test
     @WithMockUser("admin@mail.com")
     void deleteTrigger() {

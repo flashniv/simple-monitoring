@@ -7,12 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.Expression;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.ExpressionException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -50,6 +53,9 @@ public class Trigger {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String conf;
+
+    @Transient
+    private List<Alert> alerts=new ArrayList<>();
 
     public Boolean checkTrigger() throws JsonProcessingException, ClassNotFoundException, NoSuchMethodException, ExpressionException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var objectMapper = new ObjectMapper();

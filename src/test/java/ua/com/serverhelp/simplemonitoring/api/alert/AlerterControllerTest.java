@@ -61,10 +61,12 @@ class AlerterControllerTest extends AbstractTest {
         var organizations = createOrganization();
         Assertions.assertFalse(organizations.isEmpty());
         var organization = organizations.get(0);
+        var alerters=alerterRepository.findAllByOrganization(organization);
+        Assertions.assertFalse(alerters.isEmpty());
 
         var document = """
                 mutation {
-                    updateAlerter(alerterId:1,inputAlerter:{
+                    updateAlerter(alerterId:__alerterId__,inputAlerter:{
                             organizationId:"__orgId__"
                             minPriority:HIGH
                             description:"desc1"
@@ -82,7 +84,9 @@ class AlerterControllerTest extends AbstractTest {
                         }
                     }
                 }
-                """.replace("__orgId__", organization.getId().toString());
+                """
+                .replace("__alerterId__", String.valueOf(alerters.get(0).getId()))
+                .replace("__orgId__", organization.getId().toString());
         var alerter = tester
                 .document(document)
                 .execute()
@@ -96,13 +100,17 @@ class AlerterControllerTest extends AbstractTest {
     @WithMockUser("admin@mail.com")
     void deleteAlerter() {
         registerTestUsers();
-        createOrganization();
+        var organizations = createOrganization();
+        Assertions.assertFalse(organizations.isEmpty());
+        var organization = organizations.get(0);
+        var alerters=alerterRepository.findAllByOrganization(organization);
+        Assertions.assertFalse(alerters.isEmpty());
 
         var document = """
                 mutation {
-                    deleteAlerter(alerterId:1)
+                    deleteAlerter(alerterId:__alerterId__)
                 }
-                """;
+                """.replace("__alerterId__", String.valueOf(alerters.get(0).getId()));
         var result = tester
                 .document(document)
                 .execute()

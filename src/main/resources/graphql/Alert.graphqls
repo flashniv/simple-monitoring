@@ -1,0 +1,8 @@
+type Alert{
+    id:ID!
+    trigger:Trigger!
+    organization:Organization!
+    triggerStatus:TriggerStatus!
+    alertTimestamp:String!
+    operationData:String!
+}

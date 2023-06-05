@@ -11,4 +11,5 @@ type Trigger{
     suppressedScore:Int!
     muted:Boolean!
     conf:String!
+    alerts(page:Int = 0,size:Int = 50):[Alert!]
 }
