@@ -78,6 +78,6 @@ public class TriggerController {
 
     @SchemaMapping(typeName = "Trigger", field = "alerts")
     public Page<Alert> alerts(@Argument Integer page, @Argument Integer size, Trigger trigger) {
-        return alertRepository.findAllByTrigger(trigger,PageRequest.of(page, size, Sort.by("alertTimestamp")));
+        return alertRepository.findAllByTrigger(trigger,PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"alertTimestamp")));
     }
 }
