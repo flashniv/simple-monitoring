@@ -1,0 +1,24 @@
+enum TriggerPriority {
+    DEBUG,NOT_CLASSIFIED,INFO,AVERAGE,WARNING,HIGH,DISASTER
+}
+enum TriggerStatus {
+    OK,ERROR,FAILED,UNCHECKED
+}
+input IAlerter{
+    organizationId:ID!
+    minPriority:TriggerPriority!
+    description:String
+    className:String!
+    properties:String!
+}
+input ITrigger{
+    organizationId:ID!
+    name:String!
+    description:String!
+    triggerId:String!
+    priority:TriggerPriority!
+    enabled:Boolean!
+    suppressedScore:Int!
+    muted:Boolean!
+    conf:String!
+}

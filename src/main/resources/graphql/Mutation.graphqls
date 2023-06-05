@@ -4,14 +4,6 @@ type Mutation {
     createAlerter(inputAlerter:IAlerter!):Alerter!
     updateAlerter(alerterId:ID!,inputAlerter:IAlerter!):Alerter!
     deleteAlerter(alerterId:ID!):String!
-}
-enum TriggerPriority {
-    DEBUG,NOT_CLASSIFIED,INFO,AVERAGE,WARNING,HIGH,DISASTER
-}
-input IAlerter{
-    organizationId:ID!
-    minPriority:TriggerPriority!
-    description:String
-    className:String!
-    properties:String!
+    updateTrigger(triggerId:ID!,inputTrigger:ITrigger!):Trigger!
+    deleteTrigger(triggerId:ID!):String!
 }

@@ -1,0 +1,14 @@
+type Trigger{
+    id:ID!
+    organization:Organization!
+    name:String!
+    description:String!
+    triggerId:String!
+    lastStatus:TriggerStatus!
+    priority:TriggerPriority!
+    lastStatusUpdate:String!
+    enabled:Boolean!
+    suppressedScore:Int!
+    muted:Boolean!
+    conf:String!
+}
