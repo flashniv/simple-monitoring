@@ -7,8 +7,6 @@ import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
 import ua.com.serverhelp.simplemonitoring.repository.AlerterRepository;
 import ua.com.serverhelp.simplemonitoring.service.alert.alerters.AlertSender;
 
-import java.lang.reflect.InvocationTargetException;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -27,8 +25,7 @@ public class AlertService {
                         alertSender.initialize(alerter.getProperties());
 
                         alertSender.sendMessage(alert);
-                    } catch (ClassNotFoundException | InvocationTargetException | InstantiationException |
-                             IllegalAccessException | NoSuchMethodException e) {
+                    } catch (Exception e) {
                         log.error("Error sending alert over " + alerter.getClassName() + " with params " + alerter.getProperties(), e);
                     }
                 });
