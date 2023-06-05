@@ -4,5 +4,5 @@ type Alert{
     organization:Organization!
     triggerStatus:TriggerStatus!
     alertTimestamp:String!
-    operationData:String!
+    operationData:String
 }
