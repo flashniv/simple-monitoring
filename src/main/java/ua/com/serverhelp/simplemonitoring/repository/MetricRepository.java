@@ -9,6 +9,7 @@ import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.user.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MetricRepository extends JpaRepository<Metric, Long>, MetricCustomRepository {
 
@@ -16,4 +17,6 @@ public interface MetricRepository extends JpaRepository<Metric, Long>, MetricCus
     List<Metric> findAllByUser(User user);
 
     Page<Metric> findAllByOrganization(Organization organization, Pageable pageable);
+
+    Optional<Metric> findByIdAndOrganization(Long id,Organization org);
 }

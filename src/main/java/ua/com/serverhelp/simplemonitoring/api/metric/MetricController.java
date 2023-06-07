@@ -34,6 +34,15 @@ public class MetricController {
 
         return metricRepository.findAllByOrganization(org, PageRequest.of(page, size));
     }
+    @QueryMapping
+    public Metric metric(@Argument Long metricId, Authentication authentication) {
+        var userDetails = (UserDetails) authentication.getPrincipal();
+        var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
+        var metric=metricRepository.findById(metricId).orElseThrow();
+        var org = organizationRepository.findByIdAndUsers(metric.getOrganization().getId(), user).orElseThrow();
+
+        return metric;
+    }
 
     @SchemaMapping(typeName = "Metric", field = "parameterGroups")
     public Page<ParameterGroup> parameterGroups(@Argument Integer page, @Argument Integer size, Metric metric) {
