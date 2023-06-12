@@ -7,4 +7,5 @@ type Query {
     alerters(orgId:ID!):[Alerter!]
     alerts(orgId:ID!,page:Int = 0,size:Int = 100):[Alert!]
     triggers(orgId:ID!,page:Int = 0,size:Int = 50):[Trigger!]
+    organizationAccessTokens(orgId:ID!):[AccessToken!]
 }
