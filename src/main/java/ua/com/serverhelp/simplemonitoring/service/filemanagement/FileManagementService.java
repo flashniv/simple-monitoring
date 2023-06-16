@@ -52,19 +52,9 @@ public class FileManagementService {
 
     public <R> Optional<R> readMetric(String orgId, Long parameterGroupId, Instant begin, Instant end, Collector<R> collector) throws Exception {
         log.debug("FileManagementService::readMetric path=" + orgId + " params=" + parameterGroupId);
-        readMetricWithHook(orgId, parameterGroupId, dataElement -> {
-            if (dataElement.getTimestamp().isAfter(begin) && dataElement.getTimestamp().isBefore(end)) {
-                collector.processItem(dataElement);
-            }
-        });
-        return collector.getResult();
-    }
 
-    public void readMetricWithHook(String orgId, Long parameterGroupId, Consumer<DataItem> consumer) throws Exception {
         String path = getPath(orgId, parameterGroupId);
-        log.debug("FileManagementService::readMetricWithHook path=" + path);
-
-        File[] files = Objects.requireNonNull(new File(path).listFiles());
+        File[] files = collector.getFilteredFiles(Objects.requireNonNull(new File(path).listFiles()),begin,end);
 
         for (File file : files) {
             log.debug("FileManagementService::readMetricWithHook file=" + file.getAbsolutePath());
@@ -74,15 +64,18 @@ public class FileManagementService {
             while (dis.available() > 0) {
                 long timestamp = dis.readLong();
                 double value = dis.readDouble();
-                consumer.accept(DataItem.builder()
+                var dataElement = DataItem.builder()
                         .timestamp(Instant.ofEpochSecond(timestamp))
                         .value(value)
-                        .build());
+                        .build();
+                if (dataElement.getTimestamp().isAfter(begin) && dataElement.getTimestamp().isBefore(end)) {
+                    collector.processItem(dataElement);
+                }
             }
             dis.close();
         }
 
-        log.debug("FileDriver::readMetric parameter group " + parameterGroupId + " was read.");
+        return collector.getResult();
     }
 
     private String getPeriod() {
