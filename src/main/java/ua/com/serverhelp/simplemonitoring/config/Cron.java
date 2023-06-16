@@ -34,7 +34,7 @@ public class Cron {
         } catch (Exception e) {
             log.error("Error metric writing", e);
         }
-        log.debug("Cron::processDataItemQueue done " + Duration.between(start, Instant.now()).get(ChronoUnit.MILLIS));
+        log.debug("Cron::processDataItemQueue done " + Duration.between(start, Instant.now()).getSeconds());
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 90000)
@@ -45,7 +45,7 @@ public class Cron {
 
             triggerService.cronCheckTriggers();
 
-            log.debug("Cron::checkTriggers done " + Duration.between(start, Instant.now()).get(ChronoUnit.MILLIS));
+            log.debug("Cron::checkTriggers done " + Duration.between(start, Instant.now()).getSeconds());
         }
     }
 }
