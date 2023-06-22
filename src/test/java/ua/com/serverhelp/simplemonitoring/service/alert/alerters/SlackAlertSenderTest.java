@@ -2,11 +2,6 @@ package ua.com.serverhelp.simplemonitoring.service.alert.alerters;
 
 import org.junit.jupiter.api.Test;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
-import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
-import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
-import ua.com.serverhelp.simplemonitoring.entity.triggers.TriggerStatus;
-
-import java.time.Instant;
 
 class SlackAlertSenderTest extends AbstractTest {
 

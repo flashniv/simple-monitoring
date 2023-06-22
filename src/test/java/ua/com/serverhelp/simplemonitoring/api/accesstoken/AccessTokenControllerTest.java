@@ -70,7 +70,7 @@ class AccessTokenControllerTest extends AbstractTest {
                 .entityList(AccessToken.class)
                 .get();
         Assertions.assertFalse(result.isEmpty());
-        var token=result.get(0);
+        var token = result.get(0);
         Assertions.assertTrue(token.getId().toString().contains("-"));
     }
 }

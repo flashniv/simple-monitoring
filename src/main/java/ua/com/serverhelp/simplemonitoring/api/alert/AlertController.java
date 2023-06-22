@@ -29,6 +29,6 @@ public class AlertController {
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
         var org = organizationRepository.findByIdAndUsers(orgId, user).orElseThrow();
 
-        return alertRepository.findAllByOrganization(org, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC,"alertTimestamp")));
+        return alertRepository.findAllByOrganization(org, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "alertTimestamp")));
     }
 }

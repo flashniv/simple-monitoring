@@ -60,8 +60,7 @@ public class SlackAlertSender implements AlertSender {
         return switch (alert.getTriggerStatus()) {
             case FAILED, UNCHECKED ->
                     "*FAIL: check trigger failed " + trigger.getName() + "*\non event time " + formatter.format(alert.getAlertTimestamp());
-            case OK ->
-                    "*OK: " + trigger.getName() + "*\non event time " + formatter.format(alert.getAlertTimestamp());
+            case OK -> "*OK: " + trigger.getName() + "*\non event time " + formatter.format(alert.getAlertTimestamp());
             case ERROR ->
                     "*ERR: " + trigger.getName() + "*\non event time " + formatter.format(alert.getAlertTimestamp());
         };

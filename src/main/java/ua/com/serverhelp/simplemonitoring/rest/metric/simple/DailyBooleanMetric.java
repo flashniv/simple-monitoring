@@ -36,7 +36,7 @@ public class DailyBooleanMetric extends AbstractMetricRest {
                 .build()
         );
         triggerService.createTriggerIfNotExistCompareItemToConst(organization, path + "{}.boolean", path, "{}", triggerName, priority, 1.0, "==");
-        triggerService.createTriggerIfNotExistCheckLastTimeItems(organization, path + "{}.daily", path, "{}", triggerName, priority, Duration.of(25, ChronoUnit.HOURS));
+        triggerService.createTriggerIfNotExistCheckLastTimeItems(organization, path + "{}.daily", path, "{}", "Data not receive last 24h on " + triggerName, priority, Duration.of(25, ChronoUnit.HOURS));
         log.debug("DailyBooleanMetric::getAddEvent /api/v1/metric/dailyboolean Event add:" + value);
 
         return ResponseEntity.ok().body("Success");

@@ -61,7 +61,7 @@ class AlerterControllerTest extends AbstractTest {
         var organizations = createOrganization();
         Assertions.assertFalse(organizations.isEmpty());
         var organization = organizations.get(0);
-        var alerters=alerterRepository.findAllByOrganization(organization);
+        var alerters = alerterRepository.findAllByOrganization(organization);
         Assertions.assertFalse(alerters.isEmpty());
 
         var document = """
@@ -103,7 +103,7 @@ class AlerterControllerTest extends AbstractTest {
         var organizations = createOrganization();
         Assertions.assertFalse(organizations.isEmpty());
         var organization = organizations.get(0);
-        var alerters=alerterRepository.findAllByOrganization(organization);
+        var alerters = alerterRepository.findAllByOrganization(organization);
         Assertions.assertFalse(alerters.isEmpty());
 
         var document = """

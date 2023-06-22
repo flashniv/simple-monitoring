@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Service
 @Slf4j
@@ -54,7 +53,7 @@ public class FileManagementService {
         log.debug("FileManagementService::readMetric path=" + orgId + " params=" + parameterGroupId);
 
         String path = getPath(orgId, parameterGroupId);
-        File[] files = collector.getFilteredFiles(Objects.requireNonNull(new File(path).listFiles()),begin,end);
+        File[] files = collector.getFilteredFiles(Objects.requireNonNull(new File(path).listFiles()), begin, end);
 
         for (File file : files) {
             log.debug("FileManagementService::readMetricWithHook file=" + file.getAbsolutePath());

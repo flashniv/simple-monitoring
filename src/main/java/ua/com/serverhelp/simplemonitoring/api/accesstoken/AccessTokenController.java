@@ -33,8 +33,9 @@ public class AccessTokenController {
         var persistAccessToken = accessTokenRepository.save(accessToken);
         return persistAccessToken.getId().toString();
     }
+
     @QueryMapping
-    public List<AccessToken> organizationAccessTokens(@Argument UUID orgId, Authentication authentication){
+    public List<AccessToken> organizationAccessTokens(@Argument UUID orgId, Authentication authentication) {
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
         var org = organizationRepository.findByIdAndUsers(orgId, user).orElseThrow();

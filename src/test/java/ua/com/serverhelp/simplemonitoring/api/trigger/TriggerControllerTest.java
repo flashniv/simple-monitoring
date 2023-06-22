@@ -135,7 +135,7 @@ class TriggerControllerTest extends AbstractTest {
                 .entityList(Trigger.class)
                 .get();
         Assertions.assertEquals(1, result.size());
-        var trigger=result.get(0);
+        var trigger = result.get(0);
         Assertions.assertEquals(1, trigger.getAlerts().size());
     }
 

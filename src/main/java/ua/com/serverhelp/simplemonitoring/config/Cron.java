@@ -11,7 +11,6 @@ import ua.com.serverhelp.simplemonitoring.service.TriggerService;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 
 @Configuration
 @EnableScheduling

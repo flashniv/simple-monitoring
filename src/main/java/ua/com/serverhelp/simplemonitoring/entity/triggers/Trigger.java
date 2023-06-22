@@ -55,7 +55,7 @@ public class Trigger {
     private String conf;
 
     @Transient
-    private List<Alert> alerts=new ArrayList<>();
+    private List<Alert> alerts = new ArrayList<>();
 
     public Boolean checkTrigger() throws JsonProcessingException, ClassNotFoundException, NoSuchMethodException, ExpressionException, InvocationTargetException, InstantiationException, IllegalAccessException {
         var objectMapper = new ObjectMapper();

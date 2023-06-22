@@ -17,7 +17,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 class FileManagementServiceTest extends AbstractTest {
@@ -99,9 +98,9 @@ class FileManagementServiceTest extends AbstractTest {
             }
         });
 
-        File newFile=new File("./metrics/"+uuid+"/01/1/2023_6_15");
+        File newFile = new File("./metrics/" + uuid + "/01/1/2023_6_15");
         newFile.createNewFile();
-        File newFile1=new File("./metrics/"+uuid+"/01/1/2023_6_14");
+        File newFile1 = new File("./metrics/" + uuid + "/01/1/2023_6_14");
         newFile1.createNewFile();
 
         var metric = fileManagementService.readMetric(uuid, parameterGroupId, Instant.now().minus(1, ChronoUnit.DAYS), Instant.now(), Collector.allItemsCollector());

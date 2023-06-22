@@ -18,5 +18,5 @@ public interface MetricRepository extends JpaRepository<Metric, Long>, MetricCus
 
     Page<Metric> findAllByOrganization(Organization organization, Pageable pageable);
 
-    Optional<Metric> findByIdAndOrganization(Long id,Organization org);
+    Optional<Metric> findByIdAndOrganization(Long id, Organization org);
 }
