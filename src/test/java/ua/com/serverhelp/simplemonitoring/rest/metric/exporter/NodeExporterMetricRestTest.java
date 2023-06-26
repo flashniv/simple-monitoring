@@ -81,8 +81,8 @@ class NodeExporterMetricRestTest extends AbstractTest {
 
     @Test
     void receiveData() {
-        List<Trigger> triggerList=triggerRepository.findAll();
-        triggerList.forEach(trigger -> log.debug("Trigger: "+trigger.getName()));
+        List<Trigger> triggerList = triggerRepository.findAll();
+        triggerList.forEach(trigger -> log.debug("Trigger: " + trigger.getName()));
         Assertions.assertEquals(22, triggerList.size());
     }
 }
