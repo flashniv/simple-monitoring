@@ -1,5 +1,6 @@
 package ua.com.serverhelp.simplemonitoring.rest.metric.exporter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,9 +8,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ua.com.serverhelp.simplemonitoring.AbstractTest;
+import ua.com.serverhelp.simplemonitoring.entity.triggers.Trigger;
 
 import java.io.InputStream;
+import java.util.List;
 
+@Slf4j
 class NodeExporterMetricRestTest extends AbstractTest {
 
     @BeforeEach
@@ -59,9 +63,26 @@ class NodeExporterMetricRestTest extends AbstractTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().string("Success"));
+        //centos
+        InputStream centosInput = classLoader.getResourceAsStream("exporter/node/centos_metrics.bin");
+        Assertions.assertNotNull(stgInput);
+        byte[] centosMetrics = centosInput.readAllBytes();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/metric/exporter/node/")
+                        .header("X-Simple-Token", accessToken.getId())
+                        .header("X-Project", "testproj")
+                        .header("X-Hostname", "centos")
+                        .content(centosMetrics)
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().string("Success"));
     }
 
     @Test
     void receiveData() {
+        List<Trigger> triggerList=triggerRepository.findAll();
+        triggerList.forEach(trigger -> log.debug("Trigger: "+trigger.getName()));
+        Assertions.assertEquals(22, triggerList.size());
     }
 }
