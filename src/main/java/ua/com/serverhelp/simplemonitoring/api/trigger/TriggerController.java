@@ -21,6 +21,8 @@ import ua.com.serverhelp.simplemonitoring.repository.TriggerRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
 import ua.com.serverhelp.simplemonitoring.rest.exceptions.AccessDeniedError;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,13 +46,14 @@ public class TriggerController {
     }
 
     @QueryMapping
-    public List<Trigger> triggers(Authentication authentication) {
+    public List<Trigger> triggers(@Argument Integer lastHours, Authentication authentication) {
         var triggers = new ArrayList<Trigger>();
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
         var organizations = organizationRepository.findAllByUsers(user);
         organizations.forEach(organization -> {
-            triggers.addAll(triggerRepository.findAllByOrganization(organization));
+            var orgTriggers = triggerRepository.findAllByOrganization(organization);
+            triggers.addAll(orgTriggers.stream().filter(trigger -> Duration.between(trigger.getLastStatusUpdate(), Instant.now()).getSeconds() < lastHours * 3600).toList());
         });
         return triggers;
 
