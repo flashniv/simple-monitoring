@@ -142,7 +142,7 @@ class TriggerControllerTest extends AbstractTest {
     void alerts() {
         var document = """
                 {
-                    triggers(orgId:"__orgId__"){
+                    triggers{
                         id
                         name
                         description
@@ -159,7 +159,7 @@ class TriggerControllerTest extends AbstractTest {
                         }
                     }
                 }
-                """.replace("__orgId__", organization.getId().toString());
+                """;
         var result = tester
                 .document(document)
                 .execute()

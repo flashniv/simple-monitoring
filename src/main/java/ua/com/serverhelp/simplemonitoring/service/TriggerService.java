@@ -219,7 +219,9 @@ public class TriggerService {
                                     .organization(trigger.getOrganization())
                                     .build();
                             alertRepository.save(alert);
-                            alertService.sendAlert(alert);
+                            if(!trigger.isMuted()){
+                                alertService.sendAlert(alert);
+                            }
                         }
                         trigger.setLastStatus(newStatus);
                         trigger.setLastStatusUpdate(Instant.now());
