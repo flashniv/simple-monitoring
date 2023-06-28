@@ -10,8 +10,6 @@ import ua.com.serverhelp.simplemonitoring.AbstractTest;
 
 import java.io.InputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BlackboxExporterMetricRestTest extends AbstractTest {
 
     @BeforeEach
@@ -37,7 +35,7 @@ class BlackboxExporterMetricRestTest extends AbstractTest {
 
     @Test
     void receiveData() {
-        var triggers=triggerRepository.findAll();
+        var triggers = triggerRepository.findAll();
         Assertions.assertEquals(2, triggers.size());
     }
 }

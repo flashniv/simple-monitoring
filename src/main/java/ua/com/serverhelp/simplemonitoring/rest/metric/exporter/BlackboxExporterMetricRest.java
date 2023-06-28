@@ -102,13 +102,13 @@ public class BlackboxExporterMetricRest extends AbstractMetricRest {
             );
             triggerService.createTriggerIfNotExistCheckLastTimeItems(
                     organization,
-                    path+".last15min",
+                    path + ".last15min",
                     path,
                     "{}",
                     "Web check not receive data 15 min on %s",
                     TriggerPriority.HIGH,
                     Duration.of(15, ChronoUnit.MINUTES)
-                    );
+            );
         }
     }
 

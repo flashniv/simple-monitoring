@@ -75,10 +75,10 @@ class TriggerControllerTest extends AbstractTest {
 
     @Test
     @WithMockUser("admin@mail.com")
-    void triggers() {
+    void triggersByOrganization() {
         var document = """
                 {
-                    triggers(orgId:"__orgId__"){
+                    triggersByOrganization(orgId:"__orgId__"){
                         id
                         name
                         description
@@ -96,6 +96,38 @@ class TriggerControllerTest extends AbstractTest {
                     }
                 }
                 """.replace("__orgId__", organization.getId().toString());
+        var result = tester
+                .document(document)
+                .execute()
+                .path("triggersByOrganization")
+                .entityList(Trigger.class)
+                .get();
+        Assertions.assertEquals(1, result.size());
+    }
+
+    @Test
+    @WithMockUser("admin@mail.com")
+    void triggers() {
+        var document = """
+                {
+                    triggers{
+                        id
+                        name
+                        description
+                        triggerId
+                        lastStatus
+                        priority
+                        lastStatusUpdate
+                        enabled
+                        suppressedScore
+                        muted
+                        conf
+                        organization{
+                            id
+                        }
+                    }
+                }
+                """;
         var result = tester
                 .document(document)
                 .execute()

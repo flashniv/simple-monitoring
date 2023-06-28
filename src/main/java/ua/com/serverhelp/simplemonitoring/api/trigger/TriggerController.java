@@ -21,6 +21,8 @@ import ua.com.serverhelp.simplemonitoring.repository.TriggerRepository;
 import ua.com.serverhelp.simplemonitoring.repository.UserRepository;
 import ua.com.serverhelp.simplemonitoring.rest.exceptions.AccessDeniedError;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -32,12 +34,25 @@ public class TriggerController {
     private final AlertRepository alertRepository;
 
     @QueryMapping
-    public Page<Trigger> triggers(@Argument UUID orgId, @Argument Integer page, @Argument Integer size, Authentication authentication) {
+    public Page<Trigger> triggersByOrganization(@Argument UUID orgId, @Argument Integer page, @Argument Integer size, Authentication authentication) {
         var userDetails = (UserDetails) authentication.getPrincipal();
         var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
         var org = organizationRepository.findByIdAndUsers(orgId, user).orElseThrow();
 
         return triggerRepository.findAllByOrganization(org, PageRequest.of(page, size));
+
+    }
+
+    @QueryMapping
+    public List<Trigger> triggers(Authentication authentication) {
+        var triggers = new ArrayList<Trigger>();
+        var userDetails = (UserDetails) authentication.getPrincipal();
+        var user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
+        var organizations = organizationRepository.findAllByUsers(user);
+        organizations.forEach(organization -> {
+            triggers.addAll(triggerRepository.findAllByOrganization(organization));
+        });
+        return triggers;
 
     }
 

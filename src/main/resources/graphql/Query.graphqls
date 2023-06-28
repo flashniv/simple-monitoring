@@ -6,6 +6,7 @@ type Query {
     metric(metricId:ID!):Metric!
     alerters(orgId:ID!):[Alerter!]
     alerts(orgId:ID!,page:Int = 0,size:Int = 100):[Alert!]
-    triggers(orgId:ID!,page:Int = 0,size:Int = 50):[Trigger!]
+    triggersByOrganization(orgId:ID!,page:Int = 0,size:Int = 50):[Trigger!]
+    triggers(page:Int = 0,size:Int = 50):[Trigger!]
     organizationAccessTokens(orgId:ID!):[AccessToken!]
 }
