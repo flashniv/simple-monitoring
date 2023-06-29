@@ -12,7 +12,7 @@ public class AllItemsCollector implements Collector<List<DataItem>> {
 
     @Override
     public File[] getFilteredFiles(File[] files, Instant begin, Instant end) {
-        File[] files1 = Arrays.stream(files)
+        return Arrays.stream(files)
                 .sorted((o1, o2) -> {
                     String[] o1NameParts = o1.getName().split("_");
                     String[] o2NameParts = o2.getName().split("_");
@@ -26,7 +26,6 @@ public class AllItemsCollector implements Collector<List<DataItem>> {
                         return false;
                     } else return !fileBegin.isAfter(end);
                 }).toArray(File[]::new);
-        return files1;
     }
 
     @Override

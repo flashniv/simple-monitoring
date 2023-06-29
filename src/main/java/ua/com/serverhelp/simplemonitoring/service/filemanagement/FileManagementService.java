@@ -1,24 +1,35 @@
 package ua.com.serverhelp.simplemonitoring.service.filemanagement;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import ua.com.serverhelp.simplemonitoring.entity.parametergroup.DataItem;
+import ua.com.serverhelp.simplemonitoring.entity.parametergroup.ParameterGroup;
+import ua.com.serverhelp.simplemonitoring.repository.MetricRepository;
+import ua.com.serverhelp.simplemonitoring.repository.OrganizationRepository;
+import ua.com.serverhelp.simplemonitoring.repository.ParameterGroupRepository;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.Collector;
 
 import java.io.*;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class FileManagementService {
+    private final OrganizationRepository organizationRepository;
+    private final MetricRepository metricRepository;
+    private final ParameterGroupRepository parameterGroupRepository;
+
     @Value("${metric-storage.metrics-directory}")
     private String dirPath;
+    @Value("${metric-storage.pool-deep-days}")
+    private int poolDeepDays;
 
     public void writeDataItem(String orgId, Long parameterGroupId, DataItem dataItem) throws Exception {
         String path = getPath(orgId, parameterGroupId) + getPeriod();
@@ -92,6 +103,41 @@ public class FileManagementService {
             res.add(file);
         }
         return res;
+    }
+
+    public void clearMetricDir() {
+        var organizations = organizationRepository.findAll();
+        File metricDir = new File(dirPath);
+        Arrays.stream(Objects.requireNonNull(metricDir.listFiles())).forEach(file -> {
+            if (organizations.stream().noneMatch(organization -> organization.getId().toString().equals(file.getName()))) {
+                log.info("FileManagementService::clearMetricDir delete not exist organization " + file.getName());
+                FileSystemUtils.deleteRecursively(file);
+            }
+        });
+        organizations.forEach(organization -> {
+            var metrics = metricRepository.findAllByOrganization(organization);
+            var allParameterGroups = new ArrayList<ParameterGroup>();
+            metrics.forEach(metric -> {
+                allParameterGroups.addAll(parameterGroupRepository.findAllByMetric(metric));
+            });
+            allParameterGroups.forEach(parameterGroup -> {
+                var pgDir = new File(dirPath + File.separatorChar + organization.getId() + File.separatorChar + parameterGroup.getId().toString().substring(0, 2) + File.separatorChar + parameterGroup.getId());
+                if (pgDir.exists()) {
+                    var partitions = pgDir.listFiles();
+                    if (partitions != null) {
+                        Arrays.stream(partitions).forEach(file -> {
+                            var fileNameParts = file.getName().split("_");
+                            var timestamp = Instant.parse(fileNameParts[0] + "-" + (fileNameParts[1].length() == 1 ? "0" + fileNameParts[1] : fileNameParts[1]) + "-" + (fileNameParts[2].length() == 1 ? "0" + fileNameParts[2] : fileNameParts[2]) + "T00:00:00.00Z");
+                            var duration = Duration.between(timestamp, Instant.now());
+                            if (duration.toDays() > poolDeepDays) {
+                                log.info("FileManagementService::clearMetricDir delete too old partition " + organization.getId() + " " + parameterGroup.getId() + " " + file.getName());
+                                file.delete();
+                            }
+                        });
+                    }
+                }
+            });
+        });
     }
 
 }

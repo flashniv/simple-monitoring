@@ -40,6 +40,7 @@ logging:
 
 metric-storage:
   metrics-directory: ./metrics
+  pool-deep-days: 10
 
 application:
   security:
