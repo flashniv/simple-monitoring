@@ -268,7 +268,7 @@ public class TriggerService {
             constantDoubleExpression.set("parameters", constantDoubleExpressionParameters);
 
             readValuesOfMetricExpressionParameters1.put("parameterGroup", String.valueOf(parameterGroup1.getId()));
-            readValuesOfMetricExpressionParameters1.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
+            readValuesOfMetricExpressionParameters1.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector");
             readValuesOfMetricExpressionParameters1.put("organizationID", "__organizationID__");
             readValuesOfMetricExpressionParameters1.put("beginDiff", 2592000L);
             readValuesOfMetricExpressionParameters1.put("endDiff", 0L);
@@ -277,7 +277,7 @@ public class TriggerService {
             readValuesOfMetricExpression1.set("parameters", readValuesOfMetricExpressionParameters1);
 
             readValuesOfMetricExpressionParameters2.put("parameterGroup", String.valueOf(parameterGroup2.getId()));
-            readValuesOfMetricExpressionParameters2.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemTimestampCollector");
+            readValuesOfMetricExpressionParameters2.put("collectorClass", "ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.LastItemValueCollector");
             readValuesOfMetricExpressionParameters2.put("organizationID", "__organizationID__");
             readValuesOfMetricExpressionParameters2.put("beginDiff", 2592000L);
             readValuesOfMetricExpressionParameters2.put("endDiff", 0L);
