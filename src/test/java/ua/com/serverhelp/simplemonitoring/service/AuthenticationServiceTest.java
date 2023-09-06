@@ -43,8 +43,8 @@ class AuthenticationServiceTest extends AbstractTest {
                 .build();
         var authenticationResponse = authenticationService.authenticate(authenticationRequest);
 
-        log.info("Authenticated access token" + authenticationResponse.getAccessToken());
-        log.info("Authenticated refresh token" + authenticationResponse.getRefreshToken());
+        log.debug("Authenticated access token" + authenticationResponse.getAccessToken());
+        log.debug("Authenticated refresh token" + authenticationResponse.getRefreshToken());
 
         Assertions.assertFalse(authenticationResponse.getAccessToken().isBlank());
         Assertions.assertFalse(authenticationResponse.getRefreshToken().isBlank());

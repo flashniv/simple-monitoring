@@ -74,7 +74,7 @@ public class ReadValuesOfMetricExpression<T> implements Expression<T> {
 
             return metricsOptional.orElseThrow();
         } catch (Exception e) {
-            throw new ExpressionException("Read metric error", e);
+            throw new ExpressionException("Read metric error orgId=" + organizationId + " parameter_group=" + parameterGroup + " beginDiff=" + beginDiff + " endDiff=" + endDiff, e);
         }
     }
 
@@ -89,7 +89,7 @@ public class ReadValuesOfMetricExpression<T> implements Expression<T> {
             beginDiff = parameters.get("beginDiff").asLong();
             endDiff = parameters.get("endDiff").asLong();
         } catch (JsonProcessingException e) {
-            throw new ExpressionException("JSON decode error", e);
+            throw new ExpressionException("JSON decode error " + parametersJson, e);
         }
     }
 }

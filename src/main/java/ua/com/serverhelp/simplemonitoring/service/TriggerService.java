@@ -219,7 +219,7 @@ public class TriggerService {
                                     .organization(trigger.getOrganization())
                                     .build();
                             alertRepository.save(alert);
-                            if(!trigger.isMuted()){
+                            if (!trigger.isMuted()) {
                                 alertService.sendAlert(alert);
                             }
                         }

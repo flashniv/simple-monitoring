@@ -37,7 +37,7 @@ public class FileManagementService {
         //noinspection ResultOfMethodCallIgnored
         dataFile.getParentFile().mkdirs();
         if (dataFile.createNewFile()) {
-            log.info("FileDriver::writeMetric file " + path + " created for metric " + parameterGroupId);
+            log.debug("FileDriver::writeMetric file " + path + " created for metric " + parameterGroupId);
         }
         FileOutputStream fos = new FileOutputStream(dataFile, true);
         DataOutputStream dos = new DataOutputStream(fos);
@@ -110,7 +110,7 @@ public class FileManagementService {
         File metricDir = new File(dirPath);
         Arrays.stream(Objects.requireNonNull(metricDir.listFiles())).forEach(file -> {
             if (organizations.stream().noneMatch(organization -> organization.getId().toString().equals(file.getName()))) {
-                log.info("FileManagementService::clearMetricDir delete not exist organization " + file.getName());
+                log.debug("FileManagementService::clearMetricDir delete not exist organization " + file.getName());
                 FileSystemUtils.deleteRecursively(file);
             }
         });
@@ -130,7 +130,7 @@ public class FileManagementService {
                             var timestamp = Instant.parse(fileNameParts[0] + "-" + (fileNameParts[1].length() == 1 ? "0" + fileNameParts[1] : fileNameParts[1]) + "-" + (fileNameParts[2].length() == 1 ? "0" + fileNameParts[2] : fileNameParts[2]) + "T00:00:00.00Z");
                             var duration = Duration.between(timestamp, Instant.now());
                             if (duration.toDays() > poolDeepDays) {
-                                log.info("FileManagementService::clearMetricDir delete too old partition " + organization.getId() + " " + parameterGroup.getId() + " " + file.getName());
+                                log.debug("FileManagementService::clearMetricDir delete too old partition " + organization.getId() + " " + parameterGroup.getId() + " " + file.getName());
                                 file.delete();
                             }
                         });
