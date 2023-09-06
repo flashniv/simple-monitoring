@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.entity.alert.Alert;
 import ua.com.serverhelp.simplemonitoring.entity.organization.Organization;
 import ua.com.serverhelp.simplemonitoring.entity.triggers.expressions.Expression;
@@ -20,6 +21,7 @@ import java.util.List;
 @Entity
 @Builder
 @Data
+@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 public class Trigger {
@@ -58,6 +60,7 @@ public class Trigger {
     private List<Alert> alerts = new ArrayList<>();
 
     public Boolean checkTrigger() throws JsonProcessingException, ClassNotFoundException, NoSuchMethodException, ExpressionException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        log.debug("Trigger::checkTrigger check " + triggerId + " org=" + organization.getName() + " lastStatus=" + lastStatus.name());
         var objectMapper = new ObjectMapper();
         var confNode = objectMapper.readTree(conf);
 
@@ -67,6 +70,10 @@ public class Trigger {
         Expression<Boolean> expression = (Expression<Boolean>) classType.getConstructor().newInstance();
         expression.initialize(objectMapper.writeValueAsString(confNode.get("parameters")).replaceAll("__organizationID__", organization.getId().toString()));
 
-        return expression.getValue();
+        var res = expression.getValue();
+
+        log.debug("Trigger::checkTrigger checkDone " + triggerId + " org=" + organization.getName() + " lastStatus=" + lastStatus.name() + " res=" + res);
+
+        return res;
     }
 }
