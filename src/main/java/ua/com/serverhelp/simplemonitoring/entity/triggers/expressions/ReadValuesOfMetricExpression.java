@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ua.com.serverhelp.simplemonitoring.config.SpringContext;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.FileManagementService;
 import ua.com.serverhelp.simplemonitoring.service.filemanagement.collector.Collector;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 @Builder
 public class ReadValuesOfMetricExpression<T> implements Expression<T> {
     private UUID organizationId;
@@ -71,6 +73,7 @@ public class ReadValuesOfMetricExpression<T> implements Expression<T> {
                     Instant.now().minus(endDiff, ChronoUnit.SECONDS),
                     collector
             );
+            log.debug("ReadValuesOfMetricExpression::getValue value orgId=" + organizationId + " parameter_group=" + parameterGroup + " found=" + metricsOptional.isPresent() + " result=" + metricsOptional.orElse(null));
 
             return metricsOptional.orElseThrow();
         } catch (Exception e) {
